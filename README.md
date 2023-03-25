@@ -5,12 +5,12 @@ Build Angular 14 CRUD example with Firebase Firestore that uses `AngularFireStor
 - Each Tutorial has key, title, description, published status.
 - We can make CRUD operations: create, retrieve, update, delete Tutorials.
 
-![angular-14-firestore-example-crud](angular-14-firestore-example-crud.png)
-
 For more detail, please visit:
+
 > [Angular 14 Firestore CRUD example with AngularFireStore](https://www.bezkoder.com/angular-14-firestore-crud/)
 
 More Practice:
+
 > [Angular 14 Firebase CRUD with Realtime DataBase](https://www.bezkoder.com/angular-14-firebase-crud/)
 
 > [Angular 14 Firebase Storage: File Upload/Display/Delete example](https://www.bezkoder.com/angular-14-firebase-storage/)
@@ -42,6 +42,7 @@ Fullstack with Spring Boot:
 > [Angular + Spring Boot: File upload example](https://www.bezkoder.com/angular-14-spring-boot-file-upload/)
 
 Fullstack with Django:
+
 > [Angular + Django example](https://bezkoder.com/django-angular-13-crud-rest-framework/)
 
 ## Development server
