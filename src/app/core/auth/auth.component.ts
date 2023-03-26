@@ -27,7 +27,7 @@ export class AuthComponent implements OnInit {
       .then(() => {
         // SignUp
         alert('เข้าสู่ระบบสำเร็จ !');
-        this.router.navigate(['welcome']);
+        this.router.navigate(['test']);
         // ...
       })
       .catch(() => {
