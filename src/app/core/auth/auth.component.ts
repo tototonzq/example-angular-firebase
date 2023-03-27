@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -7,7 +9,30 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthComponent implements OnInit {
-  constructor() {}
+  /* -------------------------------------------------------------------------- */
+  /*                                 constructor                                */
+  /* -------------------------------------------------------------------------- */
+  constructor(private auth: AngularFireAuth, private router: Router) {}
 
+  /* -------------------------------------------------------------------------- */
+  /*                                 Life Circle                                */
+  /* -------------------------------------------------------------------------- */
   ngOnInit() {}
+  /* -------------------------------------------------------------------------- */
+  /*                                  Functions                                 */
+  /* -------------------------------------------------------------------------- */
+  SignIn(email: string, password: string) {
+    return this.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        // SignUp
+        alert('เข้าสู่ระบบสำเร็จ !');
+        this.router.navigate(['welcome']);
+        // ...
+      })
+      .catch(() => {
+        // SignUp Failed
+        alert('กรุณากรอกข้อมูลที่ถูกต้อง !');
+      });
+  }
 }
