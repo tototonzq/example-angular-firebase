@@ -1,17 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HeroIconModule, allIcons } from 'ng-heroicon';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { environment } from 'src/environments/environment';
+import { SidebarModule } from '../component/sidebar/sidebar.module';
+import { TableModule } from '../component/table/table.module';
 
-export const imports = [
+const componentModule = [SidebarModule, TableModule];
+
+const firebaseModule = [
+  AngularFireModule.initializeApp(environment.firebase),
+  AngularFirestoreModule, // For Firestore
+];
+
+const commonModule = [
+  FormsModule,
   BrowserModule,
   AppRoutingModule,
   CommonModule,
-  AngularFireModule.initializeApp(environment.firebase),
-  AngularFirestoreModule, // for firestore
   HeroIconModule.withIcons(
     {
       ...allIcons,
@@ -21,3 +30,5 @@ export const imports = [
     }
   ),
 ];
+
+export const imports = [...firebaseModule, ...componentModule, ...commonModule];

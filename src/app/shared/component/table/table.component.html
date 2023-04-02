@@ -1,0 +1,47 @@
+<div class="table-container">
+  <div class="flex justify-end items-center">
+    <button *ngIf="showClearSort" class="button-red" (click)="resetSort()">
+      reset
+    </button>
+  </div>
+  <table>
+    <thead>
+      <ng-container
+        [ngTemplateOutlet]="headers || defaultHeaderTemplate"
+        [ngTemplateOutletContext]="{ $implicit: data }"
+        [ngTemplateOutletInjector]="injector"></ng-container>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="data.length > 0">
+        <ng-container
+          [ngTemplateOutlet]="rows || defaultRowTemplate"
+          [ngTemplateOutletContext]="{ $implicit: data }"
+          [ngTemplateOutletInjector]="injector"></ng-container>
+      </ng-container>
+      <ng-container *ngIf="data.length <= 0">
+        <ng-container
+          [ngTemplateOutlet]="noData || defaultNoData"
+          [ngTemplateOutletContext]="{ $implicit: data }"
+          [ngTemplateOutletInjector]="injector"></ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #defaultHeaderTemplate let-data>
+  <tr>
+    <th *ngFor="let header of data[0] | keyvalue">{{ header.key }}</th>
+  </tr>
+</ng-template>
+
+<ng-template #defaultRowTemplate let-rows>
+  <tr *ngFor="let row of rows">
+    <td *ngFor="let row of row | keyvalue">{{ row.value }}</td>
+  </tr>
+</ng-template>
+
+<ng-template #defaultNoData let-data>
+  <tr class="hover:bg-slate-100 cursor-pointer">
+    <td>ไม่มีข้อมูล</td>
+  </tr>
+</ng-template>

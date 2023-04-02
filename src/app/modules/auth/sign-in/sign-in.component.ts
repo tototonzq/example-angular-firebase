@@ -6,9 +6,12 @@ import { Router } from '@angular/router';
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInComponent implements OnInit {
+  /* -------------------------------------------------------------------------- */
+  /*                                  Variable                                  */
+  /* -------------------------------------------------------------------------- */
+  private isActiveAuth: boolean = false;
   /* -------------------------------------------------------------------------- */
   /*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
@@ -25,12 +28,14 @@ export class SignInComponent implements OnInit {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         // SignUp
+        this.isActiveAuth = true;
         alert('เข้าสู่ระบบสำเร็จ !');
         this.router.navigate(['dashboard']);
         // ...
       })
       .catch(() => {
         // SignUp Failed
+        this.isActiveAuth = false;
         alert('กรุณากรอกข้อมูลที่ถูกต้อง !');
       });
   }

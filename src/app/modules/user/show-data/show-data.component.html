@@ -1,0 +1,50 @@
+<app-sidebar>
+  <main>
+    <header>
+      <div>
+        <div
+          class="w-full h-[15rem] flex justify-center items-center bg-slate-100"
+        >
+          <div>
+            <input
+              type="text"
+              class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+              placeholder="ค้นหา"
+            />
+            <button
+              class="h-10 shadow-md rounded-md w-[10rem] text-slate-100 ml-5 hover:bg-slate-200 bg-slate-300 hover:text-slate-500"
+              style="transition: 0.5s"
+            >
+              ค้นหา
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <body>
+      <div>
+        <app-table [data]="data || []" class="table-class flex-auto">
+          <ng-template #headers let-item>
+            <tr>
+              <th class="text-center" [colSpan]="1">XXXX</th>
+              <th class="text-center border-none" [colSpan]="1">XXXX</th>
+              <th class="text-center border-none" [colSpan]="1">
+                XXXX
+              </th>
+              <th class="text-center" [rowSpan]="1">XXXX</th>
+            </tr>
+          </ng-template>
+          <ng-template #rows let-item>
+            <tr *ngFor="let row of item; let i = index">
+              <td class="text-center" [colSpan]="1">{{ i + 1 }}</td>
+              <td class="text-center" [colSpan]="1">{{ row.age }}</td>
+              <td class="text-center" [colSpan]="1">{{ row.city }}</td>
+              <td class="text-center" [colSpan]="1">{{ row.city }}</td>
+            </tr>
+          </ng-template>
+        </app-table>
+      </div>
+    </body>
+    <footer></footer>
+  </main>
+</app-sidebar>

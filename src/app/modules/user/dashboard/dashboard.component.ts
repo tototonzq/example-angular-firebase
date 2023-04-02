@@ -5,7 +5,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
   constructor(public store: AngularFirestore) {}
