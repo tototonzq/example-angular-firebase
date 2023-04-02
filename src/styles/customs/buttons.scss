@@ -1,0 +1,46 @@
+.button {
+  &-default {
+    @apply text-white bg-blue-700 hover:bg-blue-800 focus:outline-none active:ring-4 focus:ring-4 focus:ring-opacity-40 focus:ring-blue-300 
+    font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2;
+  }
+
+  &-alternative {
+    @apply py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-md 
+    border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 active:ring-4 focus:ring-4 focus:ring-opacity-40 focus:ring-gray-700;
+  }
+
+  &-dark {
+    @apply text-white bg-gray-800 hover:bg-gray-900 focus:outline-none active:ring-4 focus:ring-4 focus:ring-opacity-40 focus:ring-gray-700 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2;
+  }
+
+  &-light {
+    @apply text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 active:ring-4 focus:ring-4 focus:ring-opacity-40 focus:ring-gray-700 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2;
+  }
+
+  &-green {
+    @apply text-white bg-green-700 hover:bg-green-800 focus:outline-none active:ring-4 focus:ring-4 focus:ring-opacity-40 focus:ring-green-700 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2;
+  }
+
+  &-red {
+    @apply text-white bg-red-700 hover:bg-red-800 focus:outline-none active:ring-4 focus:ring-4 focus:ring-opacity-40 focus:ring-red-700 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2;
+  }
+
+  &-yellow {
+    @apply text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none active:ring-4 focus:ring-4 focus:ring-opacity-40 focus:ring-yellow-700 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2;
+  }
+
+  &-purple {
+    @apply text-white bg-purple-700 hover:bg-purple-800 focus:outline-none active:ring-4 focus:ring-4 focus:ring-opacity-40 focus:ring-purple-700 font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2;
+  }
+
+  &-default-rounded,
+  &-alternative-rounded,
+  &-dark-rounded,
+  &-light-rounded,
+  &-green-rounded,
+  &-red-rounded,
+  &-yellow-rounded,
+  &-purple-rounded {
+    @apply rounded-full;
+  }
+}

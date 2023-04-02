@@ -1,0 +1,71 @@
+<app-sidebar>
+  <main>
+    <header>
+      <div>
+        <div
+          class="w-full h-[15rem] flex justify-center items-center bg-slate-100"
+        >
+          <div class="grid gap-5">
+            <div class="flex gap-5 justify-center items-center">
+              <!-- <input
+                type="text"
+                class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+                placeholder="Please fill out"
+              /> -->
+              <input
+                type="text"
+                class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+                placeholder="Please fill out Gesture"
+                [(ngModel)]="Gesture"
+              />
+            </div>
+            <div class="flex gap-5">
+              <input
+                type="text"
+                class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+                placeholder="Please fill out Description"
+                [(ngModel)]="Description"
+              />
+              <input
+                type="text"
+                class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+                placeholder="Please fill out Category"
+                [(ngModel)]="Category"
+              />
+            </div>
+            <div class="flex gap-5 justify-center items-center">
+              <button
+                (click)="addData()"
+                class="h-10 shadow-md rounded-md w-[10rem] text-slate-100 ml-5 hover:bg-slate-200 bg-slate-300 hover:text-slate-500"
+                style="transition: 0.5s"
+              >
+                + Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <body>
+      <app-table [data]="_data || []" class="table-class flex-auto">
+        <ng-template #headers let-item>
+          <tr>
+            <th class="text-center" [colSpan]="1">XXXX</th>
+            <th class="text-center border-none" [colSpan]="1">XXXX</th>
+            <th class="text-center" [colSpan]="2">XXXX</th>
+            <th class="text-center" [colSpan]="1">XXXX</th>
+          </tr>
+        </ng-template>
+        <ng-template #rows let-item>
+          <tr *ngFor="let row of item; let i = index">
+            <td class="text-center" [colSpan]="1">{{ i + 1 }}</td>
+            <td class="text-center" [colSpan]="1">{{ row.Gesture }}</td>
+            <td class="text-center" [colSpan]="2">{{ row.Description }}</td>
+            <td class="text-center" [colSpan]="1">{{ row.Category }}</td>
+          </tr>
+        </ng-template>
+      </app-table>
+    </body>
+    <footer></footer>
+  </main>
+</app-sidebar>

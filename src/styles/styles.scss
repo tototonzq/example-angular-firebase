@@ -1,4 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* You can add global styles to this file, and also import other style files */
 @import "./customs/fonts.scss";
+@import "./customs/scrollbar.scss";
+// @import "./customs/form.scss";
+@import "./customs/table.scss";
+// @import './customs/buttons.scss';
+@import "./tailwind.scss";
+
+/* Background - Colors */
+.bg-login {
+  height: 100vh;
+  width: 100%;
+  // background-image: linear-gradient(130deg, #1abc9c, #2ecc71);
+}
+
+/* Sidebar - Effects */
+.sidebar {
+  background: linear-gradient(173.81deg, #ffffff 7.11%, #ffffff 207.37%);
+  transform: translateX(-400px);
+  min-width: 18rem;
+  max-width: 18rem;
+  width: 0%;
+  &.active {
+    width: 100%;
+    transform: translateX(0);
+  }
+}

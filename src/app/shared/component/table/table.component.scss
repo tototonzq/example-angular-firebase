@@ -1,0 +1,50 @@
+.table-container {
+  width: 100%;
+  border-radius: 1.5rem;
+
+  table {
+    width: 100%;
+    border-radius: 0.4rem;
+
+    thead {
+      background-color: #eff3f8;
+
+      th {
+        @apply border-b border-b-slate-200 last:border-none;
+        position: sticky;
+        top: 0;
+        color: #536830;
+        padding: 1rem;
+        text-align: center;
+
+        &:first-child {
+          border-radius: 0.4rem 0 0 0;
+        }
+        &:last-child {
+          border-radius: 0 0.4rem 0 0;
+        }
+      }
+    }
+
+    tbody {
+      background-color: #ffffff;
+
+      tr {
+        @apply border-b border-b-slate-200 last:border-none;
+
+        td {
+          padding: 1rem;
+          color: #000000;
+          text-align: center;
+
+          &:first-child {
+            border-radius: 0 0 0 0.4rem;
+          }
+          &:last-child {
+            border-radius: 0 0 0.4rem 0;
+          }
+        }
+      }
+    }
+  }
+}
