@@ -10,7 +10,7 @@ export class SidebarComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   /*                                  Variable                                  */
   /* -------------------------------------------------------------------------- */
-  public _sidebarOpen: boolean = false;
+  public _sidebarOpen: boolean = true;
   public today = new Date(); // Get the current date
 
   /* -------------------------------------------------------------------------- */
