@@ -95,6 +95,9 @@ export class AddDataComponent implements OnInit {
 
   // ---- Add Document With Customer ID
   add(category?: any): void {
+    if (category === '') {
+      alert('กรุณาเลือก Category');
+    }
     const data: any = {
       Category: this.dropdownData.value,
       Description: this.Description,
