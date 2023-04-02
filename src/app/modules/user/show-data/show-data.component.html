@@ -23,14 +23,46 @@
     </header>
     <body>
       <div>
+        <div class="w-full h-14 bg-slate-200 flex justify-center items-center">
+          <h1 class="text-slate-500">การวนเเสดงข้อมูล เเบบ * NgFor</h1>
+        </div>
+        <ng-container>
+          <table class="table">
+            <thead>
+              <tr class="bg-slate-100">
+                <th>XXXX</th>
+                <th>XXXX</th>
+                <th>XXXX</th>
+                <th>XXXX</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let row of data; let i = index">
+              <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.age }}</td>
+                <td>{{ row.city }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="data.length === 0">
+              <td [colSpan]="4">Not Found .</td>
+            </tbody>
+          </table>
+        </ng-container>
+
+        <div
+          class="w-full h-14 bg-slate-200 flex justify-center items-center mt-10"
+        >
+          <h1 class="text-slate-500">
+            การวนเเสดงข้อมูล เเบบ Component ตัวกลาง
+          </h1>
+        </div>
         <app-table [data]="data || []" class="table-class flex-auto">
           <ng-template #headers let-item>
             <tr>
               <th class="text-center" [colSpan]="1">XXXX</th>
               <th class="text-center border-none" [colSpan]="1">XXXX</th>
-              <th class="text-center border-none" [colSpan]="1">
-                XXXX
-              </th>
+              <th class="text-center border-none" [colSpan]="1">XXXX</th>
               <th class="text-center" [rowSpan]="1">XXXX</th>
             </tr>
           </ng-template>

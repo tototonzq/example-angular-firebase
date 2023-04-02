@@ -1,16 +1,16 @@
-// .table {
-//   width: 100%;
-// }
+.table {
+  @apply text-slate-500;
+  width: 100%;
+}
 
-// .table th,
-// .table td {
-//   text-align: center;
-//   padding: 12px;
-//   border-bottom: 1px solid #ddd;
-// }
+.table th,
+.table td {
+  text-align: center;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
 
-// .table th {
-//   text-align: center;
-//   color: #333;
-//   font-weight: bold;
-// }
+.table th {
+  text-align: center;
+  font-weight: bold;
+}
