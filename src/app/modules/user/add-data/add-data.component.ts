@@ -20,6 +20,9 @@ export class AddDataComponent implements OnInit {
   ngOnInit() {
     this.GetAll();
     this.dropdownData.valueChanges.subscribe((res) => {
+      if (res !== '') {
+        this.isCheckValidator = false;
+      }
       this.GetAll(res);
       this.Delete(res);
     });
@@ -33,6 +36,8 @@ export class AddDataComponent implements OnInit {
   Gesture: any | null = '';
   Vdo: any | null = '';
   isCheckEditMode: boolean = false;
+  isCheckValidator: boolean = false;
+
   _data: any = [];
   dropdownData = new FormControl('', [Validators.required]);
 
@@ -96,7 +101,8 @@ export class AddDataComponent implements OnInit {
   // ---- Add Document With Customer ID
   add(category?: any): void {
     if (category === '') {
-      alert('กรุณาเลือก Category');
+      // alert('กรุณาเลือก Category');
+      this.checkValidator();
     }
     const data: any = {
       Category: this.dropdownData.value,
@@ -149,6 +155,10 @@ export class AddDataComponent implements OnInit {
     this.Description = '';
     this.Gesture = '';
     this.Vdo = '';
+  }
+
+  checkValidator() {
+    this.isCheckValidator = true;
   }
 
   /* -------------------------------------------------------------------------- */

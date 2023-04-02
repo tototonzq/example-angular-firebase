@@ -10,6 +10,9 @@
               <select
                 class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
                 [formControl]="dropdownData"
+                [ngClass]="
+                  isCheckValidator ? 'border-red-500 border-[1px]' : ''
+                "
               >
                 <option value="" selected disabled>Category</option>
                 <ng-container *ngFor="let option of dropdown">
