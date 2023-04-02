@@ -3,23 +3,22 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
+  selector: 'app-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthComponent implements OnInit {
+export class SignInComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   /*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
   constructor(private auth: AngularFireAuth, private router: Router) {}
-
   /* -------------------------------------------------------------------------- */
   /*                                 Life Circle                                */
   /* -------------------------------------------------------------------------- */
   ngOnInit() {}
   /* -------------------------------------------------------------------------- */
-  /*                                  Functions                                 */
+  /*                                  Function                                  */
   /* -------------------------------------------------------------------------- */
   SignIn(email: string, password: string) {
     return this.auth
@@ -27,7 +26,7 @@ export class AuthComponent implements OnInit {
       .then(() => {
         // SignUp
         alert('เข้าสู่ระบบสำเร็จ !');
-        this.router.navigate(['test']);
+        this.router.navigate(['dashboard']);
         // ...
       })
       .catch(() => {

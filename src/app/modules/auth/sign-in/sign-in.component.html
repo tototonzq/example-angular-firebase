@@ -1,0 +1,36 @@
+<div class="bg-login">
+  <div
+    class="absolute top-[50%] left-[50%] flex text-center gap-5 justify-center items-center flex-col"
+    style="transform: translate(-50%, -50%)"
+  >
+    <h1 class="text-[26px]">ลงชื่อเข้าใช้งาน</h1>
+    <input
+      style="transition: 0.5s"
+      class="border-[#1abc9c] border-[1px] h-[50px] w-[250px] text-[1rem] outline-none text-center rounded-md hover:w-[300px] cursor-pointer"
+      type="email"
+      placeholder="อีเมล"
+      #user
+      id="email"
+    />
+    <input
+      style="transition: 0.5s"
+      class="border-[#1abc9c] border-[1px] h-[50px] w-[250px] text-[1rem] outline-none text-center rounded-md hover:w-[300px] cursor-pointer"
+      type="password"
+      placeholder="รหัสผ่าน"
+      #password
+      id="password"
+    />
+
+    <button
+      (click)="SignIn(user.value, password.value)"
+      style="transition: 0.5s"
+      class="bg-[#1abc9c] text-[#fff] hover:text-[#1abc9c] hover:text-[20px] hover:font-bold hover:border-[#1abc9c] border-[1px] h-[50px] w-[250px] text-[1rem] outline-none text-center rounded-md hover:bg-[#fff] cursor-pointer"
+    >
+      เข้าสู่ระบบ
+    </button>
+    <!-- <h2> ทดสอบ </h2>
+  <input type="submit" class="btn-submit" onclick="signUp()" name="signup_submit" value="SignUp" />
+  <input type="submit" class="btn-submit" onclick="signOut()" name="signup_submit" value="SignOut" /> -->
+    <h2>จัดการ คลังศัพท์ภาษามือ</h2>
+  </div>
+</div>

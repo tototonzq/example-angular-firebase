@@ -1,0 +1,11 @@
+.sidebar {
+  background: linear-gradient(173.81deg, #ffffff 7.11%, #ffffff 207.37%);
+  transform: translateX(-400px);
+  min-width: 18rem;
+  max-width: 18rem;
+  width: 0%;
+  &.active {
+    width: 100%;
+    transform: translateX(0);
+  }
+}

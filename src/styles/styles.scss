@@ -1,4 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Tailwind - SCSS */
 @import "./customs/fonts.scss";
+@import "./customs/scrollbar.scss";
+
+/* Background - Login */
+.bg-login {
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(130deg, #1abc9c, #2ecc71);
+}
