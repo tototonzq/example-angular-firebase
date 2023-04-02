@@ -10,10 +10,10 @@
       background-color: #eff3f8;
 
       th {
-        @apply border-b border-b-slate-200 last:border-none;
+        @apply border-b border-b-slate-200 last:border-none text-slate-500;
         position: sticky;
         top: 0;
-        color: #536830;
+        // color: #000000;
         padding: 1rem;
         text-align: center;
 
@@ -30,11 +30,12 @@
       background-color: #ffffff;
 
       tr {
-        @apply border-b border-b-slate-200 last:border-none;
+        // @apply border-b border-b-slate-200 last:border-none;
 
         td {
+          @apply text-slate-500;
           padding: 1rem;
-          color: #000000;
+          // color: #000000;
           text-align: center;
 
           &:first-child {

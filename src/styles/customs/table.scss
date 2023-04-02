@@ -9,8 +9,7 @@
     background-color: #eff3f8;
 
     th {
-      @apply border-b border-b-slate-200;
-      color: #536830;
+      @apply border-b border-b-slate-200 text-slate-500;
       padding: 1rem;
 
       &:first-child {
@@ -39,8 +38,9 @@
       @apply border-b border-b-slate-200;
 
       td {
+        @apply text-slate-500;
         padding: 1rem;
-        color: #000000;
+        // color: #000000;
 
         &:first-child {
           border-radius: 0 0 0 0.4rem;

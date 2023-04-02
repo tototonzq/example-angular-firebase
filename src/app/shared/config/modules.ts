@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HeroIconModule, allIcons } from 'ng-heroicon';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -17,6 +17,7 @@ const firebaseModule = [
 ];
 
 const commonModule = [
+  ReactiveFormsModule,
   FormsModule,
   BrowserModule,
   AppRoutingModule,
