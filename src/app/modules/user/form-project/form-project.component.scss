@@ -1,0 +1,14 @@
+.input-text {
+  border-radius: 4px;
+  background: #dfdfdf;
+  box-shadow: inset 2px 2px 4px #bebebe, inset -2px -2px 4px #ffffff;
+  outline: none;
+  height: 3rem;
+  width: 20rem;
+  padding: 0 0.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}

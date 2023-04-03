@@ -25,3 +25,11 @@
     transform: translateX(0);
   }
 }
+
+input {
+  padding-left: 10px;
+}
+
+label {
+  @apply text-slate-500;
+}

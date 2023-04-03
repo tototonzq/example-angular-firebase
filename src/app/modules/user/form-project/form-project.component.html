@@ -1,0 +1,68 @@
+<app-sidebar>
+  <body class="p-5">
+    <form [formGroup]="_projectForm">
+      <div class="input-group">
+        <label for="project_name">Project Name</label>
+        <input
+          class="input-text"
+          type="text"
+          id="project_name"
+          formControlName="project_name"
+        />
+      </div>
+      <div class="input-group">
+        <label for="project_date">Project Date</label>
+        <input
+          class="input-text"
+          type="text"
+          id="project_date"
+          formControlName="project_date"
+        />
+      </div>
+      <div class="input-group">
+        <label for="customer_name">Customer Name</label>
+        <input
+          class="input-text"
+          type="text"
+          id="customer_name"
+          formControlName="customer_name"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="total_budget_no_vat">Total Budget No Vat</label>
+        <input
+          class="input-text"
+          type="number"
+          id="total_budget_no_vat"
+          formControlName="total_budget_no_vat"
+        />
+      </div>
+      <div class="input-group">
+        <label for="vat_value">Vat Value</label>
+        <input
+          class="input-text"
+          type="number"
+          id="vat_value"
+          formControlName="vat_value"
+        />
+      </div>
+      <div class="input-group">
+        <label for="total_budget">Total Budget</label>
+        <input
+          class="input-text"
+          type="number"
+          id="total_budget"
+          formControlName="total_budget"
+        />
+      </div>
+
+      <app-cost-form></app-cost-form>
+
+      <app-general-form></app-general-form>
+
+      <app-summary-form></app-summary-form>
+    </form>
+  </body>
+  <footer></footer>
+</app-sidebar>

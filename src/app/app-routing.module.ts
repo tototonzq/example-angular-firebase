@@ -5,6 +5,9 @@ import { AddDataComponent } from './modules/user/add-data/add-data.component';
 import { CardComponent } from './modules/user/card/card.component';
 import { DashboardComponent } from './modules/user/dashboard/dashboard.component';
 import { ShowDataComponent } from './modules/user/show-data/show-data.component';
+import { CardListComponent } from './modules/user/card/card-list/card-list.component';
+import { CardDetailComponent } from './modules/user/card/card-detail/card-detail.component';
+import { FormProjectComponent } from './modules/user/form-project/form-project.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
@@ -16,6 +19,13 @@ const routes: Routes = [
   {
     path: 'card',
     component: CardComponent,
+    children: [
+      {
+        path: '',
+        component: CardListComponent,
+        children: [{ path: ':id', component: CardDetailComponent }],
+      },
+    ],
   },
   {
     path: 'show-data',
@@ -24,6 +34,10 @@ const routes: Routes = [
   {
     path: 'add-data',
     component: AddDataComponent,
+  },
+  {
+    path: 'reactive-forms',
+    component: FormProjectComponent,
   },
 ];
 
