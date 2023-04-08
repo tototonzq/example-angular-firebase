@@ -105,10 +105,10 @@ export class AddDataComponent implements OnInit {
       this.checkValidator();
     }
     const data: any = {
-      Category: this.dropdownData.value,
-      Description: this.Description,
-      Gesture: this.Gesture,
-      Vdo: this.Vdo,
+      Category: this.dropdownData.value?.trim(),
+      Description: this.Description.trim(),
+      Gesture: this.Gesture.trim(),
+      Vdo: this.Vdo.trim(),
     };
     this.firestore
       .collection('Vocabularies')
@@ -117,6 +117,7 @@ export class AddDataComponent implements OnInit {
       .doc(data.Gesture)
       .set(data)
       .then(() => {
+        console.log(data);
         this.resetForm();
         this.isCheckEditMode = false;
         // alert('Data added successfully!');
@@ -145,6 +146,29 @@ export class AddDataComponent implements OnInit {
           this.Vdo = item.Vdo;
           this.Category = item.Category;
         }
+      });
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                               // Search Data                               */
+  /* -------------------------------------------------------------------------- */
+  // ---- Search Fields inside a Document
+  Search(category?: any): void {
+    this.firestore
+      .collection('Vocabularies')
+      .doc(category)
+      .collection('vocab')
+      .doc(this.Gesture)
+      .valueChanges()
+      .subscribe((res) => {
+        if (res === undefined) {
+          return;
+        }
+        // console.log(this.Gesture);
+        console.log(res);
+        this._data = [res];
+        // console.log([{ res }]);
+        // console.log(this._data);
       });
   }
 
