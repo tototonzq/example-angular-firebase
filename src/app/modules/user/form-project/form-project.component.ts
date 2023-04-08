@@ -8,6 +8,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class FormProjectComponent implements OnInit {
   _projectForm!: FormGroup;
+  _card: string | null = '';
   /* -------------------------------------------------------------------------- */
   /*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
@@ -17,6 +18,10 @@ export class FormProjectComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   @Input() set formGroup(value: FormGroup) {
     if (value) this._projectForm = value;
+  }
+
+  @Input() set card(value: string | null) {
+    if (value) this._card = value;
   }
   /* -------------------------------------------------------------------------- */
   /*                                 life circle                                */

@@ -1,6 +1,9 @@
-<app-sidebar>
+<main>
   <body class="p-5">
-    <form [formGroup]="_projectForm">
+    <app-cost-form></app-cost-form>
+    <app-general-form></app-general-form>
+    <app-summary-form></app-summary-form>
+    <!-- <form [formGroup]="_projectForm">
       <div class="input-group">
         <label for="project_name">Project Name</label>
         <input
@@ -62,7 +65,7 @@
       <app-general-form></app-general-form>
 
       <app-summary-form></app-summary-form>
-    </form>
+    </form> -->
   </body>
   <footer></footer>
-</app-sidebar>
+</main>

@@ -8,6 +8,7 @@ import { ShowDataComponent } from './modules/user/show-data/show-data.component'
 import { CardListComponent } from './modules/user/card/card-list/card-list.component';
 import { CardDetailComponent } from './modules/user/card/card-detail/card-detail.component';
 import { FormProjectComponent } from './modules/user/form-project/form-project.component';
+import { FormInputComponent } from './modules/user/form-input/form-input.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'reactive-forms',
     component: FormProjectComponent,
+  },
+  {
+    path: 'form-input',
+    component: FormInputComponent,
   },
 ];
 
