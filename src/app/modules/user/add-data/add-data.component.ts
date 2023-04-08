@@ -154,6 +154,9 @@ export class AddDataComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   // ---- Search Fields inside a Document
   Search(category?: any): void {
+    if (this.Gesture === '') {
+      return this.GetAll(category);
+    }
     this.firestore
       .collection('Vocabularies')
       .doc(category)
