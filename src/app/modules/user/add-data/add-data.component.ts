@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DATA_TABLE } from '../show-data/show-data.data';
 import { DropdownModels } from './store/models/add-data.model';
 import { FormControl, Validators } from '@angular/forms';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-add-data',
@@ -13,7 +14,10 @@ export class AddDataComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   /*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
-  constructor(private firestore: AngularFirestore) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private _toastService: ToastService
+  ) {}
   /* -------------------------------------------------------------------------- */
   /*                                 life circle                                */
   /* -------------------------------------------------------------------------- */
@@ -165,13 +169,11 @@ export class AddDataComponent implements OnInit {
       .valueChanges()
       .subscribe((res) => {
         if (res === undefined) {
+          alert('ไม่พบข้อมูล');
           return;
         }
-        // console.log(this.Gesture);
-        console.log(res);
         this._data = [res];
-        // console.log([{ res }]);
-        // console.log(this._data);
+        this.resetForm();
       });
   }
 
