@@ -170,7 +170,6 @@ export class AddDataComponent implements OnInit {
       .subscribe((res) => {
         if (res === undefined) {
           alert('ไม่พบข้อมูล');
-          return;
         }
         this._data = [res];
         this.resetForm();
