@@ -5,6 +5,7 @@ import { CardDetailComponent } from 'src/app/modules/user/card/card-detail/card-
 import { CardListComponent } from 'src/app/modules/user/card/card-list/card-list.component';
 import { CardComponent } from 'src/app/modules/user/card/card.component';
 import { DashboardComponent } from 'src/app/modules/user/dashboard/dashboard.component';
+import { FormInputComponent } from 'src/app/modules/user/form-input/form-input.component';
 import { CostFormComponent } from 'src/app/modules/user/form-project/cost-form/cost-form.component';
 import { FormProjectComponent } from 'src/app/modules/user/form-project/form-project.component';
 import { GeneralFormComponent } from 'src/app/modules/user/form-project/general-form/general-form.component';
@@ -24,4 +25,5 @@ export const components = [
   GeneralFormComponent,
   CostFormComponent,
   SummaryFormComponent,
+  FormInputComponent,
 ];
