@@ -10,12 +10,8 @@
   <body>
     <!-- @FormGroup I -->
     <div>
-      <div
-        class="w-full h-[5rem] flex justify-center items-center bg-slate-100"
-      >
-        <div
-          class="bg-slate-100 w-full h-[5rem] shadow-md flex justify-start items-center p-5"
-        >
+      <div class="w-full h-[5rem] flex justify-center items-center bg-slate-100">
+        <div class="bg-slate-100 w-full h-[5rem] shadow-md flex justify-start items-center p-5">
           <div class="bg-slate-200 w-[15rem] h-[2rem] text-slate-400">
             <p class="text-[20px] pl-5">@FormGroup I</p>
           </div>
@@ -24,35 +20,24 @@
       <div class="p-5">
         <div class="flex justify-center items-center gap-5">
           <div>
-            <input
-              type="text"
+            <input type="text"
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล"
-              [formControl]="value1"
-            />
+              placeholder="กรุณากรอกข้อมูล" [formControl]="value1" />
           </div>
           <div>
-            <input
-              type="text"
+            <input type="text"
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล"
-              [formControl]="value2"
-            />
+              placeholder="กรุณากรอกข้อมูล" [formControl]="value2" />
           </div>
           <div>
-            <input
-              type="text"
+            <input type="text"
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล"
-              [formControl]="value3"
-            />
+              placeholder="กรุณากรอกข้อมูล" [formControl]="value3" />
           </div>
           <div class="justify-center items-center grid">
             <button
               class="h-10 shadow-md rounded-md w-[10rem] text-slate-100 hover:bg-slate-200 bg-slate-300 hover:text-slate-500"
-              style="transition: 0.5s"
-              (click)="onSubmitFormGroupI()"
-            >
+              style="transition: 0.5s" (click)="onSubmitFormGroupI()">
               Submit$
             </button>
           </div>
@@ -65,55 +50,34 @@
 
     <!-- @FormGroup II -->
     <div>
-      <div
-        class="w-full h-[5rem] flex justify-center items-center bg-slate-100"
-      >
-        <div
-          class="bg-slate-100 w-full h-[5rem] shadow-md flex justify-start items-center p-5"
-        >
+      <div class="w-full h-[5rem] flex justify-center items-center bg-slate-100">
+        <div class="bg-slate-100 w-full h-[5rem] shadow-md flex justify-start items-center p-5">
           <div class="bg-slate-200 w-[15rem] h-[2rem] text-slate-400">
             <p class="text-[20px] pl-5">@FormGroup II</p>
           </div>
         </div>
       </div>
       <div class="p-5">
-        <form
-          [formGroup]="form2"
-          class="flex justify-center items-center gap-5"
-        >
+        <form [formGroup]="form2" class="flex justify-center items-center gap-5">
           <div>
             <input
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              type="text"
-              id="value4"
-              placeholder="กรุณากรอกข้อมูล"
-              formControlName="value4"
-            />
+              type="text" id="value4" placeholder="กรุณากรอกข้อมูล" formControlName="value4" />
           </div>
           <div>
             <input
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              type="text"
-              id="value5"
-              placeholder="กรุณากรอกข้อมูล"
-              formControlName="value5"
-            />
+              type="text" id="value5" placeholder="กรุณากรอกข้อมูล" formControlName="value5" />
           </div>
           <div>
             <input
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              type="text"
-              id="value6"
-              placeholder="กรุณากรอกข้อมูล"
-              formControlName="value6"
-            />
+              type="text" id="value6" placeholder="กรุณากรอกข้อมูล" formControlName="value6" />
           </div>
           <div class="justify-center items-center grid">
             <button
               class="h-10 shadow-md rounded-md w-[10rem] text-slate-100 hover:bg-slate-200 bg-slate-300 hover:text-slate-500"
-              style="transition: 0.5s"
-              (click)="onSubmitFormGroupI()"
-            >
+              style="transition: 0.5s" (click)="onSubmitFormGroupI()">
               Submit$
             </button>
           </div>
@@ -126,48 +90,29 @@
 
     <!-- @NgForm -->
     <div>
-      <div
-        class="w-full h-[5rem] flex justify-center items-center bg-slate-100"
-      >
-        <div
-          class="bg-slate-100 w-full h-[5rem] shadow-md flex justify-start items-center p-5"
-        >
+      <div class="w-full h-[5rem] flex justify-center items-center bg-slate-100">
+        <div class="bg-slate-100 w-full h-[5rem] shadow-md flex justify-start items-center p-5">
           <div class="bg-slate-200 w-[15rem] h-[2rem] text-slate-400">
             <p class="text-[20px] pl-5">@NgForm</p>
           </div>
         </div>
       </div>
       <div class="p-5">
-        <form
-          #data="ngForm"
-          (ngSubmit)="onSubmit(data)"
-          class="flex justify-center gap-5"
-          novalidate
-        >
+        <form #data="ngForm" (ngSubmit)="onSubmit(data)" class="flex justify-center gap-5" novalidate>
           <div>
             <input
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              name="first"
-              ngModel
-              required
-              #first="ngModel"
-              placeholder="กรุณากรอกข้อมูล"
-            />
+              name="first" ngModel required #first="ngModel" placeholder="กรุณากรอกข้อมูล" />
           </div>
           <div>
             <input
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              name="last"
-              ngModel
-              placeholder="กรุณากรอกข้อมูล"
-            />
+              name="last" ngModel placeholder="กรุณากรอกข้อมูล" />
           </div>
           <div class="justify-center items-center grid">
             <button
               class="h-10 shadow-md rounded-md w-[10rem] text-slate-100 hover:bg-slate-200 bg-slate-300 hover:text-slate-500"
-              style="transition: 0.5s"
-              (click)="onSubmitFormGroupI()"
-            >
+              style="transition: 0.5s" (click)="onSubmitFormGroupI()">
               Submit$
             </button>
           </div>
@@ -183,12 +128,8 @@
 
     <!-- @Form -->
     <div>
-      <div
-        class="w-full h-[5rem] flex justify-center items-center bg-slate-100"
-      >
-        <div
-          class="bg-slate-100 w-full h-[5rem] shadow-md flex justify-start items-center p-5"
-        >
+      <div class="w-full h-[5rem] flex justify-center items-center bg-slate-100">
+        <div class="bg-slate-100 w-full h-[5rem] shadow-md flex justify-start items-center p-5">
           <div class="bg-slate-200 w-[15rem] h-[2rem] text-slate-400">
             <p class="text-[20px] pl-5">@Form</p>
           </div>
@@ -199,27 +140,17 @@
           <div>
             <input
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล"
-              type="text"
-              id="name"
-              #name
-            />
+              placeholder="กรุณากรอกข้อมูล" type="text" id="name" #name />
           </div>
           <div>
             <input
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล"
-              type="text"
-              id="surname"
-              #surname
-            />
+              placeholder="กรุณากรอกข้อมูล" type="text" id="surname" #surname />
           </div>
           <div>
             <button
               class="h-10 shadow-md rounded-md w-[10rem] text-slate-100 hover:bg-slate-200 bg-slate-300 hover:text-slate-500"
-              style="transition: 0.5s"
-              (click)="onSubmitForm(name.value, surname.value)"
-            >
+              style="transition: 0.5s" (click)="onSubmitForm(name.value, surname.value)">
               $Submit
             </button>
           </div>
@@ -229,12 +160,8 @@
 
     <!-- @FormControls -->
     <div>
-      <div
-        class="w-full h-[5rem] flex justify-center items-center bg-slate-100"
-      >
-        <div
-          class="bg-slate-100 w-full h-[5rem] shadow-md flex justify-start items-center p-5"
-        >
+      <div class="w-full h-[5rem] flex justify-center items-center bg-slate-100">
+        <div class="bg-slate-100 w-full h-[5rem] shadow-md flex justify-start items-center p-5">
           <div class="bg-slate-200 w-[15rem] h-[2rem] text-slate-400">
             <p class="text-[20px] pl-5">@FormControl</p>
           </div>
@@ -245,17 +172,12 @@
           <div>
             <input
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล"
-              type="text"
-              [formControl]="value7"
-            />
+              placeholder="กรุณากรอกข้อมูล" type="text" [formControl]="value7" />
           </div>
           <div>
             <button
               class="h-10 shadow-md rounded-md w-[10rem] text-slate-100 hover:bg-slate-200 bg-slate-300 hover:text-slate-500"
-              style="transition: 0.5s"
-              (click)="onSubmitFormControl()"
-            >
+              style="transition: 0.5s" (click)="onSubmitFormControl()">
               $Submit
             </button>
           </div>
