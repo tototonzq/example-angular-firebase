@@ -9,48 +9,50 @@ import { CardListComponent } from './modules/user/card/card-list/card-list.compo
 import { CardDetailComponent } from './modules/user/card/card-detail/card-detail.component';
 import { FormProjectComponent } from './modules/user/form-project/form-project.component';
 import { FormInputComponent } from './modules/user/form-input/form-input.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
-  { path: 'sign-in', component: SignInComponent },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: 'card',
-    component: CardComponent,
-    children: [
-      {
-        path: '',
-        component: CardListComponent,
-        children: [{ path: ':id', component: CardDetailComponent }],
-      },
-    ],
-  },
-  {
-    path: 'show-data',
-    component: ShowDataComponent,
-  },
-  {
-    path: 'add-data',
-    component: AddDataComponent,
-  },
-  {
-    path: 'reactive-forms',
-    component: FormProjectComponent,
-  },
-  {
-    path: 'form-input',
-    component: FormInputComponent,
-  },
-  {
-    path: 'routes-compo',
-    loadChildren: () =>
-      import('./modules/learning/routes-compo/routes-compo.module').then(
-        (m) => m.RoutesCompoModule
-      ),
-  },
+  { path: '', component: LayoutComponent },
+  // { path: 'sign-in', component: SignInComponent },
+  // {
+  //   path: 'dashboard',
+  //   component: DashboardComponent,
+  // },
+  // {
+  //   path: 'card',
+  //   component: CardComponent,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: CardListComponent,
+  //       children: [{ path: ':id', component: CardDetailComponent }],
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: 'show-data',
+  //   component: ShowDataComponent,
+  // },
+  // {
+  //   path: 'add-data',
+  //   component: AddDataComponent,
+  // },
+  // {
+  //   path: 'reactive-forms',
+  //   component: FormProjectComponent,
+  // },
+  // {
+  //   path: 'form-input',
+  //   component: FormInputComponent,
+  // },
+  // {
+  //   path: 'routes-compo',
+  //   loadChildren: () =>
+  //     import('./modules/learning/routes-compo/routes-compo.module').then(
+  //       (m) => m.RoutesCompoModule
+  //     ),
+  // },
 ];
 
 @NgModule({
