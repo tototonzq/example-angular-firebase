@@ -9,7 +9,6 @@ import { CardListComponent } from './modules/user/card/card-list/card-list.compo
 import { CardDetailComponent } from './modules/user/card/card-detail/card-detail.component';
 import { FormProjectComponent } from './modules/user/form-project/form-project.component';
 import { FormInputComponent } from './modules/user/form-input/form-input.component';
-import { InputReComponent } from './modules/user/input-re/input-re.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
@@ -44,10 +43,6 @@ const routes: Routes = [
   {
     path: 'form-input',
     component: FormInputComponent,
-  },
-  {
-    path: 'input-re',
-    component: InputReComponent,
   },
   {
     path: 'routes-compo',

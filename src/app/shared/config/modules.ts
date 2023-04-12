@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { SidebarModule } from '../component/sidebar/sidebar.module';
 import { TableModule } from '../component/table/table.module';
 import { FormModule } from '../component/form/form.module';
+import { RouterModule } from '@angular/router';
 
 const componentModule = [SidebarModule, TableModule, FormModule];
 
@@ -18,6 +19,7 @@ const firebaseModule = [
 ];
 
 const commonModule = [
+  RouterModule,
   ReactiveFormsModule,
   FormsModule,
   BrowserModule,

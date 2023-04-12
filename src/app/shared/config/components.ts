@@ -10,7 +10,6 @@ import { CostFormComponent } from 'src/app/modules/user/form-project/cost-form/c
 import { FormProjectComponent } from 'src/app/modules/user/form-project/form-project.component';
 import { GeneralFormComponent } from 'src/app/modules/user/form-project/general-form/general-form.component';
 import { SummaryFormComponent } from 'src/app/modules/user/form-project/summary-form/summary-form.component';
-import { InputReComponent } from 'src/app/modules/user/input-re/input-re.component';
 import { ShowDataComponent } from 'src/app/modules/user/show-data/show-data.component';
 
 export const components = [
@@ -27,5 +26,4 @@ export const components = [
   CostFormComponent,
   SummaryFormComponent,
   FormInputComponent,
-  InputReComponent
 ];
