@@ -85,10 +85,10 @@ export const routes: Route[] = [
           ),
       },
       {
-        path: 'status-petition',
+        path: 'manager-user',
         loadChildren: () =>
-          import('./modules/user/status-petition/status-petition.module').then(
-            (m) => m.StatusPetitionModule
+          import('./modules/user/manager-user/manager-user.module').then(
+            (m) => m.ManagerUserModule
           ),
       },
     ],
@@ -109,6 +109,20 @@ export const routes: Route[] = [
           import('./modules/admin/manager/manager.module').then(
             (m) => m.ManagerModule
           ),
+      },
+      {
+        path: 'status-petition',
+        loadChildren: () =>
+          import('./modules/user/status-petition/status-petition.module').then(
+            (m) => m.StatusPetitionModule
+          ),
+      },
+      {
+        path: 'manager-petition',
+        loadChildren: () =>
+          import(
+            './modules/admin/manager-petition/manager-petition.module'
+          ).then((m) => m.ManagerPetitionModule),
       },
     ],
   },

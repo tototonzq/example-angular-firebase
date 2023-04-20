@@ -15,7 +15,7 @@
       <!-- USER -->
       <ng-container *ngIf="(role$ | async) === 'user'">
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s" #m1
-          id="dashboard" #link (click)="click(link.id)">
+          id="dashboard" #linkUs1 (click)="click(linkUs1.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
             <span>Dashboard</span>
           </div>
@@ -45,15 +45,15 @@
           </div>
         </div> -->
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
-          id="users" #link5 (click)="click(link5.id)">
+          id="manager-user" #linkUs2 (click)="click(linkUs2.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
             <span>User</span>
           </div>
         </div>
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
-          id="status-petition" #link6 (click)="click(link6.id)">
+          id="users" #linkUs3 (click)="click(linkUs3.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
-            <span>Status Petition</span>
+            <span>Manager User</span>
           </div>
         </div>
       </ng-container>
@@ -61,9 +61,21 @@
       <!-- ADMIN -->
       <ng-container *ngIf="(role$ | async) === 'admin'">
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
-          id="manager" #link5 (click)="click(link5.id)">
+          id="manager" #linkAd1 (click)="click(linkAd1.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
             <span>Manager</span>
+          </div>
+        </div>
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="status-petition" #linkAd2 (click)="click(linkAd2.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>Status Petition</span>
+          </div>
+        </div>
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="manager-petition" #linkAd3 (click)="click(linkAd3.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>Manager Petition</span>
           </div>
         </div>
       </ng-container>

@@ -31,4 +31,6 @@ export class ManagerComponent implements OnInit, OnDestroy {
 
   m: number[] = [1, 2, 3, 4, 5];
   m1: string[] = ['มกราคา', 'มกราคา'];
+
+
 }
