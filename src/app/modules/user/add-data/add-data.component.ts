@@ -57,6 +57,10 @@ export class AddDataComponent implements OnInit {
       .collection('vocab')
       .valueChanges()
       .subscribe((values) => {
+        values.filter((item: any) => {
+          console.log(item.Description);
+        });
+        console.log(values);
         this._data = values;
       });
   }

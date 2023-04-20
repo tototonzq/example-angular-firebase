@@ -22,7 +22,7 @@ const commonModule = [
   RouterModule,
   ReactiveFormsModule,
   FormsModule,
-  BrowserModule,
+  // BrowserModule,
   AppRoutingModule,
   CommonModule,
   HeroIconModule.withIcons(
