@@ -1,0 +1,87 @@
+<main class="flex flex-row h-screen">
+  <header class="sidebar h-screen overflow-auto transition-all duration-200 ease-in-out border-r-[1px] border-[#D0D5DB]"
+    [ngClass]="isOpen  ? 'active' : ''">
+
+    <!-- <header class="grid justify-center items-center p-5">
+      <div class="bg-slate-200 w-[10rem] h-[10rem] rounded-full shadow-md hover:bg-slate-300 cursor-pointer"
+        style="transition: 0.5s;">
+      </div>
+      <div class="grid justify-center items-center pt-5">
+      </div>
+    </header> -->
+    {{layout$ | async}}
+
+    <body class="flex justify-center items-center p-5 flex-col gap-5">
+      <!-- USER -->
+      <ng-container *ngIf="(role$ | async) === 'user'">
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s" #m1
+          id="dashboard" #link (click)="click(link.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>Dashboard</span>
+          </div>
+        </div>
+        <!-- <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="card" #link1 (click)="click(link1.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>Card</span>
+          </div>
+        </div> -->
+        <!-- <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="form-input" #link2 (click)="click(link2.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>From Input</span>
+          </div>
+        </div>
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="routes-compo" #link3 (click)="click(link3.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>Routes Component</span>
+          </div>
+        </div> -->
+        <!-- <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="table-data" #link4 (click)="click(link4.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>Table</span>
+          </div>
+        </div> -->
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="users" #link5 (click)="click(link5.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>User</span>
+          </div>
+        </div>
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="status-petition" #link6 (click)="click(link6.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>Status Petition</span>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- ADMIN -->
+      <ng-container *ngIf="(role$ | async) === 'admin'">
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="manager" #link5 (click)="click(link5.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>Manager</span>
+          </div>
+        </div>
+      </ng-container>
+    </body>
+
+    <div>
+      <hr class="mx-5">
+    </div>
+
+    <footer class="flex justify-center items-center p-5 flex-col gap-5">
+      <div (click)="exit()" class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300"
+        style="transition: 0.5s">
+        <div class=" flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+          <span>Log-out</span>
+        </div>
+      </div>
+      <p class="text-slate-300">Dev. for learning</p>
+    </footer>
+
+  </header>
+</main>

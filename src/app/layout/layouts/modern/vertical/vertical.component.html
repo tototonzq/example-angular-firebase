@@ -1,0 +1,18 @@
+<ng-container>
+  <div class="flex">
+
+    <header *ngIf="isOpen$ | async as data">
+      <app-sidebar [isOpen]="data"></app-sidebar>
+    </header>
+
+    <main class="main flex flex-col flex-grow transition-all duration-200 ease-in-out">
+      <app-navbar (toggleSidebar)="onToggleSidebar()"></app-navbar>
+      <router-outlet></router-outlet>
+    </main>
+
+    <footer>
+
+    </footer>
+
+  </div>
+</ng-container>
