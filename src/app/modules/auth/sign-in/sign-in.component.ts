@@ -30,13 +30,21 @@ export class SignInComponent implements OnInit {
     // this.router.navigate(['dashboard']);
     if (email === 'admin' && password === 'admin') {
       this.router.navigate(['manager']);
+      console.log('admin');
+
     } else if (email === 'user' && password === 'user') {
       this.router.navigate(['dashboard']);
+      console.log('user');
+
+    } else if (email === 'teacher' && password === 'teacher') {
+      this.router.navigate(['t-dashboard']);
+      console.log('teacher');
+
     } else if (
       email === '' ||
       password === '' ||
-      email !== ('admin' || 'user') ||
-      password !== ('admin' || 'user')
+      email !== ('admin' || 'user' || 'teacher') ||
+      password !== ('admin' || 'user' || 'teacher')
     ) {
       alert('Please enter your email and password');
     }

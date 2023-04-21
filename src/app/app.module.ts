@@ -9,6 +9,7 @@ import { Stores } from './stores';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
+import { UserFormComponent } from './modules/user/user-form/user-form.component';
 
 const components = [AppComponent];
 

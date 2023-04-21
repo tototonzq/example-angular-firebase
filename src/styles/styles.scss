@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @import "./customs/fonts.scss";
+@import "./customs/input.scss";
+
+button {
+  @apply w-full rounded-md shadow-md h-[4rem] border-[1px];
+}

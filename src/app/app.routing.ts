@@ -91,6 +91,13 @@ export const routes: Route[] = [
             (m) => m.ManagerUserModule
           ),
       },
+      {
+        path: 'user-form',
+        loadChildren: () =>
+          import('./modules/user/user-form/user-form.module').then(
+            (m) => m.UserFormModule
+          ),
+      },
     ],
   },
 
@@ -103,6 +110,13 @@ export const routes: Route[] = [
       role: 'admin',
     },
     children: [
+      {
+        path: 'ad-dashboard',
+        loadChildren: () =>
+          import('./modules/admin/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
+      },
       {
         path: 'manager',
         loadChildren: () =>
@@ -123,6 +137,32 @@ export const routes: Route[] = [
           import(
             './modules/admin/manager-petition/manager-petition.module'
           ).then((m) => m.ManagerPetitionModule),
+      },
+    ],
+  },
+
+  //* Admin routes for users that are signed in
+  {
+    path: '',
+    component: LayoutComponent,
+    data: {
+      layout: 'vertical',
+      role: 'teacher',
+    },
+    children: [
+      {
+        path: 't-manager',
+        loadChildren: () =>
+          import('./modules/teacher/manager/manager.module').then(
+            (m) => m.ManagerModule
+          ),
+      },
+      {
+        path: 't-dashboard',
+        loadChildren: () =>
+          import('./modules/teacher/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
       },
     ],
   },

@@ -2,14 +2,13 @@
   <header class="sidebar h-screen overflow-auto transition-all duration-200 ease-in-out border-r-[1px] border-[#D0D5DB]"
     [ngClass]="isOpen  ? 'active' : ''">
 
-    <!-- <header class="grid justify-center items-center p-5">
-      <div class="bg-slate-200 w-[10rem] h-[10rem] rounded-full shadow-md hover:bg-slate-300 cursor-pointer"
-        style="transition: 0.5s;">
-      </div>
-      <div class="grid justify-center items-center pt-5">
-      </div>
-    </header> -->
-    {{layout$ | async}}
+    <header class="pt-5"></header>
+
+    <div class="flex justify-center items-center">
+      <p> {{ layout$ | async }} </p>
+      <p class="pl-1">:</p>
+      <p class="pl-1"> {{ role$ | async }} </p>
+    </div>
 
     <body class="flex justify-center items-center p-5 flex-col gap-5">
       <!-- USER -->
@@ -17,15 +16,15 @@
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s" #m1
           id="dashboard" #linkUs1 (click)="click(linkUs1.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
-            <span>Dashboard</span>
+            <span>แผงควบคุม</span>
           </div>
         </div>
-        <!-- <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
           id="card" #link1 (click)="click(link1.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
             <span>Card</span>
           </div>
-        </div> -->
+        </div>
         <!-- <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
           id="form-input" #link2 (click)="click(link2.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
@@ -44,16 +43,22 @@
             <span>Table</span>
           </div>
         </div> -->
-        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+        <!-- <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
           id="manager-user" #linkUs2 (click)="click(linkUs2.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
-            <span>User</span>
+            <span>การจัดการผู้ใช้งาน</span>
           </div>
-        </div>
+        </div> -->
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
           id="users" #linkUs3 (click)="click(linkUs3.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
-            <span>Manager User</span>
+            <span>ตรวจสอบคำร้อง</span>
+          </div>
+        </div>
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="user-form" #linkUs4 (click)="click(linkUs4.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>จัดการคำร้อง</span>
           </div>
         </div>
       </ng-container>
@@ -61,21 +66,43 @@
       <!-- ADMIN -->
       <ng-container *ngIf="(role$ | async) === 'admin'">
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
-          id="manager" #linkAd1 (click)="click(linkAd1.id)">
+          id="ad-dashboard" #linkAd4 (click)="click(linkAd4.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
-            <span>Manager</span>
+            <span>แผงควบคุม</span>
           </div>
         </div>
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="manager" #linkAd1 (click)="click(linkAd1.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>จัดการผู้ใช้งาน</span>
+          </div>
+        </div>
+        <!-- <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
           id="status-petition" #linkAd2 (click)="click(linkAd2.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
             <span>Status Petition</span>
           </div>
-        </div>
-        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+        </div> -->
+        <!-- <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
           id="manager-petition" #linkAd3 (click)="click(linkAd3.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
             <span>Manager Petition</span>
+          </div>
+        </div> -->
+      </ng-container>
+
+      <!-- TEACHER -->
+      <ng-container *ngIf="(role$ | async) === 'teacher'">
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="t-dashboard" #linkT1 (click)="click(linkT1.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>แผงควบคุม</span>
+          </div>
+        </div>
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="t-manager" #linkT2 (click)="click(linkT2.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>ตรวจสอบคำร้อง</span>
           </div>
         </div>
       </ng-container>
@@ -89,7 +116,7 @@
       <div (click)="exit()" class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300"
         style="transition: 0.5s">
         <div class=" flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
-          <span>Log-out</span>
+          <span>ออกจากระบบ</span>
         </div>
       </div>
       <p class="text-slate-300">Dev. for learning</p>
