@@ -54,7 +54,7 @@ export const routes: Route[] = [
     component: LayoutComponent,
     data: {
       layout: 'vertical',
-      role: 'user',
+      role: 'student',
     },
     children: [
       {

@@ -11,7 +11,7 @@ import { ChangeLayout } from './actions/change-layout.action';
 
 const initialState: LayoutStateModel = {
   sidebar_open: true,
-  role: 'user',
+  role: 'student',
   layout: Layout.EMPTY,
 };
 

@@ -12,7 +12,7 @@
 
     <body class="flex justify-center items-center p-5 flex-col gap-5">
       <!-- USER -->
-      <ng-container *ngIf="(role$ | async) === 'user'">
+      <ng-container *ngIf="(role$ | async) === 'student'">
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s" #m1
           id="dashboard" #linkUs1 (click)="click(linkUs1.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">

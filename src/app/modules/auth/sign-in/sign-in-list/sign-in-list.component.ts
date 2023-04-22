@@ -92,17 +92,17 @@ export class SignInListComponent implements OnInit, OnDestroy {
   //   if (email === 'admin' && password === 'admin') {
   //     this.router.navigate(['manager']);
   //     console.log('admin');
-  //   } else if (email === 'user' && password === 'user') {
+  //   } else if (email === 'student' && password === 'student') {
   //     this.router.navigate(['dashboard']);
-  //     console.log('user');
+  //     console.log('student');
   //   } else if (email === 'teacher' && password === 'teacher') {
   //     this.router.navigate(['t-dashboard']);
   //     console.log('teacher');
   //   } else if (
   //     email === '' ||
   //     password === '' ||
-  //     email !== ('admin' || 'user' || 'teacher') ||
-  //     password !== ('admin' || 'user' || 'teacher')
+  //     email !== ('admin' || 'student' || 'teacher') ||
+  //     password !== ('admin' || 'student' || 'teacher')
   //   ) {
   //     alert('Please enter your email and password');
   //   }

@@ -32,7 +32,7 @@ export class SidebarComponent implements OnInit {
   /*                                  Functions                                 */
   /* -------------------------------------------------------------------------- */
   click(item?: any) {
-    // if (role === 'user') {
+    // if (role === 'student') {
     // } else {
     //   this.router.navigate(['sign-in']);
     // }
