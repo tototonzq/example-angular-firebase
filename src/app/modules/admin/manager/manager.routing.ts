@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { ManagerComponent } from './manager.component';
+import { ManagerListComponent } from './manager-list/manager-list.component';
 
 export const ManagerRoutes: Routes = [
-  { path: '', component: ManagerComponent },
+  { path: '', component: ManagerListComponent },
 ];
