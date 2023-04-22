@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { StateContext } from '@ngxs/store';
 import { SignInStateModel } from '../models/sign-in.state';
+import { StateContext } from '@ngxs/store';
 
 @Injectable({ providedIn: 'root' })
 export class SignInEffect {
@@ -9,8 +9,15 @@ export class SignInEffect {
   /* -------------------------------------------------------------------------- */
   constructor() {}
 
-  SignIn({ patchState }: StateContext<SignInStateModel>, { payload }: any) {
-    console.log('1');
-    console.log(payload);
+  SignIn(
+    { patchState }: StateContext<SignInStateModel>,
+    { email, password, data }: any
+  ) {
+    const userLogin: any = data.fin
+    console.log(email);
+    console.log(password);
+    console.log(data);
+
+    patchState({});
   }
 }

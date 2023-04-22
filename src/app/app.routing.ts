@@ -32,6 +32,13 @@ export const routes: Route[] = [
             (m) => m.SignInModule
           ),
       },
+      {
+        path: 'change-password',
+        loadChildren: () =>
+          import('./modules/auth/change-password/change-password.module').then(
+            (m) => m.ChangePasswordModule
+          ),
+      },
     ],
   },
 

@@ -1,7 +1,8 @@
-/* -------------------------------------------------------------------------- */
-/*                                   Sign In                                  */
-/* -------------------------------------------------------------------------- */
 export class SignIn {
   static readonly type = '[ Auth ] SignIn';
-  constructor(public user: string, public password: string) {}
+  constructor(
+    public email: string,
+    public password: string,
+    public data: any
+  ) {}
 }

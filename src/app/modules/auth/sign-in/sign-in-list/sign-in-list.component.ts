@@ -6,6 +6,8 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Layout } from 'src/app/layout/store/models/layout.model';
 import { LayoutSelectors } from 'src/app/layout/store/selectors/layout.selector';
+import { SignIn } from '../store/actions/sign-in.action';
+import { ManagerSelector } from 'src/app/modules/admin/manager/store/selectors/manager.selectors';
 
 @Component({
   templateUrl: './sign-in-list.component.html',
@@ -13,7 +15,6 @@ import { LayoutSelectors } from 'src/app/layout/store/selectors/layout.selector'
 })
 export class SignInListComponent implements OnInit {
   @Select(LayoutSelectors.layout) layout$!: Observable<Layout>;
-
   /* -------------------------------------------------------------------------- */
   /*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
@@ -42,7 +43,6 @@ export class SignInListComponent implements OnInit {
       .collection('users')
       .valueChanges()
       .subscribe((values) => {
-        console.log(values);
         this.data = values;
       });
   }
@@ -50,7 +50,11 @@ export class SignInListComponent implements OnInit {
   SignIn(email: string, password: string) {
     console.log(email, password);
     console.log(this.data);
-    // this.store.dispatch(new SignIn(email, password));
+    this.store.dispatch(new SignIn(email, password, this.data));
+  }
+
+  forgetPassword(): void {
+    this.router.navigate(['change-password']);
   }
 
   // SignIn(email: string, password: string) {
