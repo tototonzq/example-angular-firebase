@@ -55,7 +55,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     if (_role === 'teacher') {
       return 'อาจารย์';
     }
-    if (_role === 'user') {
+    if (_role === 'student') {
       return 'นิสิต';
     }
     return;

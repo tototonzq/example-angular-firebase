@@ -6,9 +6,8 @@ import { DropdownRole } from './store/models/manager.model';
 export const MENU_DROPDOWN_MANAGER_ADMIN: DropdownRole[] = [
   { id: '00', name: 'เเอดมิน', value: 'admin' },
   { id: '01', name: 'อาจารย์', value: 'teacher' },
-  { id: '02', name: 'นิสิต', value: 'user' },
+  { id: '02', name: 'นิสิต', value: 'student' },
 ];
-
 
 export const DATA_TABLE: any = [
   { name: 'XXXX', age: 'XXXX', city: 'XXXX' },

@@ -79,4 +79,7 @@
   </body>
   <footer>
   </footer>
+  <app-loaders *ngIf="(isLoading$ | async) === true"></app-loaders>
+  {{ isLoggedIn$ | async }}
+  {{ role$ | async }}
 </main>
