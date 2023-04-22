@@ -43,6 +43,7 @@ export class SignInListComponent implements OnInit {
       .collection('users')
       .valueChanges()
       .subscribe((values) => {
+        // console.log(values);
         this.data = values;
       });
   }

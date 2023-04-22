@@ -17,6 +17,9 @@ export const routes: Route[] = [
   //* Auth first routes for users that are signed in
   { path: '', pathMatch: 'full', redirectTo: 'sign-in' },
 
+  /* -------------------------------------------------------------------------- */
+  /*                                    Auth                                    */
+  /* -------------------------------------------------------------------------- */
   //* Auth routes for users that are signed in
   {
     path: '',
@@ -42,6 +45,9 @@ export const routes: Route[] = [
     ],
   },
 
+  /* -------------------------------------------------------------------------- */
+  /*                                    User                                    */
+  /* -------------------------------------------------------------------------- */
   //* User routes for users that are signed in
   {
     path: '',
@@ -108,6 +114,9 @@ export const routes: Route[] = [
     ],
   },
 
+  /* -------------------------------------------------------------------------- */
+  /*                                    Admin                                   */
+  /* -------------------------------------------------------------------------- */
   //* Admin routes for users that are signed in
   {
     path: '',
@@ -148,7 +157,10 @@ export const routes: Route[] = [
     ],
   },
 
-  //* Admin routes for users that are signed in
+  /* -------------------------------------------------------------------------- */
+  /*                                   Teacher                                  */
+  /* -------------------------------------------------------------------------- */
+  //* Teacher routes for users that are signed in
   {
     path: '',
     component: LayoutComponent,
@@ -158,22 +170,25 @@ export const routes: Route[] = [
     },
     children: [
       {
-        path: 't-manager',
-        loadChildren: () =>
-          import('./modules/teacher/manager/manager.module').then(
-            (m) => m.ManagerModule
-          ),
-      },
-      {
         path: 't-dashboard',
         loadChildren: () =>
           import('./modules/teacher/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
           ),
       },
+      {
+        path: 't-manager',
+        loadChildren: () =>
+          import('./modules/teacher/manager/manager.module').then(
+            (m) => m.ManagerModule
+          ),
+      },
     ],
   },
 
-  //! not found pages
+  /* -------------------------------------------------------------------------- */
+  /*                                  Not found                                 */
+  /* -------------------------------------------------------------------------- */
+  //! Not found pages
   { path: '**', redirectTo: '404-not-found' },
 ];
