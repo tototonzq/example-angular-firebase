@@ -1,4 +1,6 @@
 import { Route } from '@angular/router';
-import { SignInComponent } from './sign-in.component';
+import { SignInListComponent } from './sign-in-list/sign-in-list.component';
 
-export const signInRoutes: Route[] = [{ path: '', component: SignInComponent }];
+export const signInRoutes: Route[] = [
+  { path: '', component: SignInListComponent },
+];

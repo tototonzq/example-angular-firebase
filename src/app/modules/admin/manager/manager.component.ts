@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DropdownRole } from './store/models/manager.model';
+import { MENU_DROPDOWN_MANAGER_ADMIN } from './manager.data';
 
 @Component({
   selector: 'app-manager',
@@ -24,10 +26,10 @@ export class ManagerComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   /*                                    logic                                   */
   /* -------------------------------------------------------------------------- */
-  dropdown: any = [
-    { id: '1', name: 'วิศวกรรมคอมพิวเตอร์' },
-    { id: '2', name: 'วิศวกรรมซอฟเเวร์' },
-  ];
+  // dropdown: any = [
+  //   { id: '1', name: 'วิศวกรรมคอมพิวเตอร์' },
+  //   { id: '2', name: 'วิศวกรรมซอฟเเวร์' },
+  // ];
   // LOOP_TABLE: any = [
   //   { id: 'มกราคา', name: [1, 2, 3, 4, 5] },
   //   { id: 'ุกมราคา', name: [1, 2, 3, 4] },
@@ -35,4 +37,7 @@ export class ManagerComponent implements OnInit, OnDestroy {
 
   // m: number[] = [1, 2, 3, 4, 5];
   // m1: string[] = ['มกราคา', 'มกราคา'];
+  /* -------------------------------------------------------------------------- */
+  /*                               Local Database                               */
+  /* -------------------------------------------------------------------------- */
 }

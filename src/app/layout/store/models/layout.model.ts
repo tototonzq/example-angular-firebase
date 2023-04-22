@@ -5,10 +5,3 @@ export enum Layout {
   MODERN = 'MODERN',
   // Vertical;
 }
-
-export enum Role {
-  // Admin
-  ADMIN = 'ADMIN',
-  // User
-  USER = 'USER',
-}

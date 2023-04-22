@@ -4,6 +4,7 @@ import { Select } from '@ngxs/store';
 import { LayoutSelectors } from '../../store/selectors/layout.selector';
 import { Observable } from 'rxjs';
 import { RoleType } from 'src/app/shared/types/role.type';
+import { Layout } from '../../store/models/layout.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +15,7 @@ export class SidebarComponent implements OnInit {
   @Input() isOpen: boolean = true;
 
   @Select(LayoutSelectors.role) role$!: Observable<RoleType>;
-  @Select(LayoutSelectors.layout) layout$!: Observable<RoleType>;
+  @Select(LayoutSelectors.layout) layout$!: Observable<Layout>;
 
   /* -------------------------------------------------------------------------- */
   /*                                  Variable                                  */
