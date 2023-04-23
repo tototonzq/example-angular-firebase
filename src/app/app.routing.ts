@@ -18,7 +18,7 @@ export const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'sign-in' },
 
   /* -------------------------------------------------------------------------- */
-  /*                                    Auth                                    */
+  //*                                    Auth                                    */
   /* -------------------------------------------------------------------------- */
   //* Auth routes for users that are signed in
   {
@@ -36,6 +36,13 @@ export const routes: Route[] = [
           ),
       },
       {
+        path: 'sign-up',
+        loadChildren: () =>
+          import('./modules/auth/sign-up/sign-up.module').then(
+            (m) => m.SignUpModule
+          ),
+      },
+      {
         path: 'change-password',
         loadChildren: () =>
           import('./modules/auth/change-password/change-password.module').then(
@@ -46,7 +53,7 @@ export const routes: Route[] = [
   },
 
   /* -------------------------------------------------------------------------- */
-  /*                                    User                                    */
+  //*                                   Student                                  */
   /* -------------------------------------------------------------------------- */
   //* User routes for users that are signed in
   {
@@ -58,7 +65,7 @@ export const routes: Route[] = [
     },
     children: [
       {
-        path: 'dashboard',
+        path: 'student-dashboard',
         loadChildren: () =>
           import('./modules/user/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
@@ -115,7 +122,7 @@ export const routes: Route[] = [
   },
 
   /* -------------------------------------------------------------------------- */
-  /*                                    Admin                                   */
+  //*                                    Admin                                   */
   /* -------------------------------------------------------------------------- */
   //* Admin routes for users that are signed in
   {
@@ -127,7 +134,7 @@ export const routes: Route[] = [
     },
     children: [
       {
-        path: 'ad-dashboard',
+        path: 'admin-dashboard',
         loadChildren: () =>
           import('./modules/admin/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
@@ -158,7 +165,7 @@ export const routes: Route[] = [
   },
 
   /* -------------------------------------------------------------------------- */
-  /*                                   Teacher                                  */
+  //*                                   Teacher                                  */
   /* -------------------------------------------------------------------------- */
   //* Teacher routes for users that are signed in
   {
@@ -170,7 +177,7 @@ export const routes: Route[] = [
     },
     children: [
       {
-        path: 't-dashboard',
+        path: 'teacher-dashboard',
         loadChildren: () =>
           import('./modules/teacher/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
@@ -187,7 +194,7 @@ export const routes: Route[] = [
   },
 
   /* -------------------------------------------------------------------------- */
-  /*                                  Not found                                 */
+  //*                                  Not found                                 */
   /* -------------------------------------------------------------------------- */
   //! Not found pages
   { path: '**', redirectTo: '404-not-found' },

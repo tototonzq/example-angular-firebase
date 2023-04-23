@@ -1,15 +1,25 @@
 import { Action, State, StateContext } from '@ngxs/store';
-import { SignInStateModel } from './models/sign-in.state';
+import { SignInStateModel } from './models/sign-in.state.model';
 import { Injectable } from '@angular/core';
 import { SignInEffect } from './effects/sign-in.effect';
-import { SignIn, SignInFailed, SignInSuccess } from './actions/sign-in.action';
-import { ClearEffect } from './effects/clear.effect';
-import { Clear } from './actions/clear.action';
+import { SignIn, SignInWithAdmin } from './actions/sign-in.action';
+import { LeavePageEffect } from './effects/leave-page.effect';
+import { GetAllUsers } from './actions/get-all-user.action';
+import { GetAllUsersEffect } from './effects/get-user.effect';
+import { LeavePage } from './actions/leave-page.action';
 
 const initialState: SignInStateModel = {
+  // TODO : status user
+  role: null,
+
+  // TODO : status
   loading: false,
   login_status: false,
-  role: null,
+
+  // TODO : status data
+  data_user_all: null,
+  count_user_all: null,
+  data_user_login: null,
 };
 
 @State<SignInStateModel>({
@@ -19,36 +29,40 @@ const initialState: SignInStateModel = {
 @Injectable()
 export class SignInState {
   /* -------------------------------------------------------------------------- */
-  /*                                 constructor                                */
+  //*                                 Constructor                                */
   /* -------------------------------------------------------------------------- */
   constructor(
     private _signInEffect: SignInEffect,
-    private _clearEffect: ClearEffect
+    private _leavePageEffect: LeavePageEffect,
+    private _getAllUsersEffect: GetAllUsersEffect
   ) {}
 
   /* -------------------------------------------------------------------------- */
-  /*                                Sign-In State                               */
+  //*                                Sign-In State                               */
   /* -------------------------------------------------------------------------- */
   @Action(SignIn)
   SignIn(ctx: StateContext<SignInStateModel>, action: SignIn) {
-    return this._signInEffect.SignIn(ctx, action);
+    return this._signInEffect.signIn(ctx, action);
   }
 
-  @Action(SignInSuccess)
-  SignInSuccess(ctx: StateContext<SignInStateModel>) {
-    return this._signInEffect.signSuccess(ctx);
-  }
-
-  @Action(SignInFailed)
-  SignInFailed(ctx: StateContext<SignInStateModel>) {
-    return this._signInEffect.signFailed(ctx);
+  @Action(SignInWithAdmin)
+  SignInWithAdmin(ctx: StateContext<SignInStateModel>) {
+    return this._signInEffect.signInWithAdmin(ctx);
   }
 
   /* -------------------------------------------------------------------------- */
-  /*                                 Clear State                                */
+  //*                              Leave-Page State                              */
   /* -------------------------------------------------------------------------- */
-  @Action(Clear)
+  @Action(LeavePage)
   Clear(ctx: StateContext<SignInStateModel>) {
-    return this._clearEffect.Clear(ctx);
+    return this._leavePageEffect.leavePage(ctx);
+  }
+
+  /* -------------------------------------------------------------------------- */
+  //*                             Get-All Users State                            */
+  /* -------------------------------------------------------------------------- */
+  @Action(GetAllUsers)
+  GetAllUsers(ctx: StateContext<SignInStateModel>, action: any) {
+    return this._getAllUsersEffect.getAllUsers(ctx, action);
   }
 }

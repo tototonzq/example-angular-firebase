@@ -4,7 +4,7 @@ import { MENU_DROPDOWN_MANAGER_ADMIN } from './manager.data';
 
 @Component({
   selector: 'app-manager',
-  templateUrl: './manager.component.html',
+  template: `<router-outlet></router-outlet>`,
   styleUrls: ['./manager.component.scss'],
 })
 export class ManagerComponent implements OnInit, OnDestroy {

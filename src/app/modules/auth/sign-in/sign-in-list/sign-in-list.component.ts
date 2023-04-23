@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subject, take } from 'rxjs';
 import { Layout } from 'src/app/layout/store/models/layout.model';
@@ -9,7 +9,10 @@ import { LayoutSelectors } from 'src/app/layout/store/selectors/layout.selector'
 import { SignIn } from '../store/actions/sign-in.action';
 import { GetAllUserService } from 'src/app/shared/services/get-all-user.service.service';
 import { SignInSelectors } from '../store/selectors/sign-in.selectors';
-import { Clear } from '../store/actions/clear.action';
+import { GetAllUsers } from '../store/actions/get-all-user.action';
+import { UserDataModelResponse } from '../store/models/sign-in.interface.model';
+import { FormControl, Validators } from '@angular/forms';
+import { LeavePage } from '../store/actions/leave-page.action';
 
 @Component({
   templateUrl: './sign-in-list.component.html',
@@ -24,9 +27,20 @@ export class SignInListComponent implements OnInit, OnDestroy {
   //*                                   select                                   */
   /* -------------------------------------------------------------------------- */
   @Select(LayoutSelectors.layout) layout$!: Observable<Layout>;
-  @Select(SignInSelectors.isLoading) isLoading$!: Observable<boolean>;
-  @Select(SignInSelectors.isLoggedIn) isLoggedIn$!: Observable<boolean>;
-  @Select(SignInSelectors.getRole) role$!: Observable<any>;
+  @Select(SignInSelectors.getLoginStatus) getLoginStatus$!: Observable<boolean>;
+  @Select(SignInSelectors.getLoading) getLoading$!: Observable<boolean>;
+  @Select(SignInSelectors.getRoleStatus) getRoleStatus$!: Observable<
+    string | null
+  >;
+  //! New
+  @Select(SignInSelectors.getDataUserAll)
+  getDataUserAll$!: Observable<UserDataModelResponse | null>;
+  @Select(SignInSelectors.getCountUserAll) getCountUserAll$!: Observable<
+    number | any
+  >;
+  @Select(SignInSelectors.getDataUserLogin) getDataUserLogin$!: Observable<
+    UserDataModelResponse | null | any
+  >;
   /* -------------------------------------------------------------------------- */
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
@@ -34,77 +48,77 @@ export class SignInListComponent implements OnInit, OnDestroy {
     private auth: AngularFireAuth,
     private firestore: AngularFirestore,
     private store: Store,
-    private router: Router,
-    private _getAllUserService: GetAllUserService
+    private _router: Router,
+    private getAllUserService: GetAllUserService,
+    private _route: ActivatedRoute
   ) {}
 
   /* -------------------------------------------------------------------------- */
   //*                                  variables                                 */
   /* -------------------------------------------------------------------------- */
+  // * Form
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
+
   /* -------------------------------------------------------------------------- */
   //*                                 life circle                                */
   /* -------------------------------------------------------------------------- */
 
   ngOnInit(): void {
-    this.isLoggedIn$.pipe().subscribe((isLoggedIn) => {
-      console.log(isLoggedIn);
-    });
-    this.role$.pipe().subscribe((role) => {
-      if (role === 'admin') {
-        this.router.navigate(['manager']);
-      } else if (role === 'teacher') {
-        this.router.navigate(['t-dashboard']);
-      } else if (role === 'student') {
-        this.router.navigate(['dashboard']);
+    // TODO :  Get User All Data !
+    this.getAllUserService
+      .GetAllUser()
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          // console.log(res);
+          this.store.dispatch(new GetAllUsers(res));
+        },
+        error: (err) => {
+          // console.log(err);
+          alert(err.message);
+        },
+      });
+
+    // TODO : Role User !
+    this.getRoleStatus$.subscribe((res) => {
+      if (res === null) return;
+      console.log(res);
+      if (res === 'admin') {
+        this._router.navigate(['admin-dashboard']);
+      } else if (res === 'student') {
+        this._router.navigate(['student-dashboard']);
+      } else if (res === 'teacher') {
+        this._router.navigate(['teacher-dashboard']);
       } else {
-        this.router.navigate(['sign-in']);
+        this._router.navigate(['admin-dashboard']);
       }
     });
-    // this._getAllUserService
-    //   .GetAllUser()
-    //   .pipe()
-    //   .subscribe((values) => {
-    //     console.log(values);
-    //   });
   }
 
   ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
-    this.store.dispatch(new Clear());
+    this.store.dispatch(new LeavePage());
+
+    //TODO : Remove the data from localStorage
+    localStorage.removeItem('userData');
   }
 
   /* -------------------------------------------------------------------------- */
   //*                               logic function                               */
   /* -------------------------------------------------------------------------- */
 
-  SignIn(email: string, password: string) {
-    console.log(email, password);
-    this.store.dispatch(new SignIn(email, password));
+  signIn(username: string | null, password: string | null) {
+    const payload = {
+      username: username,
+      password: password,
+    };
+    // console.log(username, password);
+    this.store.dispatch(new SignIn(payload));
   }
 
   forgetPassword(): void {
-    this.router.navigate(['change-password']);
+    this._router.navigate(['change-password']);
   }
-
-  // SignIn(email: string, password: string) {
-  //   // this.router.navigate(['dashboard']);
-  //   if (email === 'admin' && password === 'admin') {
-  //     this.router.navigate(['manager']);
-  //     console.log('admin');
-  //   } else if (email === 'student' && password === 'student') {
-  //     this.router.navigate(['dashboard']);
-  //     console.log('student');
-  //   } else if (email === 'teacher' && password === 'teacher') {
-  //     this.router.navigate(['t-dashboard']);
-  //     console.log('teacher');
-  //   } else if (
-  //     email === '' ||
-  //     password === '' ||
-  //     email !== ('admin' || 'student' || 'teacher') ||
-  //     password !== ('admin' || 'student' || 'teacher')
-  //   ) {
-  //     alert('Please enter your email and password');
-  //   }
-  // }
 }

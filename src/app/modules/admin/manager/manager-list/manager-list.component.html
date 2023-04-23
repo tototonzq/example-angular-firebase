@@ -22,20 +22,32 @@
                 </option>
               </ng-container>
             </select>
+            <input type="text"
+              class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
+              placeholder="รหัสประจำตัว" [formControl]="code" />
+            <input type="text"
+              class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
+              placeholder="ชื่อผู้ใช้" [formControl]="username" />
           </div>
           <div class="flex gap-5 justify-center items-center">
             <input type="text"
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
-              placeholder="ชื่อผู้ใช้งาน" [formControl]="user" />
+              placeholder="ผู้ใช้" [formControl]="user" />
             <input type="text"
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
-              placeholder="รหัสผ่าน" [formControl]="password" />
+              placeholder="คณะ" [formControl]="group" />
+            <input type="text"
+              class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
+              placeholder="สาขา" [formControl]="major" />
+          </div>
+          <div class="text-center">
+            <span class="text-red-500">** รหัสผ่านเริ่มต้น 123456789</span>
           </div>
           <div class="flex justify-center items-center">
             <div class="flex gap-5 justify-center items-center">
               <button
                 class="h-10 shadow-md rounded-md w-[20rem] text-slate-100 ml-5 hover:bg-blue-500 bg-blue-300 hover:text-slate-100 hover:w-[21rem]"
-                style="transition: 0.5s" (click)="Add()">
+                style="transition: 0.5s" (click)="Add(username.value)">
                 + Add
               </button>
             </div>
@@ -44,13 +56,18 @@
       </div>
     </div>
     {{ data$ | async | json }}
+
     <div class="border-x-[1px] border-t-[1px] rounded-md">
-      <ng-container *ngIf="data$ | async as data">
+      <!-- <ng-container *ngIf="data$ | async as data">
         <table class="table">
           <thead>
             <tr class="bg-slate-100">
               <th>ลำดับ</th>
+              <th>รหัสประจำตัว</th>
+              <th>ผู้ใช้</th>
               <th>ชื่อผู้ใช้งาน</th>
+              <th>คณะ</th>
+              <th>สาขา</th>
               <th>รหัสผ่าน</th>
               <th>ตำแหน่ง</th>
             </tr>
@@ -58,17 +75,20 @@
           <tbody *ngFor="let row of data; let i = index">
             <tr>
               <td>{{ i + 1 }}</td>
+              <td>{{ row.code }}</td>
               <td>{{ row.user }}</td>
-              <td>{{ row.password }}</td>
+              <td>{{ row.username}}</td>
+              <td>{{ row.group }}</td>
+              <td>{{ row.major }}</td>
+              <td>{{ row.password}}</td>
               <td>{{ getRole(row.role) }}</td>
-              <!-- <td>{{ row.role }}</td> -->
             </tr>
           </tbody>
           <tbody *ngIf="data.length === 0">
-            <td [colSpan]="4">ไม่พบข้อมูล .</td>
+            <td [colSpan]="8">ไม่พบข้อมูล .</td>
           </tbody>
         </table>
-      </ng-container>
+      </ng-container> -->
     </div>
   </body>
 

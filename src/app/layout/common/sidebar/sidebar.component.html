@@ -2,19 +2,25 @@
   <header class="sidebar h-screen overflow-auto transition-all duration-200 ease-in-out border-r-[1px] border-[#D0D5DB]"
     [ngClass]="isOpen  ? 'active' : ''">
 
-    <header class="pt-5"></header>
-
-    <div class="flex justify-center items-center">
-      <p> {{ layout$ | async }} </p>
-      <p class="pl-1">:</p>
-      <p class="pl-1"> {{ role$ | async }} </p>
-    </div>
+    <header class="pt-10 text-center justify-center grid">
+      <div class="bg-slate-300 w-[245px] h-[220px] my-5 rounded-md shadow-md">
+      </div>
+      <ng-container *ngFor="let item of data">
+        <div class="w-[247px] h-full">
+          <p class="text-[16px]">{{ item.user }}</p>
+          <p>{{ item.code }}</p>
+          <p class="text-clip overflow-hidden">{{ item.group }}</p>
+          <p>{{ item.major }}</p>
+          <p>{{ getRole(item.role) }}</p>
+        </div>
+      </ng-container>
+    </header>
 
     <body class="flex justify-center items-center p-5 flex-col gap-5">
       <!-- USER -->
       <ng-container *ngIf="(role$ | async) === 'student'">
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s" #m1
-          id="dashboard" #linkUs1 (click)="click(linkUs1.id)">
+          id="student-dashboard" #linkUs1 (click)="click(linkUs1.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
             <span>แผงควบคุม</span>
           </div>

@@ -1,45 +1,87 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { LayoutSelectors } from '../../store/selectors/layout.selector';
-import { Observable } from 'rxjs';
+import { Observable, Subject, take } from 'rxjs';
 import { RoleType } from 'src/app/shared/types/role.type';
 import { Layout } from '../../store/models/layout.model';
+import { UserDataModelResponse } from 'src/app/modules/auth/sign-in/store/models/sign-in.interface.model';
+import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
+  /* -------------------------------------------------------------------------- */
+  //*                                 unsubscribe                                */
+  /* -------------------------------------------------------------------------- */
+  _destroy$ = new Subject<void>();
+
+  /* -------------------------------------------------------------------------- */
+  //*                                    Input                                   */
+  /* -------------------------------------------------------------------------- */
   @Input() isOpen: boolean = true;
 
+  /* -------------------------------------------------------------------------- */
+  //*                                   Select                                   */
+  /* -------------------------------------------------------------------------- */
   @Select(LayoutSelectors.role) role$!: Observable<RoleType>;
   @Select(LayoutSelectors.layout) layout$!: Observable<Layout>;
+  @Select(SignInSelectors.getDataUserLogin) getDataUserLogin$!: Observable<
+    UserDataModelResponse | null | any
+  >;
+  /* -------------------------------------------------------------------------- */
+  //*                                  Variable                                  */
+  /* -------------------------------------------------------------------------- */
+  public data: any = JSON.parse(localStorage.getItem('userData') || '[]');
 
   /* -------------------------------------------------------------------------- */
-  /*                                  Variable                                  */
-  /* -------------------------------------------------------------------------- */
-  /* -------------------------------------------------------------------------- */
-  /*                                 constructor                                */
+  //*                                 Constructor                                */
   /* -------------------------------------------------------------------------- */
   constructor(private router: Router) {}
+
   /* -------------------------------------------------------------------------- */
-  /*                                 Life Circle                                */
+  //*                                 Life Circle                                */
   /* -------------------------------------------------------------------------- */
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getDataUserLogin$.subscribe((response) => {
+      if (response === null) return;
+      //* Save the updated data to localStorage
+      this.data.push(...response);
+      localStorage.setItem('userData', JSON.stringify(this.data));
+    });
+  }
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+    //TODO : Remove the data from localStorage
+    localStorage.removeItem('userData');
+  }
+
   /* -------------------------------------------------------------------------- */
   /*                                  Functions                                 */
   /* -------------------------------------------------------------------------- */
   click(item?: any) {
-    // if (role === 'student') {
-    // } else {
-    //   this.router.navigate(['sign-in']);
-    // }
     this.router.navigate([item]);
   }
 
   exit(): void {
     this.router.navigate(['sign-in']);
+  }
+
+  getRole(role: string) {
+    const _role = role;
+    if (_role === 'admin') {
+      return 'ผู้ดูแลระบบ';
+    }
+    if (_role === 'teacher') {
+      return 'อาจารย์';
+    }
+    if (_role === 'student') {
+      return 'นิสิต';
+    }
+    return;
   }
 }

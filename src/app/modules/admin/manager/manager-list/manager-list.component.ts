@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { DATA_TABLE, MENU_DROPDOWN_MANAGER_ADMIN } from '../manager.data';
+import { MENU_DROPDOWN_MANAGER_ADMIN } from '../manager.data';
 import { DropdownRole } from '../store/models/manager.model';
 import { Select, Store } from '@ngxs/store';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Find } from '../store/actions/find-manager.action';
 import { ManagerSelector } from '../store/selectors/manager.selectors';
 import { Observable } from 'rxjs';
@@ -14,9 +14,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./manager-list.component.css'],
 })
 export class ManagerListComponent implements OnInit, OnDestroy {
-  @Select(ManagerSelector.data) data$!: Observable<unknown[] | any>;
   /* -------------------------------------------------------------------------- */
-  /*                                 constructor                                */
+  //*                                   select                                   */
+  /* -------------------------------------------------------------------------- */
+  @Select(ManagerSelector.data) data$!: Observable<unknown[] | any>;
+  // @Select(SignInSelectors.getData) data!: Observable<any>;
+  /* -------------------------------------------------------------------------- */
+  //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
   constructor(
     private auth: AngularFireAuth,
@@ -25,20 +29,22 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   ) {}
 
   /* -------------------------------------------------------------------------- */
-  /*                                 life circle                                */
+  //*                                 life circle                                */
   /* -------------------------------------------------------------------------- */
   ngOnInit(): void {
     this.GetAll();
-
-    // this.auth.createUserWithEmailAndPassword
   }
   ngOnDestroy(): void {}
   /* -------------------------------------------------------------------------- */
-  /*                                  variables                                 */
+  //*                                  variables                                 */
   /* -------------------------------------------------------------------------- */
   user = new FormControl('', [Validators.required]);
   role = new FormControl('', [Validators.required]);
+  username = new FormControl('', [Validators.required]);
+  major = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
+  code = new FormControl('', [Validators.required]);
+  group = new FormControl('', [Validators.required]);
 
   /* -------------------------------------------------------------------------- */
   /*                                    logic                                   */
@@ -60,13 +66,23 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     }
     return;
   }
-  Add(): void {
+  Add(username: string | null | any): void {
     const data: any = {
-      user: this.user.value,
-      password: this.password.value,
       role: this.role.value,
+      code: this.code.value,
+      username: this.username.value,
+      password: '123456789',
+      user: this.user.value,
+      group: this.group.value,
+      major: this.major.value,
     };
-    this.firestore.collection('users').add(data);
+    this.firestore
+      .collection('users')
+      .doc(username)
+      .set(data)
+      .then((res) => {
+        console.log(res);
+      });
   }
 
   GetAll(): void {
@@ -83,5 +99,4 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   /*                               Local Database                               */
   /* -------------------------------------------------------------------------- */
   dropdown: DropdownRole[] = MENU_DROPDOWN_MANAGER_ADMIN;
-  data = DATA_TABLE;
 }

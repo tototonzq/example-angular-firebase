@@ -1,12 +1,13 @@
+import { SignInPayload } from '../models/sign-in.payload.model';
+
+/* -------------------------------------------------------------------------- */
+//*                               Sign In Actions                              */
+/* -------------------------------------------------------------------------- */
 export class SignIn {
   static readonly type = '[ Auth ] SignIn';
-  constructor(public email: string, public password: string) {}
+  constructor(public payload: SignInPayload) {}
 }
 
-export class SignInSuccess {
-  static readonly type = '[ Auth ] SignIn Success';
-}
-
-export class SignInFailed {
-  static readonly type = '[ Auth ] SignIn Failed';
+export class SignInWithAdmin {
+  static readonly type = '[ Auth ] Admin SignIn';
 }
