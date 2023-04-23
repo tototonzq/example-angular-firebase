@@ -91,7 +91,7 @@ export class SignInListComponent implements OnInit, OnDestroy {
       } else if (res === 'teacher') {
         this._router.navigate(['teacher-dashboard']);
       } else {
-        this._router.navigate(['admin-dashboard']);
+        this._router.navigate(['sign-in']);
       }
     });
   }
