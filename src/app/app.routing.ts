@@ -12,7 +12,7 @@ export const routes: Route[] = [
    */
 
   //* Welcome page
-  { path: '', pathMatch: 'full', redirectTo: 'welcome' },
+  // { path: '', pathMatch: 'full', redirectTo: 'welcome' },
 
   //* Auth first routes for users that are signed in
   { path: '', pathMatch: 'full', redirectTo: 'sign-in' },
@@ -118,6 +118,7 @@ export const routes: Route[] = [
             (m) => m.UserFormModule
           ),
       },
+      { path: '**', redirectTo: '404-not-found' },
     ],
   },
 
@@ -141,10 +142,17 @@ export const routes: Route[] = [
           ),
       },
       {
-        path: 'manager',
+        path: 'admin-manager',
         loadChildren: () =>
           import('./modules/admin/manager/manager.module').then(
             (m) => m.ManagerModule
+          ),
+      },
+      {
+        path: 'admin-manager-table',
+        loadChildren: () =>
+          import('./modules/admin/manager-table/manager-table.module').then(
+            (m) => m.ManagerTableModule
           ),
       },
       {
@@ -161,6 +169,7 @@ export const routes: Route[] = [
             './modules/admin/manager-petition/manager-petition.module'
           ).then((m) => m.ManagerPetitionModule),
       },
+      { path: '**', redirectTo: '404-not-found' },
     ],
   },
 
@@ -190,12 +199,29 @@ export const routes: Route[] = [
             (m) => m.ManagerModule
           ),
       },
+      { path: '**', redirectTo: '404-not-found' },
     ],
   },
 
   /* -------------------------------------------------------------------------- */
-  //*                                  Not found                                 */
+  //*                                Global Routes                               */
   /* -------------------------------------------------------------------------- */
-  //! Not found pages
+  {
+    path: '',
+    component: LayoutComponent,
+    data: {
+      layout: 'empty',
+    },
+    children: [
+      {
+        path: '404-not-found',
+        loadChildren: () =>
+          import('./modules/error/not-found/not-found.module').then(
+            (m) => m.NotFoundModule
+          ),
+      },
+      { path: '**', redirectTo: '404-not-found' },
+    ],
+  },
   { path: '**', redirectTo: '404-not-found' },
 ];

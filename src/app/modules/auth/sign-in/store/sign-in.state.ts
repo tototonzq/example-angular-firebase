@@ -5,7 +5,7 @@ import { SignInEffect } from './effects/sign-in.effect';
 import { SignIn, SignInWithAdmin } from './actions/sign-in.action';
 import { LeavePageEffect } from './effects/leave-page.effect';
 import { GetAllUsers } from './actions/get-all-user.action';
-import { GetAllUsersEffect } from './effects/get-user.effect';
+import { GetAllUsersEffect } from './effects/get-all-user.effect';
 import { LeavePage } from './actions/leave-page.action';
 
 const initialState: SignInStateModel = {

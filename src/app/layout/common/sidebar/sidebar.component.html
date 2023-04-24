@@ -72,15 +72,21 @@
       <!-- ADMIN -->
       <ng-container *ngIf="(role$ | async) === 'admin'">
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
-          id="ad-dashboard" #linkAd4 (click)="click(linkAd4.id)">
+          id="admin-dashboard" #linkAd4 (click)="click(linkAd4.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
             <span>แผงควบคุม</span>
           </div>
         </div>
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
-          id="manager" #linkAd1 (click)="click(linkAd1.id)">
+          id="admin-manager" #linkAd1 (click)="click(linkAd1.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
             <span>จัดการผู้ใช้งาน</span>
+          </div>
+        </div>
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="admin-manager-table" #linkAd3 (click)="click(linkAd3.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>ตารางเเสดงผล</span>
           </div>
         </div>
         <!-- <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"

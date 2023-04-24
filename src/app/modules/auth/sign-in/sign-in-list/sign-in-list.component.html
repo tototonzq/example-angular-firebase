@@ -32,10 +32,7 @@
       </div>
     </div>
     <div class="grid gap-5">
-      <div class="text-center">
-        <p class="text-slate-400">Dev.</p>
-      </div>
-      <div class="gap-5 grid">
+      <!-- <div class="gap-5 grid">
         <div>
           <button
             class="h-[40px] w-full text-[1rem] outline-none text-center rounded-md cursor-pointer text-slate-500 bg-slate-200 hover:bg-slate-100"
@@ -57,15 +54,15 @@
             <p>นิสิต</p>
           </button>
         </div>
-      </div>
+      </div> -->
     </div>
   </body>
   <footer>
   </footer>
-  <app-loaders *ngIf="(getLoading$ | async) === true"></app-loaders>
+  <app-loaders *ngIf="((( getLoading$ | async) === true)||(( getCountUserAll$ | async) === null))"></app-loaders>
   <div>
-    <div>สถานะล็อคอิน : {{ getLoginStatus$ | async }}</div>
-    <div>จำนวนไอดี : {{ getCountUserAll$ | async }} </div>
+    <div>สถานะล็อคอิน : {{ getLoginStatus$ | async |json }}</div>
+    <div>จำนวนไอดี : {{ getCountUserAll$ | async | json }} </div>
   </div>
 
 </main>

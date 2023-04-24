@@ -1,0 +1,65 @@
+<main>
+  <header></header>
+
+  <body>
+    <div class="border-x-[1px] border-t-[1px] rounded-md">
+      <ng-container *ngIf="data$ | async as data">
+        <table class="table">
+          <thead>
+            <tr class="bg-slate-100">
+              <th>ลำดับ</th>
+              <th>รหัสประจำตัว</th>
+              <!-- <th>ชื่อผู้ใช้งาน</th> -->
+              <th>ผู้ใช้</th>
+              <th>คณะ</th>
+              <th>สาขา</th>
+              <!-- <th>รหัสผ่าน</th> -->
+              <th>ตำแหน่ง</th>
+              <th>จัดการ</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let row of data; let i = index">
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{ row.code }}</td>
+              <!-- <td>{{ row.user }}</td> -->
+              <td>{{ row.username}}</td>
+              <td>{{ row.group }}</td>
+              <td>{{ row.major }}</td>
+              <!-- <td>
+                <p class="text-red-500">*********</p>
+              </td> -->
+              <td>{{ getRole(row.role) }}</td>
+              <td class="text-center" [colSpan]="1">
+                <div class="flex gap-5 justify-center items-center">
+                  <div class="shadow-md rounded-md h-[40px] px-5 bg-red-300 hover:bg-red-500 cursor-pointer"
+                    style="transition: 0.5s">
+                    <div class="pt-2">
+                      <i class="fa-solid fa-trash-can fa-xl" style="color: #fff;"></i>
+                    </div>
+                  </div>
+                  <div class="shadow-md rounded-md h-[40px] px-5 bg-yellow-300 hover:bg-yellow-500 cursor-pointer"
+                    style="transition: 0.5s">
+                    <div class="pt-2">
+                      <i class="fa-solid fa-gear fa-xl" style="color: #fff;"></i>
+                    </div>
+                  </div>
+                  <div class="shadow-md rounded-md h-[40px] px-5 bg-blue-300 hover:bg-blue-500 cursor-pointer"
+                    style="transition: 0.5s">
+                    <div class="pt-2">
+                      <i class="fa-solid fa-circle-info fa-xl" style="color: #fff;"></i>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="data.length === 0">
+            <td [colSpan]="9">ไม่พบข้อมูล .</td>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </body>
+  <footer></footer>
+</main>

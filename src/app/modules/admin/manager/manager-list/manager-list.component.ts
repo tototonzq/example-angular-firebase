@@ -8,6 +8,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Find } from '../store/actions/find-manager.action';
 import { ManagerSelector } from '../store/selectors/manager.selectors';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './manager-list.component.html',
@@ -25,15 +26,14 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   constructor(
     private auth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private store: Store
+    private store: Store,
+    private _router: Router
   ) {}
 
   /* -------------------------------------------------------------------------- */
   //*                                 life circle                                */
   /* -------------------------------------------------------------------------- */
-  ngOnInit(): void {
-    this.GetAll();
-  }
+  ngOnInit(): void {}
   ngOnDestroy(): void {}
   /* -------------------------------------------------------------------------- */
   //*                                  variables                                 */
@@ -53,19 +53,6 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   /*                               logic function                               */
   /* -------------------------------------------------------------------------- */
-  getRole(role: string) {
-    const _role = role;
-    if (_role === 'admin') {
-      return 'ผู้ดูแลระบบ';
-    }
-    if (_role === 'teacher') {
-      return 'อาจารย์';
-    }
-    if (_role === 'student') {
-      return 'นิสิต';
-    }
-    return;
-  }
   Add(username: string | null | any): void {
     const data: any = {
       role: this.role.value,
@@ -81,18 +68,9 @@ export class ManagerListComponent implements OnInit, OnDestroy {
       .doc(username)
       .set(data)
       .then((res) => {
-        console.log(res);
-      });
-  }
-
-  GetAll(): void {
-    this.firestore
-      .collection('users')
-      .valueChanges()
-      .subscribe((values) => {
-        // console.log(values);
-        this.store.dispatch(new Find(values));
-        values;
+        // console.log(res);
+        alert('เพิ่มข้อมูลสำเร็จ');
+        this._router.navigate(['/admin-manager-table']);
       });
   }
   /* -------------------------------------------------------------------------- */

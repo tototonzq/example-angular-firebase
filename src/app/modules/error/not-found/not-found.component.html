@@ -1,0 +1,32 @@
+<!-- <body>
+  <section>
+    <div class="four_zero_four_bg">
+      <h1 class="text-center text-[80px]">404</h1>
+    </div>
+    <div class="text-center">
+      <p class="text-[36px] text-slate-600">หน้าที่คุณกำลังมองหาไม่พร้อมใช้งาน!</p>
+      <p>Look like you're lost ?</p>
+    </div>
+  </section>
+</body> -->
+
+<body>
+  <section class="flex items-center h-full p-1">
+    <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+      <div class="max-w-md text-center grid gap-5">
+        <p class="mt-4 mb-8 dark:text-gray-400">Sorry, we couldn't find this page.</p>
+        <h2 class="mb-8 font-extrabold text-9xl dark:text-gray-600">
+          <span class="sr-only">Error</span>404
+        </h2>
+        <!-- <p class="text-2xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
+         -->
+        <p class="text-2xl font-semibold md:text-3xl">ขออภัย, เราไม่พบหน้านี้.</p>
+        <p class="mt-4 mb-8 dark:text-gray-400">But dont worry, you can find plenty of other things on our sign-in in
+          {{ remaining | json }} .</p>
+        <button
+          class="text-[23px] bg-slate-200 text-slate-500 hover:bg-slate-300 hover:text-slate-100 transition-[0.5s]"
+          routerLink="/sign-in">กลับทันที.</button>
+      </div>
+    </div>
+  </section>
+</body>
