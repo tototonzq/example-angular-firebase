@@ -5,6 +5,7 @@ import { ManagerRoutes } from './manager.routing';
 import { ManagerComponent } from './manager.component';
 import { ManagerListComponent } from './manager-list/manager-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadersScreenModule } from 'src/app/shared/components/loaders-screen/loaders-screen.module';
 
 const components = [ManagerComponent, ManagerListComponent];
 
@@ -15,6 +16,7 @@ const components = [ManagerComponent, ManagerListComponent];
     RouterModule.forChild(ManagerRoutes),
     ReactiveFormsModule,
     FormsModule,
+    LoadersScreenModule,
   ],
 })
 export class ManagerModule {}

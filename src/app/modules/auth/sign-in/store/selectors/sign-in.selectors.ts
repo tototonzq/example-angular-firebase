@@ -35,6 +35,10 @@ export class SignInSelectors {
     return state.loading;
   }
 
+  @Selector([SignInState])
+  static getLoadingButton(state: SignInStateModel) {
+    return state.loading_button;
+  }
   /* -------------------------------------------------------------------------- */
   //*                                 Status Auth                                */
   /* -------------------------------------------------------------------------- */

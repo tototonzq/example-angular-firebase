@@ -13,7 +13,7 @@
         <div class="grid gap-5">
           <div class="flex justify-center items-center gap-5">
             <select
-              class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+              [ngClass]="isRoleValidate ? 'border-[#e20000] border-[1px] rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500' : 'rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500'"
               [formControl]="role">
               <option value="" selected disabled>สิทธิ์การเข้าถึง</option>
               <ng-container *ngFor="let option of dropdown">
@@ -33,12 +33,31 @@
             <input type="text"
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
               placeholder="ชื่อผู้ใช้" [formControl]="user" />
-            <input type="text"
+            <!-- border-[#e20000] border-[1px] -->
+            <!-- class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500" -->
+            <select
+              [ngClass]="isGroupValidate ? 'border-[#e20000] border-[1px] rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500' : 'rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500'"
+              [formControl]="group">
+              <option value="" selected disabled>คณะ</option>
+              <ng-container *ngFor="let option of dropdownGroup">
+                <option [value]="option.value">
+                  <span>{{ option.name }}</span>
+                </option>
+              </ng-container>
+            </select>
+            <select
+              [ngClass]="isMajorValidate ? 'border-[#e20000] border-[1px] rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500' : 'rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500'"
+              [formControl]="major">
+              <option value="" selected disabled>สาขา</option>
+              <ng-container *ngFor="let option of dropdownMajor">
+                <option [value]="option.value">
+                  <span>{{ option.name }}</span>
+                </option>
+              </ng-container>
+            </select>
+            <!-- <input type="text"
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
-              placeholder="คณะ" [formControl]="group" />
-            <input type="text"
-              class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
-              placeholder="สาขา" [formControl]="major" />
+              placeholder="สาขา" [formControl]="major" /> -->
           </div>
           <div class="text-center justify-center flex">
             <span class="text-red-500"># รหัสผ่านเริ่มต้น 123456789</span>
@@ -59,4 +78,8 @@
 
   <footer>
   </footer>
+
+  <ng-container>
+    <app-loaders-screen *ngIf="isChecked"></app-loaders-screen>
+  </ng-container>
 </main>

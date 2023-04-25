@@ -15,6 +15,7 @@ const initialState: SignInStateModel = {
   // TODO : status
   loading: false,
   login_status: false,
+  loading_button: false,
 
   // TODO : status data
   data_user_all: null,

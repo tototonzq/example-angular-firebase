@@ -7,6 +7,8 @@ import { RoleType } from 'src/app/shared/types/role.type';
 import { Layout } from '../../store/models/layout.model';
 import { UserDataModelResponse } from 'src/app/modules/auth/sign-in/store/models/sign-in.interface.model';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
+import { MenuItem } from './store/models/sidebar.interface';
+import { MENU_LIST_DATA } from './sidebar.data';
 
 @Component({
   selector: 'app-sidebar',
@@ -84,4 +86,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
     return;
   }
+
+  menu: MenuItem[] = MENU_LIST_DATA;
 }

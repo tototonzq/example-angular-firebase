@@ -29,6 +29,8 @@ export class SignInListComponent implements OnInit, OnDestroy {
   @Select(LayoutSelectors.layout) layout$!: Observable<Layout>;
   @Select(SignInSelectors.getLoginStatus) getLoginStatus$!: Observable<boolean>;
   @Select(SignInSelectors.getLoading) getLoading$!: Observable<boolean>;
+  @Select(SignInSelectors.getLoadingButton)
+  getLoadingButton$!: Observable<boolean>;
   @Select(SignInSelectors.getRoleStatus) getRoleStatus$!: Observable<
     string | null
   >;
@@ -103,6 +105,7 @@ export class SignInListComponent implements OnInit, OnDestroy {
 
     //TODO : Remove the data from localStorage
     localStorage.removeItem('userData');
+    localStorage.removeItem('userDataAdminDashboard');
   }
 
   /* -------------------------------------------------------------------------- */

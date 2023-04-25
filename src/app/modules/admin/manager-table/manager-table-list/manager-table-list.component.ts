@@ -4,6 +4,9 @@ import { GetAllUserService } from 'src/app/shared/services/get-all-user.service.
 import { Find } from '../../manager/store/actions/find-manager.action';
 import { Observable } from 'rxjs';
 import { ManagerSelector } from '../../manager/store/selectors/manager.selectors';
+import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-manager-table-list',
@@ -15,14 +18,24 @@ export class ManagerTableListComponent implements OnInit {
   //*                                   Select                                   */
   /* -------------------------------------------------------------------------- */
   @Select(ManagerSelector.data) data$!: Observable<unknown[] | any>;
+  @Select(SignInSelectors.getCountUserAll) getCountUserAll$!: Observable<
+    number | any
+  >;
 
   /* -------------------------------------------------------------------------- */
   //*                                 Constructor                                */
   /* -------------------------------------------------------------------------- */
   constructor(
     private _getAllUserService: GetAllUserService,
-    private _store: Store
+    private _store: Store,
+    private auth: AngularFireAuth,
+    private firestore: AngularFirestore
   ) {}
+
+  /* -------------------------------------------------------------------------- */
+  //*                                  Variables                                 */
+  /* -------------------------------------------------------------------------- */
+  public isChecked: boolean = false;
   /* -------------------------------------------------------------------------- */
   //*                                 Life Circle                                */
   /* -------------------------------------------------------------------------- */
@@ -33,6 +46,7 @@ export class ManagerTableListComponent implements OnInit {
       .pipe()
       .subscribe((res) => {
         this._store.dispatch(new Find(res));
+        this.isChecked = true;
       });
   }
   /* -------------------------------------------------------------------------- */
@@ -51,5 +65,17 @@ export class ManagerTableListComponent implements OnInit {
       return 'นิสิต';
     }
     return;
+  }
+
+  // TODO : delete users with username
+  delete(item: any): void {
+    // console.log(item);
+    this.firestore
+      .collection('users')
+      .doc(item.username)
+      .delete()
+      .then(() => {
+        // alert('ลบข้อมูลสําเร็จ');
+      });
   }
 }

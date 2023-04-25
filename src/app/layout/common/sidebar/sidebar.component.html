@@ -70,6 +70,27 @@
       </ng-container>
 
       <!-- ADMIN -->
+      <!-- <ng-container *ngIf="menu as menuAdminList">
+        <ng-container *ngFor="let item of menuAdminList">
+          <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+            id="manager-petition" #linkAd3 (click)="click(linkAd3.id)">
+            <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+              <span>Manager Petition</span>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="menuAdminList.length < 1">
+          <p class="text-[23px]">ไม่พบรายการ</p>
+        </ng-container>
+      </ng-container> -->
+      <!-- <ng-container *ngFor="let item of menu">
+        <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          id="manager-petition" #linkAd3 (click)="click(linkAd3.id)">
+          <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <span>Manager Petition</span>
+          </div>
+        </div>
+      </ng-container> -->
       <ng-container *ngIf="(role$ | async) === 'admin'">
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
           id="admin-dashboard" #linkAd4 (click)="click(linkAd4.id)">
@@ -86,7 +107,7 @@
         <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
           id="admin-manager-table" #linkAd3 (click)="click(linkAd3.id)">
           <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
-            <span>ตารางเเสดงผล</span>
+            <span>ข้อมูลผู้ใช้งาน</span>
           </div>
         </div>
         <!-- <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"

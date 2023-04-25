@@ -1,39 +1,46 @@
-<main>
-  <header></header>
+<main class="p-10">
+  <header>
+    <div class="flex gap-2">
+      <p class="text-[26px]">ข้อมูลผู้ใช้งาน</p>
+      <span class="mt-[11px] text-slate-400">ข้อมูลผู้ใช้งาน</span>
+    </div>
+  </header>
 
-  <body>
+  <body class="grid gap-5 mt-10">
+    <p>ข้อมูลผู้ใช้งาน</p>
     <div class="border-x-[1px] border-t-[1px] rounded-md">
       <ng-container *ngIf="data$ | async as data">
         <table class="table">
           <thead>
             <tr class="bg-slate-100">
-              <th>ลำดับ</th>
-              <th>รหัสประจำตัว</th>
+              <th class="w-[100px]">ลำดับ</th>
+              <th class="w-[200px]">รหัสประจำตัว</th>
               <!-- <th>ชื่อผู้ใช้งาน</th> -->
-              <th>ผู้ใช้</th>
-              <th>คณะ</th>
-              <th>สาขา</th>
+              <th class="w-[100px]">ผู้ใช้</th>
+              <th class="w-[400px]">คณะ</th>
+              <th class="w-[300px]">สาขา</th>
               <!-- <th>รหัสผ่าน</th> -->
-              <th>ตำแหน่ง</th>
-              <th>จัดการ</th>
+              <th class="w-[100px]">ตำแหน่ง</th>
+              <th class="w-[300px]">จัดการ</th>
             </tr>
           </thead>
+          <!-- {{data | json}} -->
           <tbody *ngFor="let row of data; let i = index">
             <tr>
               <td>{{ i + 1 }}</td>
               <td>{{ row.code }}</td>
               <!-- <td>{{ row.user }}</td> -->
-              <td>{{ row.username}}</td>
-              <td>{{ row.group }}</td>
-              <td>{{ row.major }}</td>
+              <td> {{ row.username }}</td>
+              <td> {{ row.group }} </td>
+              <td> {{ row.major }} </td>
               <!-- <td>
-                <p class="text-red-500">*********</p>
-              </td> -->
+                  <p class="text-red-500">*********</p>
+                </td> -->
               <td>{{ getRole(row.role) }}</td>
               <td class="text-center" [colSpan]="1">
                 <div class="flex gap-5 justify-center items-center">
                   <div class="shadow-md rounded-md h-[40px] px-5 bg-red-300 hover:bg-red-500 cursor-pointer"
-                    style="transition: 0.5s">
+                    style="transition: 0.5s" (click)="delete(row)">
                     <div class="pt-2">
                       <i class="fa-solid fa-trash-can fa-xl" style="color: #fff;"></i>
                     </div>
@@ -54,12 +61,20 @@
               </td>
             </tr>
           </tbody>
-          <tbody *ngIf="data.length === 0">
+          <tbody *ngIf="((data.length === 0)&&(isChecked !== false))">
             <td [colSpan]="9">ไม่พบข้อมูล .</td>
           </tbody>
         </table>
+        <ng-container *ngIf="((data.length === 0)&&(isChecked === false))">
+          <div class="w-[5rem] justify-center items-center m-auto py-[30vh]">
+            <app-loaders></app-loaders>
+          </div>
+        </ng-container>
+        <hr *ngIf="isChecked === false">
       </ng-container>
     </div>
   </body>
-  <footer></footer>
+
+  <footer>
+  </footer>
 </main>

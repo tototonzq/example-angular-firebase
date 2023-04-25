@@ -23,6 +23,7 @@ export class SignInEffect {
   ) {
     patchState({
       loading: true,
+      loading_button: true,
     });
     // console.log(payload);
     // TODO: If username or password is empty
@@ -31,6 +32,7 @@ export class SignInEffect {
         alert('Please enter username and password');
         patchState({
           loading: false,
+          loading_button: false,
         });
       }, 2000);
       return;
@@ -42,7 +44,7 @@ export class SignInEffect {
         item.username === payload.username
     );
     // console.log(data);
-    // TODO : If username found
+    //! TODO : If username found
     if (data.length !== 0) {
       setTimeout(() => {
         alert('User Login Successfully');
@@ -50,6 +52,7 @@ export class SignInEffect {
           loading: false,
           login_status: true,
           data_user_login: data,
+          loading_button: false,
           role: data[0].role,
         });
         // TODO : If role is admin
@@ -66,6 +69,7 @@ export class SignInEffect {
         alert('User not found');
         patchState({
           loading: false,
+          loading_button: false,
         });
       }, 2000);
       return;

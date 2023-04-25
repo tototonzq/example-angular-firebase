@@ -2,6 +2,8 @@
   --path: #2f3545;
   // --dot: #5628ee;
   --duration: 3s;
+  width: 44px;
+  height: 44px;
   position: relative;
   &:before {
     content: "";
@@ -49,8 +51,7 @@
     }
   }
   &.triangle {
-    // TODO : fix size of triangle
-    width: auto;
+    width: 48px;
     &:before {
       left: 21px;
       transform: translate(-10px, -18px);
@@ -126,5 +127,68 @@
   }
   100% {
     stroke-dashoffset: 275;
+  }
+}
+
+.loader {
+  display: inline-block;
+  margin: 0 16px;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+}
+
+// Center & dribbble
+body {
+  min-height: 100vh;
+  background: #f5f9ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .dribbble {
+    position: fixed;
+    display: block;
+    right: 20px;
+    bottom: 20px;
+    img {
+      display: block;
+      height: 28px;
+    }
+  }
+}
+
+.spinner-container {
+  position: fixed;
+  top: 0 !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 100;
+  background-color: rgb(255, 255, 255, 0.7);
+
+  & div {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    & div {
+      // position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 50px;
+      height: 50px;
+    }
   }
 }

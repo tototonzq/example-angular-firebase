@@ -27,12 +27,15 @@
           class="h-[50px] w-[250px] text-[1rem] outline-none text-center rounded-md cursor-pointer text-slate-500 bg-slate-200 hover:bg-slate-100"
           (click)="signIn(username.value, password.value)" style="transition: 0.5s;">
           <p>เข้าสู่ระบบ</p>
+          <!-- <div class="w-7 items-center justify-center m-auto">
+            <app-loaders></app-loaders>
+          </div> -->
         </button>
         <span>{{ layout$ | async }}</span>
       </div>
     </div>
     <div class="grid gap-5">
-      <!-- <div class="gap-5 grid">
+      <div class="gap-5 grid">
         <div>
           <button
             class="h-[40px] w-full text-[1rem] outline-none text-center rounded-md cursor-pointer text-slate-500 bg-slate-200 hover:bg-slate-100"
@@ -54,15 +57,15 @@
             <p>นิสิต</p>
           </button>
         </div>
-      </div> -->
+      </div>
     </div>
   </body>
   <footer>
   </footer>
-  <app-loaders *ngIf="((( getLoading$ | async) === true)||(( getCountUserAll$ | async) === null))"></app-loaders>
+  <app-loaders-screen
+    *ngIf="((( getLoading$ | async) === true)||(( getCountUserAll$ | async) === null))"></app-loaders-screen>
   <div>
     <div>สถานะล็อคอิน : {{ getLoginStatus$ | async |json }}</div>
     <div>จำนวนไอดี : {{ getCountUserAll$ | async | json }} </div>
   </div>
-
 </main>

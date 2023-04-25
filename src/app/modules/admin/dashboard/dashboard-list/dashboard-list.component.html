@@ -11,27 +11,58 @@
     <div>
 
       <div>
-        <p class="ml-3">จำนวนผู้ใช้งาน</p>
+        <p>จำนวนผู้ใช้งาน</p>
       </div>
       <div class="flex justify-center items-center gap-5">
-        <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
+        <div class="grid gap-4 border-[1px] mt-2 h-[9rem]  p-5 rounded-md w-full bg-slate-100">
           <div>
             <p>นิสิต</p>
             <div class="text-center">
-              <p class="text-[50px]">99</p>
+              <p class="text-[50px]" *ngIf="(user_count_student !== 0)">{{
+                user_count_student }}</p>
+              <div class="w-[3rem] justify-center items-center m-auto">
+                <app-loaders *ngIf="(user_count === 0)&&(isChecked === false)"></app-loaders>
+                <ng-container *ngIf="(user_count_student === 0)&&(isChecked === true)">ไม่พบรายการ</ng-container>
+              </div>
             </div>
           </div>
         </div>
-        <!-- <div class="grid grid-cols-2 gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
-          <div>
-            <p>ทั้งหมด</p>
-          </div>
-        </div> -->
-        <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
+        <div class="grid gap-4 border-[1px] mt-2 h-[9rem]  p-5 rounded-md w-full bg-slate-100">
           <div>
             <p>อาจารย์</p>
             <div class="text-center">
-              <p class="text-[50px]">99</p>
+              <p class="text-[50px]" *ngIf="(user_count_teacher !== 0)">{{
+                user_count_teacher }}</p>
+              <div class="w-[3rem] justify-center items-center m-auto">
+                <app-loaders *ngIf="(user_count === 0)&&(isChecked === false)"></app-loaders>
+                <ng-container *ngIf="(user_count_teacher === 0)&&(isChecked === true)">ไม่พบรายการ</ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-4 border-[1px] mt-2 h-[9rem]  p-5 rounded-md w-full bg-slate-100">
+          <div>
+            <p>เเอดมิน</p>
+            <div class="text-center">
+              <p class="text-[50px]" *ngIf="(user_count_admin !== 0)">{{
+                user_count_admin }}</p>
+              <div class="w-[3rem] justify-center items-center m-auto">
+                <app-loaders *ngIf="(user_count_admin === 0)&&(isChecked === false)"></app-loaders>
+                <ng-container *ngIf="(user_count_admin === 0)&&(isChecked === true)">ไม่พบรายการ</ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-4 border-[1px] mt-2 h-[9rem]  p-5 rounded-md w-full bg-slate-100">
+          <div>
+            <p>ทั้งหมด</p>
+            <div class="text-center">
+              <p class="text-[50px]" *ngIf="(user_count !== 0)">{{
+                user_count }}</p>
+              <div class="w-[3rem] justify-center items-center m-auto">
+                <app-loaders *ngIf="(user_count === 0)&&(isChecked === false)"></app-loaders>
+                <ng-container *ngIf="(user_count === 0)&&(isChecked === true)">ไม่พบรายการ</ng-container>
+              </div>
             </div>
           </div>
         </div>

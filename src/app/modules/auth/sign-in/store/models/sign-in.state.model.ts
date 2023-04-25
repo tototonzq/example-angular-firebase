@@ -7,6 +7,7 @@ export interface SignInStateModel {
   // TODO : status auth
   login_status: boolean;
   role: string | null | any;
+  loading_button: string | null | any;
 
   // TODO : status data
   data_user_all: UserDataModelResponse | null | any;

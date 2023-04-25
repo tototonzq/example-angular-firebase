@@ -17,6 +17,7 @@ export class GetAllUsersEffect {
     { patchState, dispatch, getState }: StateContext<SignInStateModel>,
     { payload }: GetAllUsers
   ) {
+    console.log(payload);
     patchState({
       data_user_all: payload,
       count_user_all: payload.length,
