@@ -9,10 +9,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import {
-  MENU_DROPDOWN_MANAGER_ADMIN,
-  MENU_DROPDOWN_MANAGER_ADMIN_FILTER,
-} from '../../manager/manager.data';
+import { MENU_DROPDOWN_MANAGER_ADMIN_FILTER } from '../../manager/manager.data';
 import { DropdownRole } from '../../manager/store/models/manager.model';
 
 @Component({

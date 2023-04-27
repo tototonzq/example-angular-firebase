@@ -7,9 +7,9 @@
   </header>
 
   <body class="grid gap-5 mt-10">
-    <div>
+    <div class="gap-5 grid">
       <p class="mb-3">จัดการผู้ใช้งาน</p>
-      <div class="w-full h-[25rem] flex justify-center items-center bg-slate-100 border-[1px] rounded-md">
+      <div class="w-full h-[20rem] flex justify-center items-center bg-slate-100 border-[1px] rounded-md">
         <form [formGroup]="form" (ngSubmit)="Add(form.value.username)">
           <div class="grid gap-5">
             <div class="flex justify-center items-center gap-5">
@@ -70,6 +70,46 @@
           </div>
         </form>
       </div>
+
+      <ng-container *ngIf="isCheckedStatusEditLoading === true">
+        <div class="w-full h-[22rem] bg-slate-100 border-[1px] rounded-md">
+          <div class="px-[20%] pt-[2%] grid gap-5">
+            <!-- {{ user_data | json}} -->
+            <div class="grid justify-center items-center m-auto">
+              <p class="text-[26px]">รายละเอียด</p>
+            </div>
+            <div class="gap-5 grid">
+              <div class="flex justify-between gap-5">
+                <div class="h-10 bg-slate-200 rounded-md flex justify-center items-center w-[50%]">
+                  <p>ชื่อ : {{ user_data.user }} </p>
+                </div>
+                <div class="h-10 bg-slate-200 rounded-md flex justify-center items-center w-[50%]">
+                  <p>ID : {{ user_data.username }} </p>
+                </div>
+              </div>
+              <div class="flex justify-between gap-5">
+                <div class="h-10 bg-slate-200 rounded-md flex justify-center items-center w-[50%]">
+                  <p>รหัสประจำตัว : {{ user_data.code }} </p>
+                </div>
+                <div class="h-10 bg-slate-200 rounded-md flex justify-center items-center w-[50%]">
+                  <p>สาขา : {{ user_data.major }} </p>
+                </div>
+              </div>
+              <div class="flex justify-between gap-5">
+                <div class="h-10 bg-slate-200 rounded-md flex justify-center items-center w-[50%]">
+                  <p>คณะ : {{ user_data.group }} </p>
+                </div>
+                <div class="h-10 bg-slate-200 rounded-md flex justify-center items-center w-[50%]">
+                  <p>สิทธิ์การเข้าถึง : {{ user_data.role }} </p>
+                </div>
+              </div>
+              <div class="h-10 bg-slate-200 rounded-md flex justify-center items-center">
+                <p>รหัสผ่าน : {{ user_data.password }} </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </body>
 

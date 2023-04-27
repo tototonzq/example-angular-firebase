@@ -57,7 +57,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
       .getAllUser()
       .pipe()
       .subscribe((res) => {
-        this.user_data = res;
+        this.user_data_all = res;
         this._store.dispatch(new Find(res));
       });
 
@@ -84,11 +84,14 @@ export class ManagerListComponent implements OnInit, OnDestroy {
           const data = res.find(
             (item: any) => item.username === params['username']
           );
+          this.user_data = data;
           // console.log(data);
           setTimeout(() => {
+            this.form.get('username')?.disable();
             this.form.setValue(data);
             // TODO : set loading !
             this.isCheckedStatusGetByUsername = false;
+            this.isCheckedStatusEditLoading = true;
           }, 1000);
         });
       }
@@ -125,6 +128,9 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   public isCheckedStatusGetByUsername: boolean = false;
 
   public user_data: any;
+  public user_data_all: any;
+
+  public isCheckedStatusEditLoading: boolean = false;
 
   public params: string | null = null;
   /* -------------------------------------------------------------------------- */
