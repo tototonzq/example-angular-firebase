@@ -8,10 +8,10 @@ import {
 } from '../manager.data';
 import { DropdownRole } from '../store/models/manager.model';
 import { Select, Store } from '@ngxs/store';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Find } from '../store/actions/find-manager.action';
 import { ManagerSelector } from '../store/selectors/manager.selectors';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataModelResponse } from 'src/app/modules/auth/sign-in/store/models/sign-in.interface.model';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
@@ -22,6 +22,10 @@ import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service'
   styleUrls: ['./manager-list.component.css'],
 })
 export class ManagerListComponent implements OnInit, OnDestroy {
+  /* -------------------------------------------------------------------------- */
+  /*                                unsubscribe$                                */
+  /* -------------------------------------------------------------------------- */
+  _destroy$ = new Subject<void>();
   /* -------------------------------------------------------------------------- */
   //*                                   select                                   */
   /* -------------------------------------------------------------------------- */
@@ -44,6 +48,10 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   //*                                 life circle                                */
   /* -------------------------------------------------------------------------- */
   ngOnInit(): void {
+    this.form.valueChanges.subscribe(() => {
+      // console.log(this.form.value);
+    });
+
     //* Get users
     this._authUserService
       .getAllUser()
@@ -59,7 +67,12 @@ export class ManagerListComponent implements OnInit, OnDestroy {
       // this.params = params['username'];
       // console.log([params].length);
       // console.log([params]);
-      console.log(params['username'].length);
+      // console.log(params);
+      // console.log(params['username']);
+      if (params['username'] === undefined) {
+        return this.resetForm();
+      }
+      // console.log(params['username'].length);
 
       if (params['username'].length > 0) {
         // TODO : set loading !
@@ -73,12 +86,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
           );
           // console.log(data);
           setTimeout(() => {
-            this.role.setValue(data.role);
-            this.username.setValue(data.username);
-            this.code.setValue(data.code);
-            this.group.setValue(data.group);
-            this.user.setValue(data.username);
-            this.major.setValue(data.major);
+            this.form.setValue(data);
             // TODO : set loading !
             this.isCheckedStatusGetByUsername = false;
           }, 1000);
@@ -86,19 +94,26 @@ export class ManagerListComponent implements OnInit, OnDestroy {
       }
     });
   }
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+    this._destroy$.unsubscribe();
+  }
   /* -------------------------------------------------------------------------- */
   //*                                  variables                                 */
   /* -------------------------------------------------------------------------- */
-  user = new FormControl('', [Validators.required]);
-  role = new FormControl('', [Validators.required]);
-  username = new FormControl('', [Validators.required]);
-  major = new FormControl('', [Validators.required]);
-  password = new FormControl('', [Validators.required]);
-  code = new FormControl('', [Validators.required]);
-  group = new FormControl('', [Validators.required]);
+  // TODO : Form Group
+  form: FormGroup = new FormGroup({
+    user: new FormControl('', [Validators.required]),
+    role: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    major: new FormControl('', [Validators.required]),
+    password: new FormControl(''),
+    code: new FormControl('', [Validators.required]),
+    group: new FormControl('', [Validators.required]),
+  });
 
-  //TODO : Validate
+  // TODO : Validate
   public isGroupValidate: boolean = false;
   public isMajorValidate: boolean = false;
   public isCodeValidate: boolean = false;
@@ -106,7 +121,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   public isPasswordValidate: boolean = false;
   public isRoleValidate: boolean = false;
 
-  public isChecked: boolean = false;
+  public isCheckedStatusAddLoading: boolean = false;
   public isCheckedStatusGetByUsername: boolean = false;
 
   public user_data: any;
@@ -123,38 +138,50 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   detail(item: any) {
     console.log(item);
   }
-
-  Add(username?: string | null | any): void {
-    const _group = this.group.value;
-    const _major = this.major.value;
-    const _role = this.role.value;
-    const _code = this.code.value;
-    const _user = this.user.value;
-    const _username = this.username.value;
-
-    if (!_group || !_major || !_role || !_code || !_user || !_username) {
+  /* -------------------------------------------------------------------------- */
+  //*                                     ADD                                    */
+  /* -------------------------------------------------------------------------- */
+  Add(item?: any): void {
+    // console.log(item);
+    // console.log(this.form.value);
+    // console.log(this.form.invalid);
+    if (this.form.invalid) {
       alert('กรุณาใส่ข้อมูลให้ครบถ้วน');
+      console.log('Form is invalid!');
       return;
     }
-    //* Loading Add
-    this.isChecked = true;
+    //* Loading Add data
+    this.isCheckedStatusAddLoading = true;
+    // TODO : Set Value
     const data: any = {
-      role: this.role.value,
-      code: this.code.value,
-      username: this.username.value,
+      role: this.form.value.role,
+      code: this.form.value.code,
+      username: this.form.value.username,
       password: '123456789',
-      user: this.user.value,
-      group: this.group.value,
-      major: this.major.value,
+      user: this.form.value.user,
+      group: this.form.value.group,
+      major: this.form.value.major,
     };
     this._firestore
       .collection('users')
-      .doc(username)
+      .doc(item)
       .set(data)
       .then((res) => {
         alert('เพิ่มข้อมูลสำเร็จ');
         this._router.navigate(['/admin-manager-table']);
       });
+  }
+
+  resetForm(): void {
+    this.form.reset({
+      role: '',
+      code: '',
+      username: '',
+      password: '',
+      user: '',
+      group: '',
+      major: '',
+    });
   }
   /* -------------------------------------------------------------------------- */
   /*                               Local Database                               */

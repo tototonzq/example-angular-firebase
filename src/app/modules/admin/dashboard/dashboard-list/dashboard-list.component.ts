@@ -44,7 +44,6 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   ngOnInit(): void {
     // this.getCountUserAll$.pipe().subscribe((response) => {
-    //   // console.log(response);
     //   if (response === null) return;
     //   //* Save the updated data to localStorage
     //   this.data.push(response);
