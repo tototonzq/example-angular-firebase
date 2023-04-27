@@ -9,6 +9,13 @@ export const MENU_DROPDOWN_MANAGER_ADMIN: DropdownRole[] = [
   { id: '02', name: 'นิสิต', value: 'student' },
 ];
 
+export const MENU_DROPDOWN_MANAGER_ADMIN_FILTER: DropdownRole[] = [
+  { id: '00', name: 'เเอดมิน', value: 'admin' },
+  { id: '01', name: 'อาจารย์', value: 'teacher' },
+  { id: '02', name: 'นิสิต', value: 'student' },
+  { id: '03', name: 'ทั้งหมด', value: '' },
+];
+
 export const MENU_DROPDOWN_GROUP_ADMIN: any[] = [
   {
     id: '00',

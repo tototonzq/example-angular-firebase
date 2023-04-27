@@ -8,6 +8,28 @@
 
   <body class="grid gap-5 mt-10">
     <p>ข้อมูลผู้ใช้งาน</p>
+    <div>
+      <div class="flex gap-2">
+        <div class="w-full">
+          <input type="text" [(ngModel)]="searchTextFilter" class="border-[1px]"
+            placeholder="ค้นหาโดย รหัสประจำตัว & ผู้ใช้">
+        </div>
+        <select [formControl]="role" [(ngModel)]="setRoleFilter"
+          class="border-[1px] shadow-md rounded-md bg-slate-100 hover:bg-slate-200" style="transition: 0.5s;">
+          <option value='' selected disabled>
+            <p> สิทธิ์การเข้าถึง </p>
+          </option>
+          <ng-container *ngFor="let option of dropdown">
+            <option [value]="option.value">
+              <p>{{ option.name }}</p>
+            </option>
+          </ng-container>
+        </select>
+        <!-- <div class="w-40">
+          <button class="bg-slate-100 hover:bg-slate-200" style="transition: 0.5s;">ค้นหา</button>
+        </div> -->
+      </div>
+    </div>
     <div class="border-x-[1px] border-t-[1px] rounded-md">
       <ng-container *ngIf="data$ | async as data">
         <table class="table">
@@ -25,7 +47,7 @@
             </tr>
           </thead>
           <!-- {{data | json}} -->
-          <tbody *ngFor="let row of data; let i = index">
+          <tbody *ngFor="let row of data | filter:searchTextFilter || setRoleFilter; let i = index">
             <tr>
               <td>{{ i + 1 }}</td>
               <td>{{ row.code }}</td>

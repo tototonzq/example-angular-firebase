@@ -7,8 +7,13 @@ import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/si
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
-import { ManagerListComponent } from '../../manager/manager-list/manager-list.component';
 import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
+import {
+  MENU_DROPDOWN_MANAGER_ADMIN,
+  MENU_DROPDOWN_MANAGER_ADMIN_FILTER,
+} from '../../manager/manager.data';
+import { DropdownRole } from '../../manager/store/models/manager.model';
 
 @Component({
   selector: 'app-manager-table-list',
@@ -41,21 +46,37 @@ export class ManagerTableListComponent implements OnInit, OnDestroy {
   ) {}
 
   /* -------------------------------------------------------------------------- */
+  //*                               Default Search                               */
+  /* -------------------------------------------------------------------------- */
+  public searchTextFilter: string = '';
+  public setRoleFilter: string = '';
+  public data: any = [];
+  // TODO : get role
+  dropdown: DropdownRole[] = MENU_DROPDOWN_MANAGER_ADMIN_FILTER;
+
+  /* -------------------------------------------------------------------------- */
   //*                                  Variables                                 */
   /* -------------------------------------------------------------------------- */
   public isCheckedStatusGetAllUsers: boolean = false;
   public isCheckedStatusDelete: boolean = false;
+
+  role = new FormControl('', [Validators.minLength(2)]);
+
   /* -------------------------------------------------------------------------- */
   //*                                 Life Circle                                */
   /* -------------------------------------------------------------------------- */
   // TODO : OnInit
   ngOnInit() {
+    this.role.valueChanges.subscribe((value) => {
+      console.log(value);
+    });
     // ! Injector Users
     this._authUserService
       .getAllUser()
       .pipe()
       .subscribe((res) => {
-        // console.log(res);
+        console.log(res);
+        this.data = res;
         if (res!.length > 0) {
           this._store.dispatch(new Find(res));
           this.isCheckedStatusGetAllUsers = true;

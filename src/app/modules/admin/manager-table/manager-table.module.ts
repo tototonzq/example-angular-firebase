@@ -6,8 +6,14 @@ import { ManagerTableComponent } from './manager-table.component';
 import { ManagerTableListComponent } from './manager-table-list/manager-table-list.component';
 import { LoadersModule } from 'src/app/shared/components/loaders/loaders.module';
 import { LoadersScreenModule } from 'src/app/shared/components/loaders-screen/loaders-screen.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterPipe } from './manager-table-list/filter.pipe';
 
-const components = [ManagerTableComponent, ManagerTableListComponent];
+const components = [
+  ManagerTableComponent,
+  ManagerTableListComponent,
+  FilterPipe,
+];
 
 @NgModule({
   declarations: [...components],
@@ -15,7 +21,9 @@ const components = [ManagerTableComponent, ManagerTableListComponent];
     CommonModule,
     RouterModule.forChild(managerTableRoutes),
     LoadersModule,
-    LoadersScreenModule
+    FormsModule,
+    ReactiveFormsModule,
+    LoadersScreenModule,
   ],
 })
 export class ManagerTableModule {}
