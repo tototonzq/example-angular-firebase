@@ -46,7 +46,7 @@
                     </div>
                   </div>
                   <div class="shadow-md rounded-md h-[40px] px-5 bg-yellow-300 hover:bg-yellow-500 cursor-pointer"
-                    style="transition: 0.5s">
+                    style="transition: 0.5s" (click)="detail(row)">
                     <div class="pt-2">
                       <i class="fa-solid fa-gear fa-xl" style="color: #fff;"></i>
                     </div>
@@ -61,20 +61,24 @@
               </td>
             </tr>
           </tbody>
-          <tbody *ngIf="((data.length === 0)&&(isChecked !== false))">
+          <tbody *ngIf="((data.length === 0)&&(isCheckedStatusGetAllUsers !== false))">
             <td [colSpan]="9">ไม่พบข้อมูล .</td>
           </tbody>
         </table>
-        <ng-container *ngIf="((data.length === 0)&&(isChecked === false))">
+        <ng-container *ngIf="((data.length === 0)&&(isCheckedStatusGetAllUsers === false))">
           <div class="w-[5rem] justify-center items-center m-auto py-[30vh]">
             <app-loaders></app-loaders>
           </div>
         </ng-container>
-        <hr *ngIf="isChecked === false">
+        <hr *ngIf="isCheckedStatusGetAllUsers === false">
       </ng-container>
     </div>
   </body>
 
   <footer>
   </footer>
+
+  <ng-container *ngIf="isCheckedStatusGetAllUsers !== false">
+    <app-loaders-screen *ngIf="isCheckedStatusDelete === true"></app-loaders-screen>
+  </ng-container>
 </main>

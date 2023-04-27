@@ -5,4 +5,4 @@
 /* -------------------------------------------------------------------------- */
 /*                                Service Type                                */
 /* -------------------------------------------------------------------------- */
-export type GetAllResponse = string | any;
+export type GetAllListResponse = string | any;

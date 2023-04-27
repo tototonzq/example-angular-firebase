@@ -38,6 +38,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   //*                                  Variable                                  */
   /* -------------------------------------------------------------------------- */
   public data: any = JSON.parse(localStorage.getItem('userData') || '[]');
+  public isCheckedStatusSignOut: boolean = false;
 
   /* -------------------------------------------------------------------------- */
   //*                                 Constructor                                */
@@ -50,6 +51,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getDataUserLogin$.subscribe((response) => {
       if (response === null) return;
+
       //* Save the updated data to localStorage
       this.data.push(...response);
       localStorage.setItem('userData', JSON.stringify(this.data));
@@ -70,7 +72,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   exit(): void {
-    this.router.navigate(['sign-in']);
+    // TODO : remove the data from localStorage
+    localStorage.removeItem('userData');
+    localStorage.removeItem('userDataAdminDashboard');
+
+    // TODO : router
+    this.isCheckedStatusSignOut = true;
+    setTimeout(() => {
+      this.router.navigate(['sign-in']);
+      this.isCheckedStatusSignOut = false;
+    }, 1000);
   }
 
   getRole(role: string) {

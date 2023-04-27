@@ -7,12 +7,12 @@ import { Observable, Subject, take } from 'rxjs';
 import { Layout } from 'src/app/layout/store/models/layout.model';
 import { LayoutSelectors } from 'src/app/layout/store/selectors/layout.selector';
 import { SignIn } from '../store/actions/sign-in.action';
-import { GetAllUserService } from 'src/app/shared/services/get-all-user.service.service';
 import { SignInSelectors } from '../store/selectors/sign-in.selectors';
 import { GetAllUsers } from '../store/actions/get-all-user.action';
 import { UserDataModelResponse } from '../store/models/sign-in.interface.model';
 import { FormControl, Validators } from '@angular/forms';
 import { LeavePage } from '../store/actions/leave-page.action';
+import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
 
 @Component({
   templateUrl: './sign-in-list.component.html',
@@ -47,11 +47,11 @@ export class SignInListComponent implements OnInit, OnDestroy {
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
   constructor(
-    private auth: AngularFireAuth,
-    private firestore: AngularFirestore,
-    private store: Store,
+    private _auth: AngularFireAuth,
+    private _firestore: AngularFirestore,
+    private _store: Store,
     private _router: Router,
-    private getAllUserService: GetAllUserService,
+    private _authUserService: AuthUserService,
     private _route: ActivatedRoute
   ) {}
 
@@ -68,13 +68,13 @@ export class SignInListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // TODO :  Get User All Data !
-    this.getAllUserService
-      .GetAllUser()
+    this._authUserService
+      .getAllUser()
       .pipe(take(1))
       .subscribe({
         next: (res) => {
           // console.log(res);
-          this.store.dispatch(new GetAllUsers(res));
+          this._store.dispatch(new GetAllUsers(res));
         },
         error: (err) => {
           // console.log(err);
@@ -101,7 +101,8 @@ export class SignInListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
-    this.store.dispatch(new LeavePage());
+    this._destroy$.unsubscribe();
+    this._store.dispatch(new LeavePage());
 
     //TODO : Remove the data from localStorage
     localStorage.removeItem('userData');
@@ -118,7 +119,7 @@ export class SignInListComponent implements OnInit, OnDestroy {
       password: password,
     };
     // console.log(username, password);
-    this.store.dispatch(new SignIn(payload));
+    this._store.dispatch(new SignIn(payload));
   }
 
   forgetPassword(): void {

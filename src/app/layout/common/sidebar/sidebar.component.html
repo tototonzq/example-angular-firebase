@@ -154,6 +154,9 @@
       </div>
       <p class="text-slate-300">Dev. for learning</p>
     </footer>
-
   </header>
+
+  <ng-container>
+    <app-loaders-screen *ngIf="isCheckedStatusSignOut === true"></app-loaders-screen>
+  </ng-container>
 </main>

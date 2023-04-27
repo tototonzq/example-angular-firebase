@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
-import { GetAllUserService } from 'src/app/shared/services/get-all-user.service.service';
+import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
 
 @Component({
   selector: 'app-dashboard-list',
@@ -37,7 +37,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   //*                                 Constructor                                */
   /* -------------------------------------------------------------------------- */
-  constructor(private getAllUserService: GetAllUserService) {}
+  constructor(private _authUserService: AuthUserService) {}
 
   /* -------------------------------------------------------------------------- */
   //*                                 Life Circle                                */
@@ -52,7 +52,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
     // });
     // console.log(this.data);
     //* Injector get users
-    this.getAllUserService.GetAllUser().subscribe((response) => {
+    this._authUserService.getAllUser().subscribe((response) => {
       // TODO : get users
       this.user_count = response.length;
       // console.log(response);

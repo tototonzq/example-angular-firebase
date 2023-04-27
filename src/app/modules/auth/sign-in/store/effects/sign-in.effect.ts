@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SignInStateModel } from '../models/sign-in.state.model';
 import { StateContext } from '@ngxs/store';
-import { GetAllUserService } from 'src/app/shared/services/get-all-user.service.service';
 import { take } from 'rxjs';
 import { SignInPayload } from '../models/sign-in.payload.model';
 import { SignInWithAdmin } from '../actions/sign-in.action';

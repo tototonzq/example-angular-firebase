@@ -12,10 +12,10 @@ import { FormControl, Validators } from '@angular/forms';
 import { Find } from '../store/actions/find-manager.action';
 import { ManagerSelector } from '../store/selectors/manager.selectors';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
-import { GetAllUserService } from 'src/app/shared/services/get-all-user.service.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataModelResponse } from 'src/app/modules/auth/sign-in/store/models/sign-in.interface.model';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
+import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
 
 @Component({
   templateUrl: './manager-list.component.html',
@@ -32,43 +32,59 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
   constructor(
-    private auth: AngularFireAuth,
-    private firestore: AngularFirestore,
-    private store: Store,
+    private _auth: AngularFireAuth,
+    private _firestore: AngularFirestore,
+    private _store: Store,
+    private _route: ActivatedRoute,
     private _router: Router,
-    private getAllUserService: GetAllUserService
+    private _authUserService: AuthUserService
   ) {}
 
   /* -------------------------------------------------------------------------- */
   //*                                 life circle                                */
   /* -------------------------------------------------------------------------- */
   ngOnInit(): void {
-    this.getAllUserService
-      .GetAllUser()
+    //* Get users
+    this._authUserService
+      .getAllUser()
       .pipe()
       .subscribe((res) => {
         this.user_data = res;
-        this.store.dispatch(new Find(res));
+        this._store.dispatch(new Find(res));
       });
 
-    // this.major.valueChanges.subscribe((res) => {
-    //   // console.log(res);
-    //   if (res!.length >= 0) {
-    //     this.isMajorValidate = false;
-    //   }
-    // });
-    // this.group.valueChanges.subscribe((res) => {
-    //   // console.log(res);
-    //   if (res!.length >= 0) {
-    //     this.isGroupValidate = false;
-    //   }
-    // });
-    // this.role.valueChanges.subscribe((res) => {
-    //   console.log(res);
-    //   if (res!.length >= 0) {
-    //     this.isRoleValidate = false;
-    //   }
-    // });
+    //* Get by username again
+    // this.params = this._route.snapshot.queryParams['username'];
+    this._route.queryParams.subscribe((params) => {
+      // this.params = params['username'];
+      // console.log([params].length);
+      // console.log([params]);
+      console.log(params['username'].length);
+
+      if (params['username'].length > 0) {
+        // TODO : set loading !
+        this.isCheckedStatusGetByUsername = true;
+        // console.log(params);
+        this._authUserService.getAllUser().subscribe((res) => {
+          // console.log(res);
+          // TODO : Find in responses
+          const data = res.find(
+            (item: any) => item.username === params['username']
+          );
+          // console.log(data);
+          setTimeout(() => {
+            this.role.setValue(data.role);
+            this.username.setValue(data.username);
+            this.code.setValue(data.code);
+            this.group.setValue(data.group);
+            this.user.setValue(data.username);
+            this.major.setValue(data.major);
+            // TODO : set loading !
+            this.isCheckedStatusGetByUsername = false;
+          }, 1000);
+        });
+      }
+    });
   }
   ngOnDestroy(): void {}
   /* -------------------------------------------------------------------------- */
@@ -91,8 +107,11 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   public isRoleValidate: boolean = false;
 
   public isChecked: boolean = false;
+  public isCheckedStatusGetByUsername: boolean = false;
 
   public user_data: any;
+
+  public params: string | null = null;
   /* -------------------------------------------------------------------------- */
   /*                                    logic                                   */
   /* -------------------------------------------------------------------------- */
@@ -100,8 +119,12 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   /*                               logic function                               */
   /* -------------------------------------------------------------------------- */
-  Add(username?: string | null | any): void {
 
+  detail(item: any) {
+    console.log(item);
+  }
+
+  Add(username?: string | null | any): void {
     const _group = this.group.value;
     const _major = this.major.value;
     const _role = this.role.value;
@@ -113,38 +136,6 @@ export class ManagerListComponent implements OnInit, OnDestroy {
       alert('กรุณาใส่ข้อมูลให้ครบถ้วน');
       return;
     }
-
-    // if (!_group) {
-    //   alert('กรุณาเลือกคณะ');
-    // }
-    // if (!_major) {
-    //   alert('กรุณาเลือกสาขา');
-    // }
-    // if (!_role) {
-    //   alert('กรุณาเลือกสิทธิ');
-    // }
-    // if (!_code) {
-    //   alert('กรุณาใส่รหัสนิสิต');
-    // }
-    // if (!_user) {
-    //   alert('กรุณาใส่ชื่อผู้ใช้');
-    // }
-    // if (!_username) {
-    //   alert('กรุณาใส่ไอดี');
-    // }
-
-    // if (!major || !group || !role || !code || !user) {
-    //   alert('กรุณาใส่ข้อมูลให้ครบถ้วน');
-    // }
-    // if (!major) {
-    //   this.isMajorValidate = true;
-    // }
-    // if (!group) {
-    //   this.isGroupValidate = true;
-    // }
-    // if (!role) {
-    //   this.isRoleValidate = true;
-    // }
     //* Loading Add
     this.isChecked = true;
     const data: any = {
@@ -156,7 +147,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
       group: this.group.value,
       major: this.major.value,
     };
-    this.firestore
+    this._firestore
       .collection('users')
       .doc(username)
       .set(data)
