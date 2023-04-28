@@ -56,7 +56,10 @@ export class ManagerTableListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   public isCheckedStatusGetAllUsers: boolean = false;
   public isCheckedStatusDelete: boolean = false;
+  public page = 1;
+  public pageSize = 8;
 
+  // FormControl
   role = new FormControl('', [Validators.minLength(2)]);
 
   /* -------------------------------------------------------------------------- */

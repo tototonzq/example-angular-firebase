@@ -47,7 +47,8 @@
             </tr>
           </thead>
           <!-- {{data | json}} -->
-          <tbody *ngFor="let row of data | filter:searchTextFilter || setRoleFilter; let i = index">
+          <tbody
+            *ngFor="let row of data | filter:searchTextFilter || setRoleFilter | slice:(page - 1) * pageSize:page * pageSize ; let i = index">
             <tr>
               <td>{{ i + 1 }}</td>
               <td>{{ row.code }}</td>
@@ -94,6 +95,24 @@
         </ng-container>
         <hr *ngIf="isCheckedStatusGetAllUsers === false">
       </ng-container>
+    </div>
+    <div>
+      <div class="flex justify-between">
+        <div class="justify-center items-center flex">
+          <p> <span class="font-bold"> หน้า </span> <span class="text-[20px]">[ {{ page }} ]</span>
+            <!-- <span
+              class="font-bold"> รายการทั้งหมด </span> <span class="text-[20px]">[ {{
+              data.length }} ]</span> -->
+              <!-- แสดง 1 - 10 จาก 3 หน้า 3 -->
+          </p>
+        </div>
+        <div class="flex gap-5">
+          <button class="h-[3rem] w-[10rem] bg-slate-100 hover:bg-slate-200" style="transition: 0.5s;"
+            (click)="page = page - 1" [disabled]="page === 1">หน้าก่อนหน้า</button>
+          <button class="h-[3rem] w-[10rem] bg-slate-100 hover:bg-slate-200" style="transition: 0.5s;"
+            (click)="page = page + 1" [disabled]="page * pageSize >= data.length">หน้าถัดไป</button>
+        </div>
+      </div>
     </div>
   </body>
 

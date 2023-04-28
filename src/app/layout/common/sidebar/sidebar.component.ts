@@ -8,7 +8,7 @@ import { Layout } from '../../store/models/layout.model';
 import { UserDataModelResponse } from 'src/app/modules/auth/sign-in/store/models/sign-in.interface.model';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
 import { MenuItem } from './store/models/sidebar.interface';
-import { MENU_LIST_DATA } from './sidebar.data';
+import { MENU_LIST_ADMIN_DATA, MENU_LIST_STUDENT_DATA, MENU_LIST_TEACHER_DATA } from './sidebar.data';
 
 @Component({
   selector: 'app-sidebar',
@@ -67,8 +67,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   /*                                  Functions                                 */
   /* -------------------------------------------------------------------------- */
-  click(item?: any) {
-    this.router.navigate([item]);
+  onClickRouter(item?: any) {
+    const _url = item.value;
+    this.router.navigate([_url]);
   }
 
   exit(): void {
@@ -98,5 +99,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     return;
   }
 
-  menu: MenuItem[] = MENU_LIST_DATA;
+  // TODO : DATA MENU
+  menuAdmin: MenuItem[] = MENU_LIST_ADMIN_DATA;
+  menuStudent: MenuItem[] = MENU_LIST_STUDENT_DATA;
+  menuTeacher: MenuItem[] = MENU_LIST_TEACHER_DATA
 }

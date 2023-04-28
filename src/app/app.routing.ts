@@ -55,7 +55,7 @@ export const routes: Route[] = [
   /* -------------------------------------------------------------------------- */
   //*                                   Student                                  */
   /* -------------------------------------------------------------------------- */
-  //* User routes for users that are signed in
+  //* Student routes for users that are signed in
   {
     path: '',
     component: LayoutComponent,
@@ -67,54 +67,54 @@ export const routes: Route[] = [
       {
         path: 'student-dashboard',
         loadChildren: () =>
-          import('./modules/user/dashboard/dashboard.module').then(
+          import('./modules/student/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
           ),
       },
       {
         path: 'routes-compo',
         loadChildren: () =>
-          import('./modules/user/routes-compo/routes-compo.module').then(
+          import('./modules/student/routes-compo/routes-compo.module').then(
             (m) => m.RoutesCompoModule
           ),
       },
       {
         path: 'form-input',
         loadChildren: () =>
-          import('./modules/user/form-input/form-input.module').then(
+          import('./modules/student/form-input/form-input.module').then(
             (m) => m.FormInputModule
           ),
       },
       {
         path: 'card',
         loadChildren: () =>
-          import('./modules/user/card/card.module').then((m) => m.CardModule),
+          import('./modules/student/card/card.module').then((m) => m.CardModule),
       },
       {
         path: 'table-data',
         loadChildren: () =>
-          import('./modules/user/table-data/table-data.module').then(
+          import('./modules/student/table-data/table-data.module').then(
             (m) => m.TableDataModule
           ),
       },
       {
         path: 'users',
         loadChildren: () =>
-          import('./modules/user/users/users.module').then(
+          import('./modules/student/users/users.module').then(
             (m) => m.UsersModule
           ),
       },
       {
         path: 'manager-user',
         loadChildren: () =>
-          import('./modules/user/manager-user/manager-user.module').then(
+          import('./modules/student/manager-user/manager-user.module').then(
             (m) => m.ManagerUserModule
           ),
       },
       {
         path: 'user-form',
         loadChildren: () =>
-          import('./modules/user/user-form/user-form.module').then(
+          import('./modules/student/user-form/user-form.module').then(
             (m) => m.UserFormModule
           ),
       },
@@ -158,7 +158,7 @@ export const routes: Route[] = [
       {
         path: 'status-petition',
         loadChildren: () =>
-          import('./modules/user/status-petition/status-petition.module').then(
+          import('./modules/student/status-petition/status-petition.module').then(
             (m) => m.StatusPetitionModule
           ),
       },
