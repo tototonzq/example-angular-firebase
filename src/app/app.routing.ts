@@ -72,32 +72,6 @@ export const routes: Route[] = [
           ),
       },
       {
-        path: 'routes-compo',
-        loadChildren: () =>
-          import('./modules/student/routes-compo/routes-compo.module').then(
-            (m) => m.RoutesCompoModule
-          ),
-      },
-      {
-        path: 'form-input',
-        loadChildren: () =>
-          import('./modules/student/form-input/form-input.module').then(
-            (m) => m.FormInputModule
-          ),
-      },
-      {
-        path: 'card',
-        loadChildren: () =>
-          import('./modules/student/card/card.module').then((m) => m.CardModule),
-      },
-      {
-        path: 'table-data',
-        loadChildren: () =>
-          import('./modules/student/table-data/table-data.module').then(
-            (m) => m.TableDataModule
-          ),
-      },
-      {
         path: 'users',
         loadChildren: () =>
           import('./modules/student/users/users.module').then(
@@ -105,18 +79,11 @@ export const routes: Route[] = [
           ),
       },
       {
-        path: 'manager-user',
+        path: 'manager-petition',
         loadChildren: () =>
-          import('./modules/student/manager-user/manager-user.module').then(
-            (m) => m.ManagerUserModule
-          ),
-      },
-      {
-        path: 'user-form',
-        loadChildren: () =>
-          import('./modules/student/user-form/user-form.module').then(
-            (m) => m.UserFormModule
-          ),
+          import(
+            './modules/student/manager-petition/manager-petition.module'
+          ).then((m) => m.ManagerPetitionModule),
       },
       { path: '**', redirectTo: '404-not-found' },
     ],
@@ -158,9 +125,9 @@ export const routes: Route[] = [
       {
         path: 'status-petition',
         loadChildren: () =>
-          import('./modules/student/status-petition/status-petition.module').then(
-            (m) => m.StatusPetitionModule
-          ),
+          import(
+            './modules/student/status-petition/status-petition.module'
+          ).then((m) => m.StatusPetitionModule),
       },
       {
         path: 'manager-petition',
