@@ -1,13 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DropdownRole } from '../../admin/manager/store/models/manager.model';
 import { MENU_DROPDOWN_PREFIX_STUDENT } from './manager-petition.data';
+import { Subject } from 'rxjs';
 
 @Component({
+  selector: 'app-manager-petition',
   templateUrl: './manager-petition.component.html',
   styleUrls: ['./manager-petition.component.css'],
 })
-export class ManagerPetitionComponent implements OnInit {
+export class ManagerPetitionComponent implements OnInit, OnDestroy {
+  /* -------------------------------------------------------------------------- */
+  //*                                 unsubscribe                                */
+  /* -------------------------------------------------------------------------- */
+  _destroy$ = new Subject<void>();
   /* -------------------------------------------------------------------------- */
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
@@ -16,7 +22,17 @@ export class ManagerPetitionComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   //*                                 Life Circle                                */
   /* -------------------------------------------------------------------------- */
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((value) => {
+      console.log(value);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+    this._destroy$.unsubscribe();
+  }
 
   /* -------------------------------------------------------------------------- */
   //*                                  Variables                                 */
@@ -64,6 +80,3 @@ export class ManagerPetitionComponent implements OnInit {
 //   - การส่งเอกสารให้แหล่งฝึกงาน
 // 	*นิสิตส่งหนังสือเองให้กับทางสถานประกอบการ
 // 	*คณะจัดส่งให้ทาง ไปรษณีย์ EMS
-
-
-
