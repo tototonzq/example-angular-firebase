@@ -10,8 +10,8 @@ export const MENU_LIST_ADMIN_DATA: MenuItem[] = [
 
 export const MENU_LIST_STUDENT_DATA: MenuItem[] = [
   { id: '00', value: 'student-dashboard', name: 'แผงควบคุม' },
-  { id: '01', value: 'users', name: 'ตรวจสอบคำร้อง' },
-  { id: '02', value: 'manager-petition', name: 'จัดการคำร้อง' },
+  { id: '01', value: 'manager-petition', name: 'จัดการคำร้อง' },
+  { id: '02', value: 'users', name: 'ตรวจสอบคำร้อง' },
 ];
 
 export const MENU_LIST_TEACHER_DATA: MenuItem[] = [
