@@ -19,7 +19,7 @@ export class AuthUserService {
   //*                                  Functions                                 */
   /* -------------------------------------------------------------------------- */
   // TODO : get all user !
-  getAllUser(): Observable<GetAllListResponse> {
+  getAllUser(): Observable<any> {
     return this._firestore.collection('users').valueChanges();
   }
 

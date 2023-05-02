@@ -72,14 +72,21 @@ export const routes: Route[] = [
           ),
       },
       {
-        path: 'users',
+        path: 'student-status-petition',
         loadChildren: () =>
-          import('./modules/student/users/users.module').then(
-            (m) => m.UsersModule
+          import(
+            './modules/student/status-petition/status-petition.module'
+          ).then((m) => m.StatusPetitionModule),
+      },
+      {
+        path: 'petition-table',
+        loadChildren: () =>
+          import('./modules/student/petition-table/petition-table.module').then(
+            (m) => m.PetitionTableModule
           ),
       },
       {
-        path: 'manager-petition',
+        path: 'student-petition',
         loadChildren: () =>
           import(
             './modules/student/manager-petition/manager-petition.module'

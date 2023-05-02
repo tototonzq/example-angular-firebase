@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-status-petition',
-  templateUrl: './status-petition.component.html',
-  styleUrls: ['./status-petition.component.scss']
+  template: `<router-outlet></router-outlet>`,
+  styleUrls: ['./status-petition.component.scss'],
 })
 export class StatusPetitionComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

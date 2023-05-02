@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,18 +18,23 @@ export class StudentService {
   /* -------------------------------------------------------------------------- */
   //*                                   method                                   */
   /* -------------------------------------------------------------------------- */
-  // TODO : create student form!
+
+  // TODO : Create student form!
   createPetition(payload: any): void {
-    // console.log(payload);
     this._firestore
       .collection('create-petition')
-      .doc('1')
-      .set(payload)
+      // .doc(payload[0].username)
+      .add(payload)
       .then(() => {
         alert('บันทึกข้อมูลสําเร็จ');
       })
       .catch(() => {
         alert('บันทึกข้อมูลไม่สําเร็จ');
       });
+  }
+
+  // TODO : Get all petitions
+  getAllPetition(): Observable<any> {
+    return this._firestore.collection('create-petition').valueChanges();
   }
 }

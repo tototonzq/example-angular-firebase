@@ -52,17 +52,37 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
     email: new FormControl('', [Validators.required]),
     company: new FormControl('', [Validators.required]),
     company_details: new FormControl('', [Validators.required]),
+    status: new FormControl(false),
+    status_approved: new FormControl(false),
   });
 
   // TODO : Dropdown
   dropdown: DropdownRole[] = MENU_DROPDOWN_PREFIX_STUDENT;
 
   /* -------------------------------------------------------------------------- */
+  //*                                localStorage                                */
+  /* -------------------------------------------------------------------------- */
+
+  /* -------------------------------------------------------------------------- */
   //*                                  Functions                                 */
   /* -------------------------------------------------------------------------- */
+
   // TODO : create petition student form!
   onCreatePetition(): void {
-    // console.log(this.form.value);
-    this._studentService.createPetition(this.form.value);
+    // const data = localStorage.getItem('userData');
+    // const userData = JSON.parse(data || '[]');
+    // const mergedData = Object.assign({}, this.form.value, userData);
+    // console.log(mergedData);
+    // console.log(data)
+    // let userData = JSON.parse(localStorage.getItem('userData') || '[]');
+    // const mergedData = Object.assign({}, this.form.value, [
+    //   JSON.parse(localStorage.getItem('userData') || '[]')[0].username,
+    // ]);
+    // console.log(mergedData);
+    this._studentService.createPetition(
+      Object.assign({}, this.form.value, [
+        JSON.parse(localStorage.getItem('userData') || '[]')[0].username,
+      ])
+    );
   }
 }

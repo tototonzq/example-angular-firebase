@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Find } from '../../manager/store/actions/find-manager.action';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ManagerSelector } from '../../manager/store/selectors/manager.selectors';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -47,7 +47,8 @@ export class ManagerTableListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   public searchTextFilter: string = '';
   public setRoleFilter: string = '';
-  public data: any = [];
+  public data2$ = new BehaviorSubject<any[]>([]);
+
   // TODO : get role
   dropdown: DropdownRole[] = MENU_DROPDOWN_MANAGER_ADMIN_FILTER;
 
@@ -76,7 +77,7 @@ export class ManagerTableListComponent implements OnInit, OnDestroy {
       .pipe()
       .subscribe((res) => {
         console.log(res);
-        this.data = res;
+        this.data2$ = res;
         if (res!.length > 0) {
           this._store.dispatch(new Find(res));
           this.isCheckedStatusGetAllUsers = true;

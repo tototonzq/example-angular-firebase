@@ -103,14 +103,14 @@
             <!-- <span
               class="font-bold"> รายการทั้งหมด </span> <span class="text-[20px]">[ {{
               data.length }} ]</span> -->
-              <!-- แสดง 1 - 10 จาก 3 หน้า 3 -->
+            <!-- แสดง 1 - 10 จาก 3 หน้า 3 -->
           </p>
         </div>
         <div class="flex gap-5">
           <button class="h-[3rem] w-[10rem] bg-slate-100 hover:bg-slate-200" style="transition: 0.5s;"
             (click)="page = page - 1" [disabled]="page === 1">หน้าก่อนหน้า</button>
           <button class="h-[3rem] w-[10rem] bg-slate-100 hover:bg-slate-200" style="transition: 0.5s;"
-            (click)="page = page + 1" [disabled]="page * pageSize >= data.length">หน้าถัดไป</button>
+            (click)="page = page + 1" [disabled]="page * pageSize >= (data$ | async).length">หน้าถัดไป</button>
         </div>
       </div>
     </div>

@@ -45,25 +45,36 @@ export class SignInEffect {
     // console.log(data);
     //! TODO : If username found
     if (data.length !== 0) {
-      setTimeout(() => {
-        alert('User Login Successfully');
+      if (data[0].password === payload.password) {
+        // console.log(data[0]);
+        // console.log(data[0].password);
+        // console.log(payload.password);
+        setTimeout(() => {
+          alert('User Login Successfully');
+          patchState({
+            loading: false,
+            login_status: true,
+            data_user_login: data,
+            loading_button: false,
+            role: data[0].role,
+          });
+          // TODO : If role is admin
+          if (data[0].role === 'admin') {
+            dispatch(new SignInWithAdmin());
+          }
+        }, 2000);
+        return;
+      } else {
         patchState({
           loading: false,
-          login_status: true,
-          data_user_login: data,
           loading_button: false,
-          role: data[0].role,
         });
-        // TODO : If role is admin
-        if (data[0].role === 'admin') {
-          dispatch(new SignInWithAdmin());
-        }
-      }, 2000);
-      return;
+        return alert('Password is incorrect');
+      }
     }
 
     // TODO : If username not found
-    if (data.length === 0) {
+    else if (data.length === 0) {
       setTimeout(() => {
         alert('User not found');
         patchState({

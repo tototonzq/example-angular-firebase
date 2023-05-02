@@ -1,3 +1,4 @@
+# requires a minimum Node.js version of either v14.20, v16.13 or v18.10.
 # Angular Firestore Example
 
 Build Angular 14 CRUD example with Firebase Firestore that uses `AngularFireStore` service.
