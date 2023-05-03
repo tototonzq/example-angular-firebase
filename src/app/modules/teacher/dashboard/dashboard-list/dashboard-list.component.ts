@@ -18,6 +18,8 @@ export class DashboardListComponent implements OnInit {
   data$ = new BehaviorSubject<any[]>([]);
   data_status_false$ = new BehaviorSubject<any[]>([]);
   isLoading$ = new BehaviorSubject<boolean>(true);
+  status_approve$ = new BehaviorSubject<any[]>([]);
+  status_company$ = new BehaviorSubject<any[]>([]);
   /* -------------------------------------------------------------------------- */
   //*                                 life circle                                */
   /* -------------------------------------------------------------------------- */
@@ -27,13 +29,17 @@ export class DashboardListComponent implements OnInit {
       const status = res.filter(
         (item: { status: boolean }) => item.status === false
       );
-      // console.log(status);
+      const statusApprove = res.filter(
+        (item: { status: boolean }) => item.status === true
+      );
+      const statusCompany = res.filter(
+        (item: { status_approved: boolean }) => item.status_approved === true
+      );
+      this.status_company$.next(statusCompany);
+      this.status_approve$.next(statusApprove);
       this.data_status_false$.next(status);
-
-      setTimeout(() => {
-        this.isLoading$.next(false);
-        this.data$.next(res);
-      }, 1000);
+      this.isLoading$.next(false);
+      this.data$.next(res);
     });
   }
 }

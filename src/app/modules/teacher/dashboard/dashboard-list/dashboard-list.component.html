@@ -12,12 +12,40 @@
         <p class="ml-3">คำร้องขอ</p>
       </div>
       <div class="flex justify-center items-center gap-5">
+        <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
+          <div>
+            <p>รอการอนุมัติ</p>
+            <ng-container *ngIf="data_status_false$ | async as data">
+              <div class="text-center">
+                <p class="text-[50px]">
+                  {{ data.length }}
+                </p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
+          <div>
+            <p>อนุมัติเรียบร้อย</p>
+            <ng-container *ngIf="status_approve$ | async as data">
+              <div class="text-center">
+                <p class="text-[50px]">
+                  {{ data.length }}
+                </p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
         <!-- <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
           <div>
-            <p>ใหม่</p>
-            <div class="text-center">
-              <p class="text-[50px]">99</p>
-            </div>
+            <p>สถานประกอบการตอบรับ</p>
+            <ng-container *ngIf="status_company$ | async as data">
+              <div class="text-center">
+                <p class="text-[50px]">
+                  {{ data.length }}
+                </p>
+              </div>
+            </ng-container>
           </div>
         </div> -->
         <!-- <div class="grid grid-cols-2 gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
@@ -52,26 +80,42 @@
           <ng-container *ngFor="let item of data">
             <div class="bg-slate-200 shadow-md rounded-md w-full h-[5rem]">
               <div class="flex justify-center items-center mt-[20px]">
-                <div class="grid grid-cols-4 w-full text-center justify-center items-center">
-                  <h1>{{ item[0] }}</h1>
-                  <h1>{{ item.company }}</h1>
+                <div class="grid grid-cols-6 w-full text-center justify-center items-center">
                   <h1>{{ item.student_code }}</h1>
-                  <h1>
-                    <div class="flex gap-5 justify-center items-center">
-                      <div class="shadow-md rounded-md h-[40px] px-5 bg-blue-300 hover:bg-blue-500 cursor-pointer"
-                        style="transition: 0.5s">
-                        <div class="pt-2">
-                          <i class="fa-solid fa-circle-info fa-xl" style="color: #fff;"></i>
-                        </div>
+                  <h1>{{ item.name }}</h1>
+                  <h1>{{ item.surname }}</h1>
+                  <h1>{{ item.company }}</h1>
+                  <div class="flex gap-5 justify-center items-center col-span-2">
+                    <div class="shadow-md rounded-md h-[40px] px-5 bg-blue-400 hover:bg-blue-500 cursor-pointer"
+                      style="transition: 0.5s">
+                      <div class="flex justify-center items-center pt-2 gap-2">
+                        <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #fff;"></i>
+                        <p class="text-slate-100">รายละเอียด</p>
                       </div>
-                      <div class="shadow-md rounded-md h-[40px] px-5 bg-red-300 hover:bg-red-500 cursor-pointer"
-                        style="transition: 0.5s">
-                        <div class="pt-2">
+                      <!-- <div class="pt-2">
+                          <i class="fa-solid fa-magnifying fa-xl" style="color: #fff;"></i>
+                          <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #fff;"></i>
+                        </div> -->
+                    </div>
+                    <div class="shadow-md rounded-md h-[40px] px-5 bg-red-400 hover:bg-red-500 cursor-pointer"
+                      style="transition: 0.5s">
+                      <div class="flex justify-center items-center pt-2 gap-2">
+                        <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i>
+                        <p class="text-slate-100">ปฎิเสธ</p>
+                      </div>
+                      <!-- <div class="pt-2">
                           <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i>
-                        </div>
+                        </div> -->
+                    </div>
+                    <div class="shadow-md rounded-md h-[40px] px-5 bg-green-500 hover:bg-green-600 cursor-pointer"
+                      style="transition: 0.5s">
+                      <div class="flex justify-center items-center pt-2 gap-2">
+                        <!-- <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i> -->
+                        <i class="fa-solid fa-circle-check fa-bounce fa-xl" style="color: #fff;"></i>
+                        <p class="text-slate-100">อนุมัติ</p>
                       </div>
                     </div>
-                  </h1>
+                  </div>
                 </div>
               </div>
             </div>
