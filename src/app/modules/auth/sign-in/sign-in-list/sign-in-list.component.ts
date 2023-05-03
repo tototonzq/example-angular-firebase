@@ -13,6 +13,7 @@ import { UserDataModelResponse } from '../store/models/sign-in.interface.model';
 import { FormControl, Validators } from '@angular/forms';
 import { LeavePage } from '../store/actions/leave-page.action';
 import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   templateUrl: './sign-in-list.component.html',
@@ -78,7 +79,14 @@ export class SignInListComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           // console.log(err);
-          alert(err.message);
+          // alert(err.message);
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: `${err.message}`,
+            showConfirmButton: false,
+            timer: 1200,
+          });
         },
       });
 

@@ -16,6 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataModelResponse } from 'src/app/modules/auth/sign-in/store/models/sign-in.interface.model';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
 import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   templateUrl: './manager-list.component.html',
@@ -152,7 +153,14 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     // console.log(this.form.value);
     // console.log(this.form.invalid);
     if (this.form.invalid) {
-      alert('กรุณาใส่ข้อมูลให้ครบถ้วน');
+      // alert('กรุณาใส่ข้อมูลให้ครบถ้วน');
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: `กรุณาใส่ข้อมูลให้ครบถ้วน`,
+        showConfirmButton: false,
+        timer: 1200,
+      });
       console.log('Form is invalid!');
       return;
     }
@@ -173,7 +181,14 @@ export class ManagerListComponent implements OnInit, OnDestroy {
       .doc(item)
       .set(data)
       .then((res) => {
-        alert('เพิ่มข้อมูลสำเร็จ');
+        // alert('เพิ่มข้อมูลสำเร็จ');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `เพิ่มข้อมูลสำเร็จ`,
+          showConfirmButton: false,
+          timer: 1200,
+        });
         this._router.navigate(['/admin-manager-table']);
       });
   }
