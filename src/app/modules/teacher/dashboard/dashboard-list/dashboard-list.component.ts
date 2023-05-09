@@ -26,18 +26,18 @@ export class DashboardListComponent implements OnInit {
   ngOnInit() {
     this._studentService.getAllPetition().subscribe((res) => {
       // console.log(res);
-      const status = res.filter(
-        (item: { status: boolean }) => item.status === false
+      const status_approved_report = res.filter(
+        (item: { status_approved_report: boolean }) => item.status_approved_report === false
       );
       const statusApprove = res.filter(
-        (item: { status: boolean }) => item.status === true
+        (item: { status_approved_report: boolean }) => item.status_approved_report === true
       );
       const statusCompany = res.filter(
-        (item: { status_approved: boolean }) => item.status_approved === true
+        (item: { status_approved_company: boolean }) => item.status_approved_company === true
       );
       this.status_company$.next(statusCompany);
       this.status_approve$.next(statusApprove);
-      this.data_status_false$.next(status);
+      this.data_status_false$.next(status_approved_report);
       this.isLoading$.next(false);
       this.data$.next(res);
     });

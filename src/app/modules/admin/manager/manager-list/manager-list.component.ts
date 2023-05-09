@@ -15,7 +15,7 @@ import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataModelResponse } from 'src/app/modules/auth/sign-in/store/models/sign-in.interface.model';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
-import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
+import { AuthUserService } from 'src/app/shared/services/auth-user.service';
 import Swal from 'sweetalert2';
 
 @Component({

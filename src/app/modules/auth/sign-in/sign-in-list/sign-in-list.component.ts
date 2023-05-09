@@ -12,7 +12,7 @@ import { GetAllUsers } from '../store/actions/get-all-user.action';
 import { UserDataModelResponse } from '../store/models/sign-in.interface.model';
 import { FormControl, Validators } from '@angular/forms';
 import { LeavePage } from '../store/actions/leave-page.action';
-import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
+import { AuthUserService } from 'src/app/shared/services/auth-user.service';
 import Swal from 'sweetalert2';
 
 @Component({

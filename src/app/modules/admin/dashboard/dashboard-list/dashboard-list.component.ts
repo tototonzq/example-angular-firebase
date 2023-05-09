@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
-import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
+import { AuthUserService } from 'src/app/shared/services/auth-user.service';
 
 @Component({
   selector: 'app-dashboard-list',

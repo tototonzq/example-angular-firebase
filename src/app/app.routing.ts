@@ -79,14 +79,14 @@ export const routes: Route[] = [
           ).then((m) => m.StatusPetitionModule),
       },
       {
-        path: 'petition-table',
+        path: 'student-petition-table',
         loadChildren: () =>
           import('./modules/student/petition-table/petition-table.module').then(
             (m) => m.PetitionTableModule
           ),
       },
       {
-        path: 'student-petition',
+        path: 'student-manager-petition',
         loadChildren: () =>
           import(
             './modules/student/manager-petition/manager-petition.module'

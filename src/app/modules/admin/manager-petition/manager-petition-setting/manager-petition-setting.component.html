@@ -1,0 +1,33 @@
+<header>
+  <div class="w-full flex justify-start items-start bg-slate-100 p-5">
+    <div class="flex gap-2">
+      <p class="text-[26px]">ตั้งค่าคำร้อง</p>
+      <span class="mt-[11px] text-slate-400">ตั้งค่าคำร้อง</span>
+    </div>
+  </div>
+  <div>
+    <div class="w-full h-[15rem] flex justify-center items-center bg-slate-100">
+      <div class="grid gap-5 justify-center items-center text-center">
+        <div class="flex justify-center items-center gap-5">
+          <select
+            class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+            [formControl]="petition_round">
+            <option value="" selected disabled>รอบคำร้อง</option>
+            <ng-container *ngFor="let option of data_dropdown">
+              <option [value]="option.value">
+                <span>{{ option.name }}</span>
+              </option>
+            </ng-container>
+          </select>
+          <button class="rounded-md w-[5rem] h-10 shadow-md bg-slate-50 hover:bg-slate-200"
+            (click)="changeRoundPetition()" style="transition: 0.5s;">ตกลง</button>
+        </div>
+        <div class="flex justify-center items-center gap-5">
+        </div>
+      </div>
+    </div>
+    <div>
+      <p>{{ round$ | async | json}}</p>
+    </div>
+  </div>
+</header>

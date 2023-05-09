@@ -6,7 +6,7 @@ import { ManagerSelector } from '../../manager/store/selectors/manager.selectors
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AuthUserService } from 'src/app/shared/services/auth/auth-user.service';
+import { AuthUserService } from 'src/app/shared/services/auth-user.service';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { MENU_DROPDOWN_MANAGER_ADMIN_FILTER } from '../../manager/manager.data';

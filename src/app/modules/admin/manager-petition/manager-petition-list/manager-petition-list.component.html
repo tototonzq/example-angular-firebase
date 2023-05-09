@@ -8,20 +8,24 @@
     </div>
     <div>
       <div class="w-full h-[15rem] flex justify-center items-center bg-slate-100">
-        <div class="grid gap-5">
+        <div class="grid gap-5 justify-center items-center text-center">
           <div class="flex justify-center items-center gap-5">
-            <select
+            <!-- <select
               class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500">
               <option value="" selected disabled>นิสิตสาขา</option>
-              <ng-container *ngFor="let option of dropdown">
+              <ng-container *ngFor="let option of data_dropdown">
                 <option [value]="option.name">
                   <span>{{ option.name }}</span>
                 </option>
               </ng-container>
-            </select>
+            </select> -->
             <input type="text"
-            class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
-            placeholder="เลขที่คำร้อง" />
+              class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
+              placeholder="เลขที่คำร้อง" />
+            <div class="cursor-pointer border-[1px] p-2 rounded-md shadow-md bg-slate-400"
+              (click)="goToSettingPetition()">
+              <i class="fa-solid fa-gear fa-shake fa-xl" style="color: #fff;"></i>
+            </div>
           </div>
           <!-- <div class="flex justify-center items-center">
             <textarea type="text"
