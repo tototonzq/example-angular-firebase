@@ -15,7 +15,7 @@
         <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
           <div>
             <p>รอการอนุมัติ</p>
-            <ng-container *ngIf="data_status_false$ | async as data">
+            <ng-container *ngIf="data_approved_status_false$ | async as data">
               <div class="text-center">
                 <p class="text-[50px]">
                   {{ data.length }}
@@ -26,8 +26,8 @@
         </div>
         <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
           <div>
-            <p>อนุมัติเรียบร้อย</p>
-            <ng-container *ngIf="status_approve$ | async as data">
+            <p>อนุมัติ</p>
+            <ng-container *ngIf="data_approved_status_true$ | async as data">
               <div class="text-center">
                 <p class="text-[50px]">
                   {{ data.length }}
@@ -36,10 +36,10 @@
             </ng-container>
           </div>
         </div>
-        <!-- <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
+        <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
           <div>
-            <p>สถานประกอบการตอบรับ</p>
-            <ng-container *ngIf="status_company$ | async as data">
+            <p>ปฏิเสธ</p>
+            <ng-container *ngIf="data_is_cancel_status_true$ | async as data">
               <div class="text-center">
                 <p class="text-[50px]">
                   {{ data.length }}
@@ -47,21 +47,11 @@
               </div>
             </ng-container>
           </div>
-        </div> -->
-        <!-- <div class="grid grid-cols-2 gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
-          <div>
-            <p>ทั้งหมด</p>
-          </div>
-        </div> -->
+        </div>
         <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
           <ng-container *ngIf="data$ | async as data">
             <div>
               <p>ทั้งหมด</p>
-              <!-- <div class="w-[3rem] justify-center items-center m-auto">
-                <ng-container *ngIf="isLoading$ | async as isLoading">
-                  <app-loaders *ngIf="isLoading !== true"></app-loaders>
-                </ng-container>
-              </div> -->
               <div class="text-center">
                 <p class="text-[50px]"> {{ data.length }}</p>
               </div>
@@ -70,57 +60,59 @@
         </div>
       </div>
     </div>
-    {{ data_status_false$ | async | json }}
     <div>
       <div class="flex gap-2 items-center">
         <p>การแจ้งเตือน</p> <i class="fa-solid fa-bell fa-shake fa-xl"></i>
       </div>
-      <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md bg-slate-100">
-        <ng-container *ngIf=" data_status_false$ | async as data">
-          <ng-container *ngFor="let item of data">
-            <div class="bg-slate-200 shadow-md rounded-md w-full h-[5rem]">
-              <div class="flex justify-center items-center mt-[20px]">
-                <div class="grid grid-cols-6 w-full text-center justify-center items-center">
-                  <h1>{{ item.student_code }}</h1>
-                  <h1>{{ item.name }}</h1>
-                  <h1>{{ item.surname }}</h1>
-                  <h1>{{ item.company }}</h1>
-                  <div class="flex gap-5 justify-center items-center col-span-2">
-                    <div class="shadow-md rounded-md h-[40px] px-5 bg-blue-400 hover:bg-blue-500 cursor-pointer"
+      <div class="grid gap-4 mt-2  p-5 rounded-md bg-slate-100 shadow-md">
+        <div class="bg-slate-200 rounded-md">
+          <ng-container *ngIf="data_approved_status_false$ | async as data">
+            <table class="table">
+              <thead>
+                <tr class="bg-slate-100">
+                  <th> ลำดับ </th>
+                  <th> รหัสนิสิต </th>
+                  <th colspan="2"> ชื่อ - นามสกุล </th>
+                  <th> สถานประกอบการ </th>
+                  <th colspan="2"> ช่องทางการติดต่อ </th>
+                  <th> จัดการ </th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let item of data; let i = index">
+                <tr>
+                  <td> {{ i + 1 }} </td>
+                  <td> {{ item.student_code }} </td>
+                  <td> {{ item.name }} </td>
+                  <td> {{ item.surname }} </td>
+                  <td> {{ item.company }} </td>
+                  <td> {{ item.phone_number }} </td>
+                  <td> {{ item.email }} </td>
+                  <td class="flex justify-center items-center m-auto gap-5">
+                    <div (click)="DoApprovePetition(item)"
+                      class="shadow-md rounded-md h-[40px] px-5 bg-blue-300 hover:bg-blue-500 cursor-pointer"
                       style="transition: 0.5s">
-                      <div class="flex justify-center items-center pt-2 gap-2">
-                        <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #fff;"></i>
-                        <p class="text-slate-100">รายละเอียด</p>
-                      </div>
-                      <!-- <div class="pt-2">
-                          <i class="fa-solid fa-magnifying fa-xl" style="color: #fff;"></i>
-                          <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #fff;"></i>
-                        </div> -->
-                    </div>
-                    <div class="shadow-md rounded-md h-[40px] px-5 bg-red-400 hover:bg-red-500 cursor-pointer"
-                      style="transition: 0.5s">
-                      <div class="flex justify-center items-center pt-2 gap-2">
-                        <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i>
-                        <p class="text-slate-100">ปฎิเสธ</p>
-                      </div>
-                      <!-- <div class="pt-2">
-                          <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i>
-                        </div> -->
-                    </div>
-                    <div class="shadow-md rounded-md h-[40px] px-5 bg-green-500 hover:bg-green-600 cursor-pointer"
-                      style="transition: 0.5s">
-                      <div class="flex justify-center items-center pt-2 gap-2">
+                      <div class="pt-2">
+                        <span class="text-slate-50">อนุมัติ</span>
                         <!-- <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i> -->
-                        <i class="fa-solid fa-circle-check fa-bounce fa-xl" style="color: #fff;"></i>
-                        <p class="text-slate-100">อนุมัติ</p>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    <div (click)="DoCancelApprovePetition(item)"
+                      class="shadow-md rounded-md h-[40px] px-5 bg-red-300 hover:bg-red-500 cursor-pointer"
+                      style="transition: 0.5s">
+                      <div class="pt-2">
+                        <span class="text-slate-50">ปฏิเสธ</span>
+                        <!-- <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i> -->
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <ng-container *ngIf="data_approved_status_false$ | async as data">
+                <td *ngIf="data.length == 0" colspan="8">ไม่พบคำร้องใหม่</td>
+              </ng-container>
+            </table>
           </ng-container>
-        </ng-container>
+        </div>
       </div>
     </div>
 

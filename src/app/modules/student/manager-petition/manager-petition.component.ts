@@ -46,24 +46,36 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
           round_petition: res_round_petition.round_petition,
         });
         // TODO : Get all petition round
-        this._studentService
-          .getAllPetition(
-            JSON.parse(localStorage.getItem('userData') || '[]')[0].username
-          )
-          .subscribe((res) => {
-            // console.log(res);
-            const data_petition = res.filter(
-              (x: { round_petition: string }) =>
-                x.round_petition === res_round_petition.round_petition
-            );
-            // TODO : Set data round to var$
-            this.data_petition$.next(data_petition);
-            // console.log(data_petition);
-            // console.log(data_petition.length);
-          });
+        // this._studentService
+        //   .getAllPetitionWithUsername(
+        //     JSON.parse(localStorage.getItem('userData') || '[]')[0].username
+        //   )
+        //   .subscribe((res) => {
+        //     // console.log(res);
+        //     const data_petition = res.filter(
+        //       (x: { round_petition: string }) =>
+        //         x.round_petition === res_round_petition.round_petition
+        //     );
+        //     // TODO : Set data round to var$
+        //     this.data_petition$.next(data_petition);
+        //     // console.log(data_petition);
+        //     // console.log(data_petition.length);
+        //   });
         // TODO : Set data round to var$
         this.round_petition$.next(res_round_petition);
       });
+    // TODO : Set value form
+    const localStorageHeader = JSON.parse(
+      localStorage.getItem('userData') || '[]'
+    )[0];
+    console.log(localStorageHeader);
+    const split = localStorageHeader.user.split(' ');
+    // console.log(split[0]);
+    this.form.controls['name'].setValue(split[0]);
+    this.form.controls['surname'].setValue(split[1]);
+    this.form.controls['student_code'].setValue(localStorageHeader.code);
+    this.form.controls['year'].setValue(localStorageHeader.group);
+    this.form.controls['major'].setValue(localStorageHeader.major);
   }
 
   ngOnDestroy(): void {
@@ -77,21 +89,22 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   // TODO : Form Group
   form = new FormGroup({
-    prefix: new FormControl('ms', [Validators.required]),
-    name: new FormControl('xxxx', [Validators.required]),
-    surname: new FormControl('xxxx', [Validators.required]),
-    student_code: new FormControl('xxxx', [Validators.required]),
-    year: new FormControl('xxxx', [Validators.required]),
-    major: new FormControl('xxxx', [Validators.required]),
-    phone_number: new FormControl('xxxx', [Validators.required]),
-    address: new FormControl('xxxx', [Validators.required]),
-    address_details: new FormControl('xxxx', [Validators.required]),
-    email: new FormControl('xxxx', [Validators.required]),
-    company: new FormControl('xxxx', [Validators.required]),
-    company_details: new FormControl('xxxx', [Validators.required]),
+    prefix: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
+    surname: new FormControl('', [Validators.required]),
+    student_code: new FormControl('', [Validators.required]),
+    year: new FormControl('', [Validators.required]),
+    major: new FormControl('', [Validators.required]),
+    phone_number: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required]),
+    address_details: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    company: new FormControl('', [Validators.required]),
+    company_details: new FormControl('', [Validators.required]),
     status_approved_report: new FormControl(false),
     status_approved_company: new FormControl(false),
     is_cancel: new FormControl(false),
+    is_success: new FormControl(false),
     round_petition: new FormControl('', [Validators.required]),
   });
 
@@ -124,19 +137,11 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
     }
   }
 
-  // getStatus(role: boolean) {
-  //   const _role = role;
-  //   if (_role === false) {
-  //     return 'รอการอนุมัติ';
-  //   } else if (_role === true) {
-  //     return 'อนุมัติ';
-  //   } else return 'พบข้อผิดพลาด';
-  // }
-
   // TODO : create petition student form!
   onCreatePetition(): void {
     this.status_loading$.next(true);
     // TODO : is Validation
+    console.log(this.form.value);
     if (this.form.invalid) {
       Swal.fire({
         position: 'center',
@@ -148,11 +153,11 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
       return this.status_loading$.next(false);
     } else {
       setTimeout(() => {
-        this._studentService.createPetition(
-          Object.assign({}, this.form.value, [
-            JSON.parse(localStorage.getItem('userData') || '[]')[0].username,
-          ])
-        );
+        // this._studentService.createPetition(
+        //   Object.assign({}, this.form.value, [
+        //     JSON.parse(localStorage.getItem('userData') || '[]')[0].username,
+        //   ])
+        // );
       }, 1000);
       this.status_loading$.next(false);
       Swal.fire({

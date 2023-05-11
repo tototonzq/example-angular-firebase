@@ -72,13 +72,6 @@ export const routes: Route[] = [
           ),
       },
       {
-        path: 'student-status-petition',
-        loadChildren: () =>
-          import(
-            './modules/student/status-petition/status-petition.module'
-          ).then((m) => m.StatusPetitionModule),
-      },
-      {
         path: 'student-petition-table',
         loadChildren: () =>
           import('./modules/student/petition-table/petition-table.module').then(
@@ -128,13 +121,6 @@ export const routes: Route[] = [
           import('./modules/admin/manager-table/manager-table.module').then(
             (m) => m.ManagerTableModule
           ),
-      },
-      {
-        path: 'status-petition',
-        loadChildren: () =>
-          import(
-            './modules/student/status-petition/status-petition.module'
-          ).then((m) => m.StatusPetitionModule),
       },
       {
         path: 'manager-petition',

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { PetitionService } from 'src/app/shared/services/petition.service';
 import { StudentService } from 'src/app/shared/services/student.service';
 
 @Component({
@@ -9,36 +10,52 @@ import { StudentService } from 'src/app/shared/services/student.service';
 })
 export class ManagerListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
+  //*                                 unsubscribe                                */
+  /* -------------------------------------------------------------------------- */
+  _destroy$ = new Subject<void>();
+
+  /* -------------------------------------------------------------------------- */
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
-  constructor(private _studentService: StudentService) {}
+  constructor(
+    private _studentService: StudentService,
+    private _petitionService: PetitionService
+  ) {}
 
   /* -------------------------------------------------------------------------- */
   //*                                  variables                                 */
   /* -------------------------------------------------------------------------- */
-  data$ = new BehaviorSubject<any[]>([]);
+  public data$ = new BehaviorSubject<any[]>([]);
+
+  public searchFilter: string = '';
 
   /* -------------------------------------------------------------------------- */
   //*                                 life circle                                */
   /* -------------------------------------------------------------------------- */
   ngOnInit(): void {
-    this._studentService.getAllPetition().subscribe((res) => {
-      this.data$.next(res);
-      console.log(res);
-    });
+    this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
+      this.data$.next(response);
+    })
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+    this._destroy$.unsubscribe();
+  }
 
   /* -------------------------------------------------------------------------- */
   //*                                  functions                                 */
   /* -------------------------------------------------------------------------- */
-  getStatus(role: boolean) {
-    const _role = role;
-    if (_role === false) {
-      return 'รอการอนุมัติ';
-    } else if (_role === true) {
-      return 'อนุมัติ';
-    } else return 'พบข้อผิดพลาด';
+  DoGetStatusApprove(item: any) {
+    const { status_approved_report, is_cancel } = item;
+    if (!is_cancel) {
+      return status_approved_report ? 'อนุมัติ' : 'รอการอนุมัติ';
+    } else {
+      return 'ปฏิเสธ';
+    }
   }
+  /* -------------------------------------------------------------------------- */
+  //*                                    Data                                    */
+  /* -------------------------------------------------------------------------- */
 }

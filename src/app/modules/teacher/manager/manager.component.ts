@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './manager.component.html',
-  styleUrls: ['./manager.component.css'],
+  template: `<router-outlet></router-outlet>`,
 })
 export class ManagerComponent implements OnInit {
+  /* -------------------------------------------------------------------------- */
+  //*                                 constructor                                */
+  /* -------------------------------------------------------------------------- */
   constructor() {}
-
+  /* -------------------------------------------------------------------------- */
+  //*                                 life circle                                */
+  /* -------------------------------------------------------------------------- */
   ngOnInit(): void {}
 }

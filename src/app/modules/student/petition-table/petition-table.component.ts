@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { PetitionService } from 'src/app/shared/services/petition.service';
 import { StudentService } from 'src/app/shared/services/student.service';
 
 @Component({
@@ -10,45 +11,49 @@ export class PetitionTableComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
-  constructor(private _studentService: StudentService) {}
+  constructor(
+    private _studentService: StudentService,
+    private _petitionService: PetitionService
+  ) {}
 
   /* -------------------------------------------------------------------------- */
   //*                                  variables                                 */
   /* -------------------------------------------------------------------------- */
-  data$ = new BehaviorSubject<any[]>([]);
+  public data$ = new BehaviorSubject<any[]>([]);
+  public data_user_petition$ = new BehaviorSubject<any[]>([]);
+  public data_user_approved_status_false$ = new BehaviorSubject<any[]>([]);
+  public data_user_approved_status_true$ = new BehaviorSubject<any[]>([]);
+  public data_user_is_cancel_status_true$ = new BehaviorSubject<any[]>([]);
+
+  public searchFilter: string = '';
+
   /* -------------------------------------------------------------------------- */
   //*                                 life circle                                */
   /* -------------------------------------------------------------------------- */
   ngOnInit(): void {
-    this._studentService
-      .getAllPetition(
-        JSON.parse(localStorage.getItem('userData') || '[]')[0].username
-      )
-      .subscribe((res) => {
-        console.log(res);
-        console.log(
-          JSON.parse(localStorage.getItem('userData') || '[]')[0].username
-        );
-
-        const data_petition = res.filter(
-          (x: { '0': string }) =>
+    this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
+      // console.log(response);
+      this.data$.next(response);
+      this.data_user_petition$.next(
+        response.filter(
+          (x: string) =>
             x[0] ===
             JSON.parse(localStorage.getItem('userData') || '[]')[0].username
-        );
-        console.log(data_petition);
-        this.data$.next(data_petition);
-      });
-    // this._studentService.getAllPetition().subscribe((res) => {
-    //   // TODO : filter data
-    //   // console.log(res);
-    //   const data = res.filter(
-    //     (item: { '0': string }) =>
-    //       item[0] ===
-    //       JSON.parse(localStorage.getItem('userData') || '[]')[0].username
-    //   );
-    //   // console.log(data);
-    //   this.data$.next(data);
-    // });
+        )
+      );
+      console.log(this.data_user_petition$.value);
+      this.data_user_approved_status_false$.next(
+        this.data_user_petition$.value.filter(
+          (x) => x.status_approved_report === false
+        )
+      );
+      // console.log(this.data_user_approved_status_false$.value);
+      this.data_user_approved_status_true$.next(
+        this.data_user_petition$.value.filter(
+          (x) => x.status_approved_report === true
+        )
+      );
+    });
   }
   ngOnDestroy(): void {}
   /* -------------------------------------------------------------------------- */
@@ -107,11 +112,15 @@ export class PetitionTableComponent implements OnInit, OnDestroy {
 
   // ! For test
   deletePetition(payload: any) {
-    this._studentService.deletePetition(payload);
+    // this._studentService.deletePetition(payload);
   }
 
   cancelPetition(payload: any) {
     alert('ยกลิกคำร้อง');
-    this._studentService.cancelPetition(payload);
+    // this._studentService.cancelPetition(payload);
+  }
+
+  DoConfirmPetition(payload: any) {
+    alert('ยืนยันคำร้อง');
   }
 }

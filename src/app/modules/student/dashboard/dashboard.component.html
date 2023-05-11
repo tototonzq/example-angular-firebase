@@ -15,7 +15,7 @@
         <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
           <div>
             <p>สถานะรออนุมัติ</p>
-            <ng-container *ngIf="petition_status_false$ | async as data">
+            <ng-container *ngIf="data_user_approved_status_false$ | async as data">
               <div class="text-center">
                 <p class="text-[50px]">
                   {{ data.length }}
@@ -27,7 +27,7 @@
         <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
           <div>
             <p>สถานะสำเร็จ</p>
-            <ng-container *ngIf="petition_status_true$ | async as data">
+            <ng-container *ngIf="data_user_is_success$ | async as data">
               <div class="text-center">
                 <p class="text-[50px]">
                   {{ data.length }}
@@ -39,7 +39,7 @@
         <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md w-full bg-slate-100">
           <div>
             <p>คำร้องทั้งหมด</p>
-            <ng-container *ngIf="data$ | async as data">
+            <ng-container *ngIf="data_user_petition$ | async as data">
               <div class="text-center">
                 <p class="text-[50px]">
                   {{ data.length }}
@@ -68,7 +68,7 @@
         <p>การแจ้งเตือน</p> <i class="fa-solid fa-bell fa-shake fa-xl"></i>
       </div>
       <div class="grid gap-4 border-[1px] mt-2  p-5 rounded-md bg-slate-100">
-        <ng-container *ngIf=" petition_status_multi_approved$ | async as data">
+        <ng-container *ngIf=" data_user_approved_status_true$ | async as data">
           <ng-container *ngFor="let item of data">
             <div class="bg-slate-200 shadow-md rounded-md w-full h-[5rem]">
               <div class="flex justify-center items-center mt-[20px]">
@@ -99,7 +99,7 @@
                           <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i>
                         </div> -->
                     </div>
-                    <div class="shadow-md rounded-md h-[40px] px-5 bg-green-500 hover:bg-green-600 cursor-pointer"
+                    <div (click)="DoConfirmPetition(item)" class="shadow-md rounded-md h-[40px] px-5 bg-green-500 hover:bg-green-600 cursor-pointer"
                       style="transition: 0.5s">
                       <div class="flex justify-center items-center pt-2 gap-2">
                         <!-- <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i> -->

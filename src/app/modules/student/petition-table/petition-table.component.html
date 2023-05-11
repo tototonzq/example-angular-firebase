@@ -11,12 +11,12 @@
     <div>
       <div class="flex gap-2">
         <div class="w-full">
-          <input type="text" class="border-[1px]" placeholder="ค้นหาโดย">
+          <input type="text" class="border-[1px]" placeholder="ค้นหา" [(ngModel)]="searchFilter">
         </div>
       </div>
     </div>
     <div class="border-x-[1px] border-t-[1px] rounded-md">
-      <ng-container *ngIf="data$ | async as data">
+      <ng-container *ngIf="data_user_petition$ | async as data">
         <table class="table">
           <thead>
             <tr class="bg-slate-100">
@@ -30,7 +30,7 @@
               <th> จัดการ </th>
             </tr>
           </thead>
-          <tbody *ngFor="let item of data; let i = index">
+          <tbody *ngFor="let item of data | filter:searchFilter ; let i = index">
             <tr [ngClass]="{'bg-red-200': item.is_cancel === true, 'hover:bg-slate-100': item.is_cancel !== true}">
               <td> {{ i + 1 }} </td>
               <td class="font-bold text-red-500"> {{ getPetitionRound(item.round_petition) }} </td>
@@ -59,7 +59,7 @@
                   <div class="shadow-md rounded-md h-[40px] px-5 bg-red-300 hover:bg-red-500 cursor-pointer"
                     (click)="cancelPetition(item)" style="transition: 0.5s" *ngIf="item.is_cancel !== true">
                     <div class="pt-2">
-                      <span class="text-slate-50">ยกเลิกคำร้อง</span>
+                      <span class="text-slate-50">ยกเลิก</span>
                       <!-- <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i> -->
                     </div>
                   </div>
@@ -67,7 +67,7 @@
                     (click)="deletePetition(item)" style="transition: 0.5s">
                     <div class="pt-2">
                       <!-- <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i> -->
-                      <span class="text-slate-50">ลบคำร้อง</span>
+                      <span class="text-slate-50">ลบ</span>
                     </div>
                   </div>
                   <div class="shadow-md rounded-md h-[40px] px-5 bg-red-300 hover:bg-red-500 cursor-pointer"
