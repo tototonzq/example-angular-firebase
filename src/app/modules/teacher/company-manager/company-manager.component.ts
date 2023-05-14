@@ -49,4 +49,21 @@ export class CompanyManagerComponent implements OnInit {
   DoCancelApproveCompanyPetition(item: TypePayload): void {
     this._petitionService.DoCancelApprovePetition(item);
   }
+
+  DoUploadFilePetition(item: TypePayload): void {
+    // console.log(item);
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'application/pdf';
+    fileInput.hidden = true;
+    fileInput.addEventListener('change', (event: Event) => {
+      this._petitionService.DoUploadFilePDF(event, item);
+      const target = event.target as HTMLInputElement;
+      const file = target.files ? target.files[0] : null; // check if target.files is not null
+      if (file) {
+        // console.log(file); // do something with the file
+      }
+    });
+    fileInput.click();
+  }
 }

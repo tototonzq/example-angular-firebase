@@ -91,9 +91,11 @@ export class PetitionService {
   }
 
   // TODO : Upload File
-  DoUploadFilePDF(event: { target: { files: any[] } }): void {
+  DoUploadFilePDF(event: any, payload: TypePayload): void {
+    // console.log(event);
+    // console.log(payload);
     const file = event.target.files[0];
-    const filePath = 'pdfs/' + file.name;
+    const filePath = 'Petition/' + file.name;
     const fileRef = this._storage.ref(filePath);
     const task = this._storage.upload(filePath, file);
 
@@ -103,9 +105,16 @@ export class PetitionService {
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             console.log('File uploaded: ', url);
+            this.DoSetUrl(url, payload);
           });
         })
       )
       .subscribe();
+  }
+
+  DoSetUrl(url: TypePayload, payload: TypePayload): void {
+    this._firestore.collection('Petition').doc(payload.id).update({
+      url_petition: url,
+    });
   }
 }

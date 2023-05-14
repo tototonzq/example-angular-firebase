@@ -18,10 +18,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
-  constructor(
-    private _studentService: StudentService,
-    private _petitionService: PetitionService
-  ) {}
+  constructor(private _petitionService: PetitionService) {}
 
   /* -------------------------------------------------------------------------- */
   //*                                  variables                                 */
@@ -69,7 +66,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
       !is_approved_company &&
       !is_approved_success
     ) {
-      return 'รอการตรวจสอบ';
+      return 'รอการตอบรับจากสถานประกอบการ';
     }
     if (
       is_approved_report &&
@@ -100,8 +97,12 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     }
   }
 
-  DoViewDetails(): void {
-    alert('ดูรายละเอียด');
+  DoViewDetails(item: TypePayload): void {
+    // console.log(item);
+    if (!item.url_petition) {
+      alert('ไม่พบข้อมูล');
+    } else window.open(item.url_petition, '_blank');
+    return;
   }
 
   DoCancelApprovePetition(): void {
@@ -112,7 +113,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     alert('อนุมัติ');
   }
 
-  DoResetToFalse(item : TypePayload): void {
+  DoResetToFalse(item: TypePayload): void {
     this._petitionService.DoResetToFalse(item);
   }
 

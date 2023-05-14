@@ -108,6 +108,7 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
     is_approved_company: new FormControl(false),
     is_approved_cancel: new FormControl(false),
     is_approved_success: new FormControl(false),
+    url_petition: new FormControl(''),
   });
 
   // TODO : Dropdown

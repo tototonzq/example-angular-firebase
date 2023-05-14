@@ -62,12 +62,19 @@
                     <p class="text-slate-100">ปฎิเสธ</p>
                   </div>
                 </button>
-                <button (click)="DoApproveCompanyPetition(item)"
+                <button *ngIf="item.url_petition.length > 5" (click)="DoApproveCompanyPetition(item)"
                   class="shadow-md rounded-md h-[40px] px-1 bg-green-500 hover:bg-green-600 cursor-pointer"
                   style="transition: 0.5s">
                   <div class="flex justify-center items-center gap-2">
                     <i class="fa-solid fa-circle-check fa-bounce fa-xl" style="color: #fff;"></i>
                     <p class="text-slate-100">อนุมัติ</p>
+                  </div>
+                </button>
+                <button (click)="DoUploadFilePetition(item)"
+                  class="shadow-md rounded-md h-[40px] px-1 bg-red-500 hover:bg-red-600 cursor-pointer"
+                  style="transition: 0.5s">
+                  <div class="flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-file-pdf fa-bounce fa-xl" style="color: #fff;"></i>
                   </div>
                 </button>
               </div>
