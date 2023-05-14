@@ -88,4 +88,8 @@
     </ng-container>
   </body>
   <footer></footer>
+
+  <ng-container>
+    <app-loaders-screen *ngIf="(isLoadingUpload$ | async) === true"></app-loaders-screen>
+  </ng-container>
 </main>

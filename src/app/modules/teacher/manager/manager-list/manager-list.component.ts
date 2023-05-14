@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { TypePayload } from 'src/app/shared/payload/payload.model';
 import { PetitionService } from 'src/app/shared/services/petition.service';
-import { StudentService } from 'src/app/shared/services/student.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-manager-list',
@@ -100,7 +100,13 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   DoViewDetails(item: TypePayload): void {
     // console.log(item);
     if (!item.url_petition) {
-      alert('ไม่พบข้อมูล');
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: `ไม่พบข้อมูล`,
+        showConfirmButton: false,
+        timer: 1200,
+      });
     } else window.open(item.url_petition, '_blank');
     return;
   }

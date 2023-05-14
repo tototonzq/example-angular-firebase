@@ -87,6 +87,7 @@ export class PetitionService {
       is_approved_cancel: false,
       is_approved_report: false,
       is_approved_company: false,
+      url_petition: '',
     });
   }
 

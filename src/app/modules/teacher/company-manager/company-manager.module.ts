@@ -5,6 +5,7 @@ import { companyRoutes } from './company-manager.routing';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './filter.pipe';
+import { LoadersScreenModule } from 'src/app/shared/components/loaders-screen/loaders-screen.module';
 
 const components = [FilterPipe, CompanyManagerComponent];
 
@@ -14,6 +15,7 @@ const components = [FilterPipe, CompanyManagerComponent];
     RouterModule.forChild(companyRoutes),
     FormsModule,
     ReactiveFormsModule,
+    LoadersScreenModule,
   ],
   declarations: [...components],
 })

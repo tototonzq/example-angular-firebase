@@ -57,12 +57,12 @@
           <tr class="bg-slate-100">
             <th class="w-[5%]"> ลำดับ </th>
             <th class="w-[15%]"> เลขเอกสาร </th>
-            <th class="w-[15%]"> รหัสนิสิต </th>
+            <th class="w-[10%]"> รหัสนิสิต </th>
             <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
-            <th class="w-[20%]"> สถานประกอบการ </th>
+            <th class="w-[15%]"> สถานประกอบการ </th>
             <!-- <th class="w-[15%]"> ข้อมูลสถานประกอบการ </th> -->
             <th class="w-[10%]"> สถานะ </th>
-            <th class="w-[20%]"> จัดการ </th>
+            <th class="w-[25%]"> จัดการ </th>
           </tr>
         </thead>
         <tbody *ngFor="let item of data | filter:searchFilter ; let i = index">
@@ -80,11 +80,19 @@
             <td> {{ DoGetStatusApprove(item) }} </td>
             <td class="text-center" [colSpan]="1">
               <div class="flex gap-5 justify-center items-center col-span-2">
-                <button (click)="DoViewDetails(item)"
-                  class="shadow-md rounded-md h-[40px] px-1 bg-blue-400 hover:bg-blue-500 cursor-pointer"
+                <button class="shadow-md rounded-md h-[40px] px-1 bg-blue-400 hover:bg-blue-500 cursor-pointer"
                   style="transition: 0.5s">
                   <div class="flex justify-center items-center gap-2">
                     <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #fff;"></i>
+                    <!-- <p class="text-slate-100">รายละเอียด</p> -->
+                  </div>
+                </button>
+                <button *ngIf="item.url_petition.length > 5 && item.is_approved_company === true"
+                  (click)="DoViewDetails(item)"
+                  class="shadow-md rounded-md h-[40px] px-1 bg-red-400 hover:bg-red-500 cursor-pointer"
+                  style="transition: 0.5s">
+                  <div class="flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-file-pdf fa-xl" style="color: #fff;"></i>
                     <p class="text-slate-100">รายละเอียด</p>
                   </div>
                 </button>

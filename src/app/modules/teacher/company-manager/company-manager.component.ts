@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TypePayload } from 'src/app/shared/payload/payload.model';
 import { PetitionService } from 'src/app/shared/services/petition.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-company-manager',
   templateUrl: './company-manager.component.html',
@@ -21,6 +21,16 @@ export class CompanyManagerComponent implements OnInit {
   public data_user_report_success$ = new BehaviorSubject<any[]>([]);
 
   public searchFilter: string = '';
+
+  // boolean
+  public isLoading: boolean = false;
+  // public isLoadingUpload: boolean = false;
+  public isLoadingUpload$: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+  public isError: boolean = false;
+  public isSuccess: boolean = false;
+  public isEmpty: boolean = false;
+
   /* -------------------------------------------------------------------------- */
   //*                                 life circle                                */
   /* -------------------------------------------------------------------------- */
@@ -46,8 +56,30 @@ export class CompanyManagerComponent implements OnInit {
   DoApproveCompanyPetition(item: TypePayload): void {
     this._petitionService.DoApproveCompanyPetition(item);
   }
-  DoCancelApproveCompanyPetition(item: TypePayload): void {
-    this._petitionService.DoCancelApprovePetition(item);
+  // DoCancelApproveCompanyPetition(item: TypePayload): void {
+  //   this._petitionService.DoCancelApprovePetition(item);
+  // }
+  DoCancelApproveCompanyPetition(item: TypePayload) {
+    // console.log(item);
+    Swal.fire({
+      title: 'คุณแน่ใจหรือไม่ว่าต้องการปฏิเสธ?',
+      text: 'แตะที่อื่นเพื่อยกเลิกการทำงาน!',
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'ใช่, ปฏิเสธ!',
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `อนุมัติสำเร็จ`,
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        this._petitionService.DoCancelApprovePetition(item);
+      }
+    });
   }
 
   DoUploadFilePetition(item: TypePayload): void {
@@ -57,12 +89,18 @@ export class CompanyManagerComponent implements OnInit {
     fileInput.accept = 'application/pdf';
     fileInput.hidden = true;
     fileInput.addEventListener('change', (event: Event) => {
+      this.isLoadingUpload$.next(true);
       this._petitionService.DoUploadFilePDF(event, item);
-      const target = event.target as HTMLInputElement;
-      const file = target.files ? target.files[0] : null; // check if target.files is not null
-      if (file) {
-        // console.log(file); // do something with the file
-      }
+      setTimeout(() => {
+        this.isLoadingUpload$.next(false);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `อัพโหลดสําเร็จ`,
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      }, 1000);
     });
     fileInput.click();
   }
