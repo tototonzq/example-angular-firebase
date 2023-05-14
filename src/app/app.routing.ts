@@ -129,6 +129,20 @@ export const routes: Route[] = [
             './modules/admin/manager-petition/manager-petition.module'
           ).then((m) => m.ManagerPetitionModule),
       },
+      {
+        path: 'admin-company-manager',
+        loadChildren: () =>
+          import('./modules/admin/company-manager/company-manager.module').then(
+            (m) => m.CompanyManagerModule
+          ),
+      },
+      {
+        path: 'admin-response-form',
+        loadChildren: () =>
+          import('./modules/admin/response-form/response-form.module').then(
+            (m) => m.ResponseFormModule
+          ),
+      },
       { path: '**', redirectTo: '404-not-found' },
     ],
   },

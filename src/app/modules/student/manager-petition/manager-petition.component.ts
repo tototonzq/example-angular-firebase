@@ -101,6 +101,7 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
     address: new FormControl('', [Validators.required]),
     address_details: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
+    position_company: new FormControl('', [Validators.required]),
     company: new FormControl('', [Validators.required]),
     company_details: new FormControl('', [Validators.required]),
     round_petition: new FormControl('', [Validators.required]),
@@ -108,7 +109,10 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
     is_approved_company: new FormControl(false),
     is_approved_cancel: new FormControl(false),
     is_approved_success: new FormControl(false),
-    url_petition: new FormControl(''),
+    is_approved_admin_report: new FormControl(false),
+    url_courtesy: new FormControl(''),
+    url_send: new FormControl(''),
+    url_response: new FormControl(''),
   });
 
   // TODO : Dropdown

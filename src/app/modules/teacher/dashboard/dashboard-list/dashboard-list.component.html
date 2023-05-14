@@ -12,7 +12,7 @@
       <div class="flex justify-center items-center gap-5">
         <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
           <div>
-            <p>รอการอนุมัติ</p>
+            <p>รอการอนุมัติ & ตรวจสอบเอกสาร</p>
             <ng-container *ngIf="data_approved_status_false$ | async as data">
               <div class="text-center">
                 <p class="text-[50px]">
@@ -24,7 +24,7 @@
         </div>
         <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
           <div>
-            <p>อนุมัติ</p>
+            <p>รอการอนุมัติ & สถานประกอบการ & นิสิต</p>
             <ng-container *ngIf="data_approved_status_true$ | async as data">
               <div class="text-center">
                 <p class="text-[50px]">
@@ -36,7 +36,7 @@
         </div>
         <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
           <div>
-            <p>ปฏิเสธ</p>
+            <p>ปฏิเสธคำร้อง & ยกเลิกคำร้อง</p>
             <ng-container *ngIf="data_is_cancel_status_true$ | async as data">
               <div class="text-center">
                 <p class="text-[50px]">

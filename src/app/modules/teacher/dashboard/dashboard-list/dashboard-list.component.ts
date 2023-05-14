@@ -7,7 +7,6 @@ import { PetitionService } from 'src/app/shared/services/petition.service';
 import { StudentService } from 'src/app/shared/services/student.service';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-dashboard-list',
   templateUrl: './dashboard-list.component.html',
@@ -22,12 +21,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
-  constructor(
-    private _studentService: StudentService,
-    private _auth: AngularFireAuth,
-    private _firestore: AngularFirestore,
-    private _petitionService: PetitionService
-  ) {}
+  constructor(private _petitionService: PetitionService) {}
 
   /* -------------------------------------------------------------------------- */
   //*                                  variables                                 */
@@ -116,7 +110,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
     });
   }
 
-  DoResetToFalse(item : TypePayload): void {
+  DoResetToFalse(item: TypePayload): void {
     this._petitionService.DoResetToFalse(item);
   }
 }

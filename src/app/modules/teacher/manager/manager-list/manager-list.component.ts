@@ -97,9 +97,9 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     }
   }
 
-  DoViewDetails(item: TypePayload): void {
+  DoViewDetailsCourtesy(item: TypePayload): void {
     // console.log(item);
-    if (!item.url_petition) {
+    if (!item.url_courtesy) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
@@ -107,7 +107,35 @@ export class ManagerListComponent implements OnInit, OnDestroy {
         showConfirmButton: false,
         timer: 1200,
       });
-    } else window.open(item.url_petition, '_blank');
+    } else window.open(item.url_courtesy, '_blank');
+    return;
+  }
+
+  DoViewDetailsResponse(item: TypePayload): void {
+    // console.log(item);
+    if (!item.url_response) {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: `ไม่พบข้อมูล`,
+        showConfirmButton: false,
+        timer: 1200,
+      });
+    } else window.open(item.url_response, '_blank');
+    return;
+  }
+
+  DoViewDetailsSend(item: TypePayload): void {
+    // console.log(item);
+    if (!item.url_send) {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: `ไม่พบข้อมูล`,
+        showConfirmButton: false,
+        timer: 1200,
+      });
+    } else window.open(item.url_send, '_blank');
     return;
   }
 

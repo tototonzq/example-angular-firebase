@@ -5,11 +5,11 @@ import { PetitionService } from 'src/app/shared/services/petition.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-company-manager',
-  templateUrl: './company-manager.component.html',
-  styleUrls: ['./company-manager.component.scss'],
+  selector: 'app-response-form',
+  templateUrl: './response-form.component.html',
+  styleUrls: ['./response-form.component.css'],
 })
-export class CompanyManagerComponent implements OnInit {
+export class ResponseFormComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
@@ -42,9 +42,10 @@ export class CompanyManagerComponent implements OnInit {
       this.data_user_report_success$.next(
         this.data$.value.filter(
           (x) =>
+            x.is_approved_admin_report === true &&
             x.is_approved_cancel === false &&
             x.is_approved_success === false &&
-            x.is_approved_company === false &&
+            x.is_approved_company === true &&
             x.is_approved_report === true
         )
       );
@@ -72,7 +73,7 @@ export class CompanyManagerComponent implements OnInit {
           timer: 1200,
         });
         // this._petitionService.DoApproveCompanyPetition(item);
-        this._petitionService.DoApproveCompanyPetition(item);
+        this._petitionService.DoApproveSuccessPetition(item);
       }
     });
   }
@@ -89,7 +90,16 @@ export class CompanyManagerComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'ใช่, ปฏิเสธ!',
     }).then((result) => {
-      if (result.value) {
+      if (item.url_response.length < 5) {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: `กรุณาอัปโหลดข้อมูล !`,
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        return;
+      } else if (result.value) {
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -102,7 +112,7 @@ export class CompanyManagerComponent implements OnInit {
     });
   }
 
-  DoUploadFilePetition(item: TypePayload): void {
+  DoUploadFilePetitionSend(item: TypePayload): void {
     // console.log(item);
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
@@ -110,7 +120,7 @@ export class CompanyManagerComponent implements OnInit {
     fileInput.hidden = true;
     fileInput.addEventListener('change', (event: Event) => {
       this.isLoadingUpload$.next(true);
-      this._petitionService.DoUploadFilePDF(event, item);
+      this._petitionService.DoUploadFileSend(event, item);
       setTimeout(() => {
         this.isLoadingUpload$.next(false);
         Swal.fire({
@@ -123,10 +133,5 @@ export class CompanyManagerComponent implements OnInit {
       }, 1000);
     });
     fileInput.click();
-  }
-
-  DoOpenPetitionCourtesy(item: TypePayload): void {
-    // alert('อัพโหลดสําเร็จ');
-    window.open(item.url_courtesy, '_blank');
   }
 }

@@ -5,6 +5,8 @@ import { DashboardComponent } from './dashboard.component';
 import { dashboardRoutes } from './dashboard.routing';
 import { DashboardListComponent } from './dashboard-list/dashboard-list.component';
 import { LoadersModule } from 'src/app/shared/components/loaders/loaders.module';
+import { LoadersScreenModule } from 'src/app/shared/components/loaders-screen/loaders-screen.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DashboardComponent, DashboardListComponent],
@@ -12,6 +14,9 @@ import { LoadersModule } from 'src/app/shared/components/loaders/loaders.module'
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
     LoadersModule,
+    FormsModule,
+    ReactiveFormsModule,
+    LoadersScreenModule,
   ],
 })
 export class DashboardModule {}

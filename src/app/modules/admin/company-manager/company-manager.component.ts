@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-company-manager',
   templateUrl: './company-manager.component.html',
-  styleUrls: ['./company-manager.component.scss'],
+  styleUrls: ['./company-manager.component.css'],
 })
 export class CompanyManagerComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
@@ -42,6 +42,7 @@ export class CompanyManagerComponent implements OnInit {
       this.data_user_report_success$.next(
         this.data$.value.filter(
           (x) =>
+            x.is_approved_admin_report === true &&
             x.is_approved_cancel === false &&
             x.is_approved_success === false &&
             x.is_approved_company === false &&
@@ -89,7 +90,16 @@ export class CompanyManagerComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'ใช่, ปฏิเสธ!',
     }).then((result) => {
-      if (result.value) {
+      if (item.url_response.length < 5) {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: `กรุณาอัปโหลดข้อมูล !`,
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        return;
+      } else if (result.value) {
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -102,7 +112,7 @@ export class CompanyManagerComponent implements OnInit {
     });
   }
 
-  DoUploadFilePetition(item: TypePayload): void {
+  DoUploadFilePetitionResponse(item: TypePayload): void {
     // console.log(item);
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
@@ -110,7 +120,7 @@ export class CompanyManagerComponent implements OnInit {
     fileInput.hidden = true;
     fileInput.addEventListener('change', (event: Event) => {
       this.isLoadingUpload$.next(true);
-      this._petitionService.DoUploadFilePDF(event, item);
+      this._petitionService.DoUploadFileResponse(event, item);
       setTimeout(() => {
         this.isLoadingUpload$.next(false);
         Swal.fire({
@@ -123,10 +133,5 @@ export class CompanyManagerComponent implements OnInit {
       }, 1000);
     });
     fileInput.click();
-  }
-
-  DoOpenPetitionCourtesy(item: TypePayload): void {
-    // alert('อัพโหลดสําเร็จ');
-    window.open(item.url_courtesy, '_blank');
   }
 }

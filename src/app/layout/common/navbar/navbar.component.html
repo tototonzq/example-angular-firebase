@@ -1,5 +1,6 @@
 <main>
   <header></header>
+
   <body>
     <header class="header bg-white py-4 px-8 shadow-md mb-[2px]">
       <div class="text-start flex">
@@ -10,7 +11,14 @@
             <div class="bg-slate-300 w-7 h-1"></div>
           </div>
         </div>
-        <div class="text-end flex-grow text-slate-500">{{ today }}</div>
+        <!-- <div class="text-end flex-grow text-slate-500">{{ today }}</div> -->
+        <div class="flex-grow flex justify-end gap-5">
+          <div>ผู้ใช้งาน : {{ data[0].user }}</div>
+          <div>สาขา : {{ data[0].major }}</div>
+          <div>คณะ : {{ data[0].group }}</div>
+          <div>การเข้าถึง : {{ getRole(data[0].role) }}</div>
+          <div>เลขประจำตัว : {{ data[0].code }}</div>
+        </div>
       </div>
     </header>
   </body>

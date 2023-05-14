@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
+import { TypePayload } from 'src/app/shared/payload/payload.model';
 import { AuthUserService } from 'src/app/shared/services/auth-user.service';
+import { PetitionService } from 'src/app/shared/services/petition.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard-list',
@@ -28,21 +31,45 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   // public data: any = JSON.parse(
   //   localStorage.getItem('userDataAdminDashboard') || '[]'
   // );
-  public user_count: any = 0;
-  public user_count_student: any = 0;
-  public user_count_teacher: any = 0;
-  public user_count_admin: any = 0;
-  public isChecked: boolean = false;
+  public user_count$ = new BehaviorSubject<number>(0);
+  public user_count_student$ = new BehaviorSubject<number>(0);
+  public user_count_teacher$ = new BehaviorSubject<number>(0);
+  public user_count_admin$ = new BehaviorSubject<number>(0);
+  public isChecked$ = new BehaviorSubject<boolean>(false);
 
   /* -------------------------------------------------------------------------- */
   //*                                 Constructor                                */
   /* -------------------------------------------------------------------------- */
-  constructor(private _authUserService: AuthUserService) {}
+  constructor(
+    private _authUserService: AuthUserService,
+    private _petitionService: PetitionService
+  ) {}
+
+  /* -------------------------------------------------------------------------- */
+  //*                                  variables                                 */
+  /* -------------------------------------------------------------------------- */
+  public is_approved_report$ = new BehaviorSubject<any[]>([]);
+  public isLoadingUpload$: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
 
   /* -------------------------------------------------------------------------- */
   //*                                 Life Circle                                */
   /* -------------------------------------------------------------------------- */
   ngOnInit(): void {
+    this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
+      // console.log(response);
+      this.is_approved_report$.next(
+        response.filter(
+          (x) =>
+          x.is_approved_cancel === false &&
+          x.is_approved_success === false &&
+          x.is_approved_company === false &&
+          x.is_approved_report === true &&
+          x.is_approved_admin_report === false
+        )
+      );
+      console.log(this.is_approved_report$.value);
+    });
     // this.getCountUserAll$.pipe().subscribe((response) => {
     //   if (response === null) return;
     //   //* Save the updated data to localStorage
@@ -53,7 +80,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
     //* Injector get users
     this._authUserService.getAllUser().subscribe((response) => {
       // TODO : get users
-      this.user_count = response.length;
+      this.user_count$.next(response.length);
       // console.log(response);
 
       // TODO : get admins
@@ -61,30 +88,112 @@ export class DashboardListComponent implements OnInit, OnDestroy {
         (item: any) => item.role === 'admin'
       );
       // console.log(count_admin);
-      this.user_count_admin = count_admin.length;
+      this.user_count_admin$.next(count_admin.length);
 
       // TODO : get students
       const count_student: any = response.filter(
         (item: any) => item.role === 'student'
       );
       // console.log(count_student);
-      this.user_count_student = count_student.length;
+      this.user_count_student$.next(count_student.length);
 
       // TODO : get teachers
       const count_teacher: any = response.filter(
         (item: any) => item.role === 'teacher'
       );
       // console.log(count_teacher);
-      this.user_count_teacher = count_teacher.length;
+      this.user_count_teacher$.next(count_teacher.length);
 
       //! Checked
-      this.isChecked = true;
+      this.isChecked$.next(true);
     });
   }
   ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
+    this._destroy$.unsubscribe();
     //TODO : Remove the data from localStorage
     // localStorage.removeItem('userDataAdminDashboard');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  //*                                  FUnctions                                 */
+  /* -------------------------------------------------------------------------- */
+  DoApproveReportPetition(item: any) {
+    // console.log(item);
+    Swal.fire({
+      title: 'คุณแน่ใจหรือไม่ว่าต้องการอนุมัติ?',
+      text: 'แตะที่อื่นเพื่อยกเลิกการทำงาน!',
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'ใช่, อนุมัติ!',
+    }).then((result) => {
+      if (item.url_courtesy.length < 5) {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: `กรุณาอัปโหลดข้อมูล !`,
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        return;
+      } else if (result.value) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `อนุมัติสำเร็จ`,
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        this._petitionService.DoApproveReportAdminPetition(item);
+      }
+    });
+  }
+
+  DoCancelApprovePetition(item: TypePayload) {
+    // console.log(item);
+    Swal.fire({
+      title: 'คุณแน่ใจหรือไม่ว่าต้องการปฏิเสธ?',
+      text: 'แตะที่อื่นเพื่อยกเลิกการทำงาน!',
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'ใช่, ปฏิเสธ!',
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `อนุมัติสำเร็จ`,
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        this._petitionService.DoCancelApprovePetition(item);
+      }
+    });
+  }
+
+  DoUploadFilePetition(item: TypePayload): void {
+    // console.log(item);
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'application/pdf';
+    fileInput.hidden = true;
+    fileInput.addEventListener('change', (event: Event) => {
+      this.isLoadingUpload$.next(true);
+      this._petitionService.DoUploadFileCourtesy(event, item);
+      setTimeout(() => {
+        this.isLoadingUpload$.next(false);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `อัพโหลดสําเร็จ`,
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      }, 1000);
+    });
+    fileInput.click();
   }
 }

@@ -51,10 +51,24 @@ export class PetitionService {
     });
   }
 
+  DoApproveReportAdminPetition(payload: TypePayload) {
+    // console.log(payload);
+    return this._firestore.collection('Petition').doc(payload.id).update({
+      is_approved_admin_report: true,
+    });
+  }
+
   DoApproveCompanyPetition(payload: TypePayload) {
     console.log(payload);
     return this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_company: true,
+    });
+  }
+
+  DoApproveSuccessPetition(payload: TypePayload) {
+    console.log(payload);
+    return this._firestore.collection('Petition').doc(payload.id).update({
+      is_approved_success: true,
     });
   }
 
@@ -87,7 +101,10 @@ export class PetitionService {
       is_approved_cancel: false,
       is_approved_report: false,
       is_approved_company: false,
-      url_petition: '',
+      is_approved_admin_report: false,
+      url_response: '',
+      url_courtesy: '',
+      url_send: '',
     });
   }
 
@@ -106,16 +123,97 @@ export class PetitionService {
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             console.log('File uploaded: ', url);
-            this.DoSetUrl(url, payload);
+            // this.DoSetUrl(url, payload);
           });
         })
       )
       .subscribe();
   }
 
-  DoSetUrl(url: TypePayload, payload: TypePayload): void {
+  DoUploadFileCourtesy(event: any, payload: TypePayload): void {
+    // console.log(event);
+    // console.log(payload);
+    const file = event.target.files[0];
+    const filePath = 'Petition/' + file.name;
+    const fileRef = this._storage.ref(filePath);
+    const task = this._storage.upload(filePath, file);
+
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            // console.log('File uploaded: ', url);
+            this.DoSetUrlCourtesy(url, payload);
+          });
+        })
+      )
+      .subscribe();
+  }
+
+  DoSetUrlCourtesy(url: TypePayload, payload: TypePayload): void {
     this._firestore.collection('Petition').doc(payload.id).update({
-      url_petition: url,
+      url_courtesy: url,
     });
   }
+
+  DoUploadFileResponse(event: any, payload: TypePayload): void {
+    // console.log(event);
+    // console.log(payload);
+    const file = event.target.files[0];
+    const filePath = 'Petition/' + file.name;
+    const fileRef = this._storage.ref(filePath);
+    const task = this._storage.upload(filePath, file);
+
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            // console.log('File uploaded: ', url);
+            this.DoSetUrlResponse(url, payload);
+          });
+        })
+      )
+      .subscribe();
+  }
+
+  DoSetUrlResponse(url: TypePayload, payload: TypePayload): void {
+    this._firestore.collection('Petition').doc(payload.id).update({
+      url_response: url,
+    });
+  }
+
+  DoUploadFileSend(event: any, payload: TypePayload): void {
+    // console.log(event);
+    // console.log(payload);
+    const file = event.target.files[0];
+    const filePath = 'Petition/' + file.name;
+    const fileRef = this._storage.ref(filePath);
+    const task = this._storage.upload(filePath, file);
+
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            // console.log('File uploaded: ', url);
+            this.DoSetUrlSend(url, payload);
+          });
+        })
+      )
+      .subscribe();
+  }
+
+  DoSetUrlSend(url: TypePayload, payload: TypePayload): void {
+    this._firestore.collection('Petition').doc(payload.id).update({
+      url_send: url,
+    });
+  }
+
+  // DoSetUrl(url: TypePayload, payload: TypePayload): void {
+  //   this._firestore.collection('Petition').doc(payload.id).update({
+  //     url_petition: url,
+  //   });
+  // }
 }

@@ -64,11 +64,50 @@
               placeholder="ที่อยู่โดยละเอียด เช่น บ้านเลขที่ , หมู่บ้าน , ตำบล/แขวง , อำเภอ/เขต , จังหวัด , รหัสไปรษณีย์ และอื่นๆ "
               class="max-h-28 min-h-[112px] p-2 rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"></textarea>
           </div>
-          <div>
+          <div class="flex gap-5">
             <input type="text"
               class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-              placeholder="สถานที่ฝึกงาน " formControlName="company" />
+              placeholder="ชื่อสถานที่ฝึกงาน " formControlName="company" />
+            <input type="text"
+              class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
+              placeholder="เรียน(ให้ระบุชื่อบุคคลหรือตำแหน่งที่ต้องการส่งหนังสือขอความอนุเคราะห์ เช่น ผู้จัดการฝ่ายบุคคล, หัวหน้าส่วนงานไอที)"
+              formControlName="company" />
           </div>
+          <div class="flex gap-5">
+            <input type="text"
+              class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
+              placeholder="หมายเลขโทรศัพท์ของสถานที่ฝึกงาน " formControlName="company" />
+            <input type="text"
+              class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
+              placeholder="หมายเลขโทรสารของสถานที่ฝึกงาน" formControlName="company" />
+          </div>
+          <div class="flex gap-5">
+            <input type="text"
+              class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
+              placeholder="การส่งเอกสารให้แหล่งฝึกงาน " formControlName="company" />
+            <input type="text"
+              class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
+              placeholder="หมายเลขโทรสารของสถานที่ฝึกงาน" formControlName="company" />
+          </div>
+          <div class="flex gap-5">
+            <select formControlName="prefix" class="shadow-md rounded-md w-full h-10 pl-2">
+              <option value='' selected disabled>รายละเอียดหรือลักษณะงานที่นิสิตรับผิดชอบ </option>
+              <ng-container *ngFor="let option of dropdown">
+                <option [value]="option.value">
+                  {{ option.name }}
+                </option>
+              </ng-container>
+            </select>
+            <select formControlName="prefix" class="shadow-md rounded-md w-full h-10 pl-2">
+              <option value='' selected disabled>การลงทะเบียนเรียนในภาคเรียนหน้า </option>
+              <ng-container *ngFor="let option of dropdown">
+                <option [value]="option.value">
+                  {{ option.name }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+
           <div>
             <textarea formControlName="company_details"
               placeholder="ข้อมูลสภานที่ฝึกงานโดยละเอียด เช่น บ้านเลขที่ , หมู่บ้าน , ตำบล/แขวง , อำเภอ/เขต , จังหวัด , รหัสไปรษณีย์ และอื่นๆ "
