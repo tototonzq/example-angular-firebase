@@ -2,10 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { TypePayload } from 'src/app/shared/payload/payload.model';
 import { PetitionService } from 'src/app/shared/services/petition.service';
 import { StudentService } from 'src/app/shared/services/student.service';
-
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-dashboard-list',
@@ -45,32 +46,19 @@ export class DashboardListComponent implements OnInit, OnDestroy {
       this.data$.next(response);
       this.data_approved_status_false$.next(
         response.filter(
-          (x) => x.status_approved_report === false && x.is_cancel === false
+          (x) =>
+            x.is_approved_report === false && x.is_approved_cancel === false
         )
       );
       this.data_approved_status_true$.next(
-        response.filter((x) => x.status_approved_report === true)
+        response.filter(
+          (x) => x.is_approved_report === true && x.is_approved_cancel === false
+        )
       );
       this.data_is_cancel_status_true$.next(
-        response.filter((x) => x.is_cancel === true)
+        response.filter((x) => x.is_approved_cancel === true)
       );
     });
-
-    // // TODO : Get approved status false
-    // this._petitionService
-    //   .DoGetAllPetitionReportWithKey(false)
-    //   .onSnapshot((res) => {
-    //     // console.log(res.docs.map((x) => x.data()));
-    //     this.data_status_false$.next(res.docs.map((x) => x.data()));
-    //   });
-
-    // // TODO : Get approved status true
-    // this._petitionService
-    //   .DoGetAllPetitionReportWithKey(true)
-    //   .onSnapshot((res) => {
-    //     // console.log(res.docs.map((x) => x.data()));
-    //     this.status_approve$.next(res.docs.map((x) => x.data()));
-    //   });
   }
 
   ngOnDestroy(): void {
@@ -82,7 +70,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   //*                                  functions                                 */
   /* -------------------------------------------------------------------------- */
-  DoApprovePetition(item: any) {
+  DoApproveReportPetition(item: any) {
     // console.log(item);
     Swal.fire({
       title: 'คุณแน่ใจหรือไม่ว่าต้องการอนุมัติ?',
@@ -100,12 +88,12 @@ export class DashboardListComponent implements OnInit, OnDestroy {
           showConfirmButton: false,
           timer: 1200,
         });
-        this._petitionService.DoApprovePetition(item);
+        this._petitionService.DoApproveReportPetition(item);
       }
     });
   }
 
-  DoCancelApprovePetition(item: any) {
+  DoCancelApprovePetition(item: TypePayload) {
     // console.log(item);
     Swal.fire({
       title: 'คุณแน่ใจหรือไม่ว่าต้องการปฏิเสธ?',
@@ -126,5 +114,9 @@ export class DashboardListComponent implements OnInit, OnDestroy {
         this._petitionService.DoCancelApprovePetition(item);
       }
     });
+  }
+
+  DoResetToFalse(item : TypePayload): void {
+    this._petitionService.DoResetToFalse(item);
   }
 }

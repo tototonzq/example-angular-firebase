@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs/operators';
 import { map } from 'rxjs';
+import { TypePayload } from '../payload/payload.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +15,8 @@ export class PetitionService {
   /* -------------------------------------------------------------------------- */
   constructor(
     private _auth: AngularFireAuth,
-    private _firestore: AngularFirestore
+    private _firestore: AngularFirestore,
+    private _storage: AngularFireStorage
   ) {}
   /* -------------------------------------------------------------------------- */
   //*                                   method                                   */
@@ -24,7 +28,7 @@ export class PetitionService {
       .pipe(
         map((actions) =>
           actions.map((a) => {
-            const data = a.payload.doc.data() as any;
+            const data = a.payload.doc.data() as TypePayload;
             const id = a.payload.doc.id;
             // console.log({ id, ...data });
             return { id, ...data };
@@ -37,27 +41,71 @@ export class PetitionService {
     // console.log(payload);
     return this._firestore
       .collection('Petition')
-      .ref.where('status_approved_report', '==', payload);
+      .ref.where('is_approved_report', '==', payload);
   }
 
-  DoApprovePetition(payload: any) {
+  DoApproveReportPetition(payload: TypePayload) {
     // console.log(payload);
     return this._firestore.collection('Petition').doc(payload.id).update({
-      status_approved_report: true,
+      is_approved_report: true,
     });
   }
 
-  DoCancelApprovePetition(payload: any) {
-    // console.log(payload);
-    return this._firestore.collection('Petition').doc(payload.id).update({
-      is_cancel: true,
-    });
-  }
-
-  DoConfirmApprovePetition(payload: any) {
-    this._firestore.collection('Petition').doc(payload.id).update({
-      is_success: true,
-    });
+  DoApproveCompanyPetition(payload: TypePayload) {
     console.log(payload);
+    return this._firestore.collection('Petition').doc(payload.id).update({
+      is_approved_company: true,
+    });
+  }
+
+  DoCancelApprovePetition(payload: TypePayload) {
+    // console.log(payload);
+    return this._firestore.collection('Petition').doc(payload.id).update({
+      is_approved_cancel: true,
+    });
+  }
+
+  DoConfirmApprovePetition(payload: TypePayload) {
+    this._firestore.collection('Petition').doc(payload.id).update({
+      is_approved_success: true,
+    });
+    // console.log(payload);
+  }
+
+  // TODO : Create Petition Form !
+  createPetition(payload: TypePayload): void {
+    // console.log(payload);
+    this._firestore.collection('Petition').add(payload);
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                                    ////                                    */
+  /* -------------------------------------------------------------------------- */
+  DoResetToFalse(payload: TypePayload) {
+    this._firestore.collection('Petition').doc(payload.id).update({
+      is_approved_success: false,
+      is_approved_cancel: false,
+      is_approved_report: false,
+      is_approved_company: false,
+    });
+  }
+
+  // TODO : Upload File
+  DoUploadFilePDF(event: { target: { files: any[] } }): void {
+    const file = event.target.files[0];
+    const filePath = 'pdfs/' + file.name;
+    const fileRef = this._storage.ref(filePath);
+    const task = this._storage.upload(filePath, file);
+
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            console.log('File uploaded: ', url);
+          });
+        })
+      )
+      .subscribe();
   }
 }

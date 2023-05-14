@@ -32,25 +32,25 @@ export class PetitionTableComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   ngOnInit(): void {
     this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
-      // console.log(response);
+      console.log(response);
       this.data$.next(response);
       this.data_user_petition$.next(
         response.filter(
-          (x: string) =>
-            x[0] ===
+          (x) =>
+            x.authorization ===
             JSON.parse(localStorage.getItem('userData') || '[]')[0].username
         )
       );
       console.log(this.data_user_petition$.value);
       this.data_user_approved_status_false$.next(
         this.data_user_petition$.value.filter(
-          (x) => x.status_approved_report === false
+          (x) => x.is_approved_report === false
         )
       );
       // console.log(this.data_user_approved_status_false$.value);
       this.data_user_approved_status_true$.next(
         this.data_user_petition$.value.filter(
-          (x) => x.status_approved_report === true
+          (x) => x.is_approved_report === true
         )
       );
     });
@@ -81,12 +81,12 @@ export class PetitionTableComponent implements OnInit, OnDestroy {
   }
 
   getStatusMultiApprove(
-    status_approved_company: boolean,
-    status_approved_report: boolean,
-    is_cancel: boolean
+    is_approved_company: boolean,
+    is_approved_report: boolean,
+    is_approved_cancel: boolean
   ) {
-    const _status_approved = status_approved_company;
-    const _status = status_approved_report;
+    const _status_approved = is_approved_company;
+    const _status = is_approved_report;
     if (_status_approved === true && _status === true) {
       return 'สำเร็จ';
     } else if (_status_approved === true && _status === false) {
@@ -98,13 +98,13 @@ export class PetitionTableComponent implements OnInit, OnDestroy {
     } else if (
       _status_approved === false &&
       _status === false &&
-      is_cancel === false
+      is_approved_cancel === false
     ) {
       return 'กำลังดำเนินการ';
     } else if (
       _status_approved === false &&
       _status === false &&
-      is_cancel === true
+      is_approved_cancel === true
     ) {
       return 'ยกลิกคำร้อง';
     } else return 'พบข้อผิดพลาด';

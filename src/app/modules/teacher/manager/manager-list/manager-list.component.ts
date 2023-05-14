@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { TypePayload } from 'src/app/shared/payload/payload.model';
 import { PetitionService } from 'src/app/shared/services/petition.service';
 import { StudentService } from 'src/app/shared/services/student.service';
 
@@ -35,7 +36,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
       this.data$.next(response);
-    })
+    });
   }
 
   ngOnDestroy(): void {
@@ -48,13 +49,73 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   //*                                  functions                                 */
   /* -------------------------------------------------------------------------- */
   DoGetStatusApprove(item: any) {
-    const { status_approved_report, is_cancel } = item;
-    if (!is_cancel) {
-      return status_approved_report ? 'อนุมัติ' : 'รอการอนุมัติ';
+    const {
+      is_approved_success,
+      is_approved_cancel,
+      is_approved_report,
+      is_approved_company,
+    } = item;
+    if (
+      !is_approved_success &&
+      !is_approved_cancel &&
+      !is_approved_report &&
+      !is_approved_company
+    ) {
+      return 'กำลังดำเนินการ';
+    }
+    if (
+      !is_approved_cancel &&
+      is_approved_report &&
+      !is_approved_company &&
+      !is_approved_success
+    ) {
+      return 'รอการตรวจสอบ';
+    }
+    if (
+      is_approved_report &&
+      is_approved_company &&
+      !is_approved_success &&
+      !is_approved_cancel
+    ) {
+      return 'รอการยืนยัน';
+    }
+    if (
+      is_approved_success &&
+      !is_approved_cancel &&
+      is_approved_report &&
+      is_approved_company
+    ) {
+      return 'ดำเนินการสําเร็จ';
+    }
+    if (
+      (!is_approved_success &&
+        is_approved_cancel &&
+        !is_approved_report &&
+        !is_approved_company) ||
+      (is_approved_cancel && is_approved_report)
+    ) {
+      return 'เอกสารถูกปฎิเสธ';
     } else {
-      return 'ปฏิเสธ';
+      return 'พบข้อผิดพลาด';
     }
   }
+
+  DoViewDetails(): void {
+    alert('ดูรายละเอียด');
+  }
+
+  DoCancelApprovePetition(): void {
+    alert('ยกเลิกการอนุมัติ');
+  }
+
+  DoApproveReportPetition(): void {
+    alert('อนุมัติ');
+  }
+
+  DoResetToFalse(item : TypePayload): void {
+    this._petitionService.DoResetToFalse(item);
+  }
+
   /* -------------------------------------------------------------------------- */
   //*                                    Data                                    */
   /* -------------------------------------------------------------------------- */

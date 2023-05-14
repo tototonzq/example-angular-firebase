@@ -8,6 +8,7 @@ import { AdminService } from 'src/app/shared/services/admin.service';
 
 //! import Alert SweetAlert
 import Swal from 'sweetalert2';
+import { PetitionService } from 'src/app/shared/services/petition.service';
 
 @Component({
   selector: 'app-manager-petition',
@@ -24,7 +25,8 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   constructor(
     private _studentService: StudentService,
-    private _adminService: AdminService
+    private _adminService: AdminService,
+    private _petitionService: PetitionService
   ) {}
   /* -------------------------------------------------------------------------- */
   //*                                  var$data                                  */
@@ -101,11 +103,11 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
     email: new FormControl('', [Validators.required]),
     company: new FormControl('', [Validators.required]),
     company_details: new FormControl('', [Validators.required]),
-    status_approved_report: new FormControl(false),
-    status_approved_company: new FormControl(false),
-    is_cancel: new FormControl(false),
-    is_success: new FormControl(false),
     round_petition: new FormControl('', [Validators.required]),
+    is_approved_report: new FormControl(false),
+    is_approved_company: new FormControl(false),
+    is_approved_cancel: new FormControl(false),
+    is_approved_success: new FormControl(false),
   });
 
   // TODO : Dropdown
@@ -153,11 +155,13 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
       return this.status_loading$.next(false);
     } else {
       setTimeout(() => {
-        // this._studentService.createPetition(
-        //   Object.assign({}, this.form.value, [
-        //     JSON.parse(localStorage.getItem('userData') || '[]')[0].username,
-        //   ])
-        // );
+        const username = JSON.parse(localStorage.getItem('userData') || '[]')[0]
+          .username;
+        const headers = { authorization: `${username}` };
+        // console.log(Object.assign({}, this.form.value, headers));
+        this._petitionService.createPetition(
+          Object.assign({}, this.form.value, headers)
+        );
       }, 1000);
       this.status_loading$.next(false);
       Swal.fire({

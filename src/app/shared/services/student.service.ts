@@ -95,9 +95,9 @@ export class StudentService {
   //   console.log(payload);
   //   const data = {
   //     ...payload,
-  //     is_cancel: true,
-  //     status_approved_company: false,
-  //     status_approved_report: false,
+  //     is_approved_cancel: true,
+  //     is_approved_company: false,
+  //     is_approved_report: false,
   //   };
   //   this._firestore
   //     .collection('student-petition')

@@ -19,5 +19,6 @@ export const MENU_LIST_STUDENT_DATA: MenuItem[] = [
 // TODO : TEACHER
 export const MENU_LIST_TEACHER_DATA: MenuItem[] = [
   { id: '', value: 'teacher-dashboard', name: 'แผงควบคุม' },
-  { id: '', value: 't-manager', name: 'ตรวจสอบคำร้อง' },
+  { id: '', value: 'teacher-company-manager', name: 'การตอบรับสถานประกอบการ' },
+  { id: '', value: 'teacher-manager', name: 'ตรวจสอบคำร้อง' },
 ];

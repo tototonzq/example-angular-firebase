@@ -153,11 +153,18 @@ export const routes: Route[] = [
           ),
       },
       {
-        path: 't-manager',
+        path: 'teacher-manager',
         loadChildren: () =>
           import('./modules/teacher/manager/manager.module').then(
             (m) => m.ManagerModule
           ),
+      },
+      {
+        path: 'teacher-company-manager',
+        loadChildren: () =>
+          import(
+            './modules/teacher/company-manager/company-manager.module'
+          ).then((m) => m.CompanyManagerModule),
       },
       { path: '**', redirectTo: '404-not-found' },
     ],

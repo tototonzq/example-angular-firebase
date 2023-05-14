@@ -3,10 +3,11 @@
     [ngClass]="isOpen  ? 'active' : ''">
 
     <header class="pt-10 text-center justify-center grid">
-      <div class="bg-slate-300 w-[245px] h-[220px] my-5 rounded-md shadow-md">
+      <div class="bg-slate-300 w-[245px] h-[220px] rounded-md shadow-md p-8">
+        <i class="fa-solid fa-user-graduate fa-9x" style="color: #fff;"></i>
       </div>
       <ng-container *ngFor="let item of data">
-        <div class="w-[247px] h-full">
+        <div class="w-[247px] h-full gap-1 grid pt-5">
           <p class="text-[16px]">{{ item.user }}</p>
           <p>{{ item.code }}</p>
           <p class="text-clip overflow-hidden">{{ item.group }}</p>
