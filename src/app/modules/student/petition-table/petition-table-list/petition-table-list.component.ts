@@ -6,11 +6,11 @@ import { PetitionService } from 'src/app/shared/services/petition.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-manager-list',
-  templateUrl: './manager-list.component.html',
-  styleUrls: ['./manager-list.component.css'],
+  selector: 'app-petition-table-list',
+  templateUrl: './petition-table-list.component.html',
+  styleUrls: ['./petition-table-list.component.css'],
 })
-export class ManagerListComponent implements OnInit, OnDestroy {
+export class PetitionTableListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   //*                                 unsubscribe                                */
   /* -------------------------------------------------------------------------- */
@@ -29,7 +29,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   //*                                  variables                                 */
   /* -------------------------------------------------------------------------- */
   public data$ = new BehaviorSubject<any[]>([]);
-
+  public data_petition$ = new BehaviorSubject<any[]>([]);
   public searchFilter: string = '';
 
   /* -------------------------------------------------------------------------- */
@@ -38,6 +38,13 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
       this.data$.next(response);
+      this.data_petition$.next(
+        response.filter(
+          (x: any) =>
+            x.authorization ===
+            JSON.parse(localStorage.getItem('userData') || '[]')[0].username
+        )
+      );
     });
   }
 
@@ -100,6 +107,17 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     } else {
       return 'พบข้อผิดพลาด';
     }
+  }
+
+  getPetitionRound(round: string) {
+    const _round = round;
+    if (_round === 'r1') {
+      return 'รอบที่ 1';
+    } else if (_round === 'r2') {
+      return 'รอบที่ 2';
+    } else if (_round === 'r3') {
+      return 'รอบที่ 3';
+    } else return 'พบข้อผิดพลาด';
   }
 
   DoViewDetailsCourtesy(item: TypePayload): void {
@@ -165,8 +183,4 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     });
     // this._cdr.detectChanges();
   }
-
-  /* -------------------------------------------------------------------------- */
-  //*                                    Data                                    */
-  /* -------------------------------------------------------------------------- */
 }

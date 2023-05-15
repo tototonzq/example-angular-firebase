@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { TypePayload } from '../payload/payload.model';
 
 @Injectable({
@@ -215,5 +215,29 @@ export class PetitionService {
   //   this._firestore.collection('Petition').doc(payload.id).update({
   //     url_petition: url,
   //   });
+  // }
+
+  // TODO : Get all data with primary key !
+  getAllPetitionWithUsername(payload?: any): Observable<any> {
+    console.log(payload);
+    return this._firestore.collection('Petition').valueChanges();
+  }
+  // getAllPetitionWithUsername(payload?: any): Observable<any> {
+  //   console.log(payload);
+  //   return this._firestore
+  //     .collection('Petition')
+  //     .doc('create-petition')
+  //     .collection(payload)
+  //     .snapshotChanges()
+  //     .pipe(
+  //       map((actions) =>
+  //         actions.map((a) => {
+  //           const data = a.payload.doc.data() as any;
+  //           const id = a.payload.doc.id;
+  //           // console.log({ id, ...data });
+  //           return { id, ...data };
+  //         })
+  //       )
+  //     );
   // }
 }

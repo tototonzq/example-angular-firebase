@@ -1,21 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DropdownRole } from '../../admin/manager/store/models/manager.model';
-import { MENU_DROPDOWN_PREFIX_STUDENT } from './manager-petition.data';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { StudentService } from 'src/app/shared/services/student.service';
-import { AdminService } from 'src/app/shared/services/admin.service';
-
-//! import Alert SweetAlert
-import Swal from 'sweetalert2';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { DropdownRole } from 'src/app/modules/admin/manager/store/models/manager.model';
+import { MENU_DROPDOWN_PREFIX_STUDENT } from 'src/app/modules/student/manager-petition/manager-petition.data';
 import { PetitionService } from 'src/app/shared/services/petition.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-manager-petition',
-  templateUrl: './manager-petition.component.html',
-  styleUrls: ['./manager-petition.component.css'],
+  selector: 'app-manager-detail',
+  templateUrl: './manager-detail.component.html',
+  styleUrls: ['./manager-detail.component.css']
 })
-export class ManagerPetitionComponent implements OnInit, OnDestroy {
+export class ManagerDetailComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   //*                                 unsubscribe                                */
   /* -------------------------------------------------------------------------- */
@@ -23,11 +19,7 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
-  constructor(
-    private _studentService: StudentService,
-    private _adminService: AdminService,
-    private _petitionService: PetitionService
-  ) {}
+  constructor(private _petitionService: PetitionService) {}
   /* -------------------------------------------------------------------------- */
   //*                                  var$data                                  */
   /* -------------------------------------------------------------------------- */
@@ -38,51 +30,35 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
   //*                                 Life Circle                                */
   /* -------------------------------------------------------------------------- */
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((value) => {
-      // console.log(value);
-    });
-    // TODO : Get round petition round
-    this._adminService
-      .getRoundPetition()
-      .subscribe((res_round_petition: any) => {
-        // console.log(res_round_petition);
-        this.form.patchValue({
-          ...this.form.value,
-          round_petition: res_round_petition.round_petition,
-        });
-        // TODO : Get all petition round
-        this._petitionService
-          .getAllPetitionWithUsername(
-            JSON.parse(localStorage.getItem('userData') || '[]')[0].username
-          )
-          .subscribe((res) => {
-            console.log(res);
-
-            this.data_petition$.next(
-              res.filter(
-                (x: any) =>
-                  x.authorization ===
-                  JSON.parse(localStorage.getItem('userData') || '[]')[0]
-                    .username
-              )
-            );
-            // console.log(this.data_petition$.value);
-          });
-        // TODO : Set data round to var$
-        this.round_petition$.next(res_round_petition);
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    // console.log(id);
+    this._petitionService.DoGetAllPetitionWithID().subscribe((res) => {
+      // console.log(res);
+      const data: any = res.filter((item) => item.id == id);
+      console.log(...data);
+      this.form.patchValue({
+        ...data[0],
       });
-    // TODO : Set value form
-    const localStorageHeader = JSON.parse(
-      localStorage.getItem('userData') || '[]'
-    )[0];
-    console.log(localStorageHeader);
-    const split = localStorageHeader.user.split(' ');
-    // console.log(split[0]);
-    this.form.controls['name'].setValue(split[0]);
-    this.form.controls['surname'].setValue(split[1]);
-    this.form.controls['student_code'].setValue(localStorageHeader.code);
-    // this.form.controls['year'].setValue(localStorageHeader.group);
-    this.form.controls['major'].setValue(localStorageHeader.major);
+      this.form.get('prefix')?.disable();
+      this.form.get('name')?.disable();
+      this.form.get('surname')?.disable();
+      this.form.get('student_code')?.disable();
+      this.form.get('year')?.disable();
+      this.form.get('major')?.disable();
+      this.form.get('phone_number')?.disable();
+      this.form.get('address')?.disable();
+      this.form.get('address_details')?.disable();
+      this.form.get('email')?.disable();
+      this.form.get('company')?.disable();
+      this.form.get('company_details')?.disable();
+      this.form.get('position_company')?.disable();
+      this.form.get('phone_company')?.disable();
+      this.form.get('fax_company')?.disable();
+      this.form.get('work_details')?.disable();
+      this.form.get('register_next_semester')?.disable();
+      this.form.get('delivery_of_documents')?.disable();
+    });
   }
 
   ngOnDestroy(): void {

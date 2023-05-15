@@ -17,9 +17,12 @@
           </div>
         </div>
       </div>
-      <!-- <div class="absolute right-[5%] bottom-[80%] gap-5 grid">
+    </div>
+    <div>
+      <div class="items-center justify-center gap-5 flex bg-slate-100">
+        <span>* ตามลำดับ</span>
         <div class="flex items-center gap-5">
-          <i style="color : #FFB4B4" class="fa-solid fa-file-pdf fa-bounce fa-xl"></i>
+          <i style="color : #E76161" class="fa-solid fa-file-pdf fa-bounce fa-xl"></i>
           <p> ขอความอนุเคราะห์</p>
         </div>
         <div class="flex items-center gap-5">
@@ -27,15 +30,15 @@
           <p> แบบตอบรับ/ปฏิเสธ</p>
         </div>
         <div class="flex items-center gap-5">
-          <i style="color : #B2A4FF" class="fa-solid fa-file-pdf fa-bounce fa-xl"></i>
+          <i style="color : #E76161" class="fa-solid fa-file-pdf fa-bounce fa-xl"></i>
           <p> ส่งนิสิตเข้าฝึกงาน</p>
         </div>
-      </div> -->
+      </div>
     </div>
   </header>
 
   <body>
-    <ng-container *ngIf=" data$ | async as data">
+    <ng-container *ngIf=" data_petition$ | async as data">
       <table class="table">
         <thead>
           <tr class="bg-slate-100">
@@ -44,7 +47,7 @@
             <th class="w-[10%]"> รหัสนิสิต </th>
             <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
             <th class="w-[10%]"> สถานประกอบการ </th>
-            <!-- <th class="w-[15%]"> ข้อมูลสถานประกอบการ </th> -->
+            <th class="w-[15%]"> รอบที่ลง </th>
             <th class="w-[10%]"> สถานะ </th>
             <th class="w-[30%]"> จัดการ </th>
           </tr>
@@ -60,7 +63,7 @@
             <td> {{ item.name }} </td>
             <td> {{ item.surname }} </td>
             <td> {{ item.company }} </td>
-            <!-- <td> {{ item.company_details }} </td> -->
+            <td> {{ getPetitionRound(item.round_petition) }} </td>
             <td> {{ DoGetStatusApprove(item) }} </td>
             <td class="text-center" [colSpan]="1">
               <div class="flex gap-5 justify-center items-center col-span-2">
@@ -87,6 +90,9 @@
                     <p class="text-slate-100">รีเซ็ต</p>
                   </div>
                 </button> -->
+                <!-- {{ item.url_courtesy.length }}
+                {{ item.url_send.length }}
+                {{ item.url_response.length }} -->
                 <!-- <div
                   *ngIf="item.url_courtesy.length == 0 && item.url_send.length == 0 && item.url_response.length == 0">
                   <p>ไม่พบเอกสาร</p>

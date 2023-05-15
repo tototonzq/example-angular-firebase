@@ -23,10 +23,10 @@
       <div class="grid gap-4 border-[1px] mt-2 p-5 rounded-md bg-slate-100">
         <div class="overflow-auto h-[70vh] p-5">
           <ng-container *ngIf="(data_petition$ | async) as data">
-            <form *ngIf="data.length <= 0; else Success " [formGroup]="form" class="grid gap-5"
-              (ngSubmit)="onCreatePetition()">
+            <form [formGroup]="form" class="grid gap-5" (ngSubmit)="onCreatePetition()">
               <div class="flex gap-5">
-                <select formControlName="prefix" class="shadow-md rounded-md w-[30rem] h-10 pl-2">
+                <select style="background-color: #F1F5F9; color: #000;" formControlName="prefix"
+                  class="shadow-md rounded-md w-[30rem] h-10 pl-2">
                   <option value='' selected disabled>คำนำหน้า</option>
                   <ng-container *ngFor="let option of dropdown">
                     <option [value]="option.value">
@@ -34,62 +34,62 @@
                     </option>
                   </ng-container>
                 </select>
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="ชื่อ" formControlName="name" />
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="นามสกุล " formControlName="surname" />
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="รหัสนิสิต " formControlName="student_code" />
               </div>
               <div class="flex gap-5">
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="ชั้นปีที่ " formControlName="year" />
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="สาขาวิชา " formControlName="major" />
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="หมายเลขโทรศัพท์ " formControlName="phone_number" />
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="อีเมล์ " formControlName="email" />
               </div>
               <div class="flex gap-5">
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="ที่อยู่อาศัย " formControlName="address" />
               </div>
               <div>
-                <textarea formControlName="address_details"
+                <textarea style="background-color: #F1F5F9; color: #000;" formControlName="address_details"
                   placeholder="ที่อยู่โดยละเอียด เช่น บ้านเลขที่ , หมู่บ้าน , ตำบล/แขวง , อำเภอ/เขต , จังหวัด , รหัสไปรษณีย์ และอื่นๆ "
                   class="max-h-28 min-h-[112px] p-2 rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"></textarea>
               </div>
               <div class="flex gap-5">
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="ชื่อสถานที่ฝึกงาน " formControlName="company" />
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="เรียน(ให้ระบุชื่อบุคคลหรือตำแหน่งที่ต้องการส่งหนังสือขอความอนุเคราะห์ เช่น ผู้จัดการฝ่ายบุคคล, หัวหน้าส่วนงานไอที)"
                   formControlName="position_company" />
               </div>
               <div class="flex gap-5">
-                <textarea formControlName="company_details"
+                <textarea style="background-color: #F1F5F9; color: #000;" formControlName="company_details"
                   placeholder="ข้อมูลสภานที่ฝึกงานโดยละเอียด เช่น บ้านเลขที่ , หมู่บ้าน , ตำบล/แขวง , อำเภอ/เขต , จังหวัด , รหัสไปรษณีย์ และอื่นๆ"
                   class="max-h-28 min-h-[112px] p-2 rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"></textarea>
               </div>
               <div class="flex gap-5">
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="หมายเลขโทรศัพท์ของสถานที่ฝึกงาน " formControlName="phone_company" />
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="รายละเอียดหรือลักษณะงานที่นิสิตรับผิดชอบ" formControlName="work_details" />
-                <input type="text"
+                <input style="background-color: #F1F5F9; color: #000;" type="text"
                   class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
                   placeholder="หมายเลขโทรสารของสถานที่ฝึกงาน" formControlName="fax_company" />
                 <!-- <input type="text"
@@ -145,15 +145,7 @@
                 </button>
               </div>
             </form>
-            <ng-template #Success>
-              <div>
-                <div class="grid gap-4 border-[1px] mt-2 p-5 rounded-md bg-slate-50">
-                  <p>ส่งแบบฟอร์มเรียบร้อยแล้ว</p>
-                </div>
-              </div>
-            </ng-template>
           </ng-container>
-
         </div>
       </div>
     </ng-container>
