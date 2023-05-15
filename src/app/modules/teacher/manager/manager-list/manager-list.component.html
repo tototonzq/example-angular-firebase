@@ -44,7 +44,7 @@
             <th class="w-[10%]"> รหัสนิสิต </th>
             <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
             <th class="w-[10%]"> สถานประกอบการ </th>
-            <!-- <th class="w-[15%]"> ข้อมูลสถานประกอบการ </th> -->
+            <th class="w-[15%]"> รอบที่ลง </th>
             <th class="w-[10%]"> สถานะ </th>
             <th class="w-[30%]"> จัดการ </th>
           </tr>
@@ -60,7 +60,7 @@
             <td> {{ item.name }} </td>
             <td> {{ item.surname }} </td>
             <td> {{ item.company }} </td>
-            <!-- <td> {{ item.company_details }} </td> -->
+            <td> {{ getPetitionRound(item.round_petition) }} </td>
             <td> {{ DoGetStatusApprove(item) }} </td>
             <td class="text-center" [colSpan]="1">
               <div class="flex gap-5 justify-center items-center col-span-2">

@@ -102,6 +102,17 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     }
   }
 
+  getPetitionRound(round: string) {
+    const _round = round;
+    if (_round === 'r1') {
+      return 'รอบที่ 1';
+    } else if (_round === 'r2') {
+      return 'รอบที่ 2';
+    } else if (_round === 'r3') {
+      return 'รอบที่ 3';
+    } else return 'พบข้อผิดพลาด';
+  }
+
   DoViewDetailsCourtesy(item: TypePayload): void {
     // console.log(item);
     if (!item.url_courtesy) {
