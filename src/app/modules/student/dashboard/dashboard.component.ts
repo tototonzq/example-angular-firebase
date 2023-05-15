@@ -100,4 +100,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // console.log(item);
     this._petitionService.DoConfirmApprovePetition(item);
   }
+
+  DoCancelPetition(item: any) {
+    // console.log(item);
+    this._petitionService.DoCancelApprovePetition(item);
+  }
 }

@@ -38,15 +38,17 @@ export class ResponseFormComponent implements OnInit {
   ngOnInit() {
     this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
       this.data$.next(response);
-      console.log(response);
+      console.log(response[0].url_send.length);
       this.data_user_report_success$.next(
         this.data$.value.filter(
           (x) =>
             x.is_approved_admin_report === true &&
             x.is_approved_cancel === false &&
-            x.is_approved_success === false &&
+            x.is_approved_success === true &&
             x.is_approved_company === true &&
-            x.is_approved_report === true
+            x.is_approved_report === true &&
+            x.is_approved_student_success === true &&
+            x.is_complete === false
         )
       );
     });

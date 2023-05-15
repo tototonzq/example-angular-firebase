@@ -121,6 +121,8 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
     is_approved_cancel: new FormControl(false),
     is_approved_success: new FormControl(false),
     is_approved_admin_report: new FormControl(false),
+    is_approved_student_success: new FormControl(false),
+    is_complete: new FormControl(false),
     url_courtesy: new FormControl(''),
     url_send: new FormControl(''),
     url_response: new FormControl(''),

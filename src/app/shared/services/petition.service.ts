@@ -69,6 +69,7 @@ export class PetitionService {
     console.log(payload);
     return this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_success: true,
+      is_complete: true,
     });
   }
 
@@ -82,6 +83,7 @@ export class PetitionService {
   DoConfirmApprovePetition(payload: TypePayload) {
     this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_success: true,
+      is_approved_student_success: true,
     });
     // console.log(payload);
   }
@@ -102,6 +104,8 @@ export class PetitionService {
       is_approved_report: false,
       is_approved_company: false,
       is_approved_admin_report: false,
+      is_approved_student_success: false,
+      is_completed: false,
       url_response: '',
       url_courtesy: '',
       url_send: '',
