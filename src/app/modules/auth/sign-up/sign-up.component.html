@@ -1,1 +1,67 @@
-<p>sign-up works!</p>
+<main class="flex">
+  <header class="bg-slate-300 h-[100vh] w-[50vh]"></header>
+
+  <body class="grid justify-center items-center ml-[50vh]">
+    <form [formGroup]="form" (ngSubmit)="Add(form.value.code)">
+      <div class=" grid gap-4">
+        <p class="text-[40px]">สมัครสมาชิก</p>
+        <span>รหัสนิสิต</span>
+        <input type="text"
+          class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+          placeholder="กรุณากรอกข้อมูล" id="code" formControlName="code" />
+        <span>ชื่อผู้ใช้งาน</span>
+        <input type="text"
+          class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+          placeholder="กรุณากรอกข้อมูล" id="name" formControlName="user" />
+        <!-- <span>คณะ</span>
+        <input type="text"
+          class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+          placeholder="กรุณากรอกข้อมูล" id="group" /> -->
+        <span>คณะ</span>
+        <select
+          class="border-[1px] rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+          formControlName="group">
+          <option value="" selected disabled>คณะ</option>
+          <ng-container *ngFor="let option of dropdownGroup">
+            <option [value]="option.value">
+              <span>{{ option.name }}</span>
+            </option>
+          </ng-container>
+        </select>
+        <span>สาขา</span>
+        <select
+          class="border-[1px] rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+          formControlName="major">
+          <option value="" selected disabled>สาขา</option>
+          <ng-container *ngFor="let option of dropdownMajor">
+            <option [value]="option.value">
+              <span>{{ option.name }}</span>
+            </option>
+          </ng-container>
+        </select>
+        <!-- <span>ไอดี</span>
+        <input type="text"
+          class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+          placeholder="กรุณากรอกข้อมูล" id="password" /> -->
+        <div class="flex justify-between h-5">
+          <!-- <span class="cursor-pointer hover:text-red-500 hover:text-[18px]" style="transition: 0.5s;"
+            routerLink="/sign-up">สมัครสมาชิก ?
+          </span> -->
+          <!-- <span class="cursor-pointer hover:text-red-500 hover:text-[18px]" style="transition: 0.5s;">ลืมรหัสผ่าน
+            ?</span> -->
+        </div>
+        <button
+          class="h-[50px] w-[250px] text-[1rem] outline-none text-center rounded-md cursor-pointer text-slate-50 bg-blue-500 hover:bg-blue-400"
+          style="transition: 0.5s;">
+          <p>สมัครสมาชิก</p>
+          <div class="w-7 items-center justify-center m-auto">
+          </div>
+        </button>
+        <!-- <span>{{ layout$ | async }}</span> -->
+      </div>
+    </form>
+  </body>
+  <footer>
+  </footer>
+  <app-loaders-screen *ngIf="((isLoadingAdd$ | async )=== true)"></app-loaders-screen>
+</main>
