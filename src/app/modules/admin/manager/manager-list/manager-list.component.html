@@ -24,9 +24,11 @@
                   </option>
                 </ng-container>
               </select>
-              <input type="text"
-                class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
-                placeholder="รหัสประจำตัว" formControlName="code" />
+              <ng-container *ngIf="roleSub$ | async as data">
+                <input *ngIf="data === 'student'" type="text"
+                  class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
+                  placeholder="รหัสประจำตัว" formControlName="code" />
+              </ng-container>
               <input type="text"
                 class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
                 placeholder="ไอดี" formControlName="username" />
@@ -35,26 +37,30 @@
               <input type="text"
                 class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
                 placeholder="ชื่อผู้ใช้" formControlName="user" />
-              <select
-                [ngClass]="isGroupValidate ? 'border-[#e20000] border-[1px] rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500' : 'rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500'"
-                formControlName="group">
-                <option value="" selected disabled>คณะ</option>
-                <ng-container *ngFor="let option of dropdownGroup">
-                  <option [value]="option.value">
-                    <span>{{ option.name }}</span>
-                  </option>
-                </ng-container>
-              </select>
-              <select
-                [ngClass]="isMajorValidate ? 'border-[#e20000] border-[1px] rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500' : 'rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500'"
-                formControlName="major">
-                <option value="" selected disabled>สาขา</option>
-                <ng-container *ngFor="let option of dropdownMajor">
-                  <option [value]="option.value">
-                    <span>{{ option.name }}</span>
-                  </option>
-                </ng-container>
-              </select>
+              <ng-container *ngIf="roleSub$ | async as data">
+                <select *ngIf="data === 'student'"
+                  [ngClass]="isGroupValidate ? 'border-[#e20000] border-[1px] rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500' : 'rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500'"
+                  formControlName="group">
+                  <option value="" selected disabled>คณะ</option>
+                  <ng-container *ngFor="let option of dropdownGroup">
+                    <option [value]="option.value">
+                      <span>{{ option.name }}</span>
+                    </option>
+                  </ng-container>
+                </select>
+              </ng-container>
+              <ng-container *ngIf="roleSub$ | async as data">
+                <select *ngIf="data === 'student'"
+                  [ngClass]="isMajorValidate ? 'border-[#e20000] border-[1px] rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500' : 'rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500'"
+                  formControlName="major">
+                  <option value="" selected disabled>สาขา</option>
+                  <ng-container *ngFor="let option of dropdownMajor">
+                    <option [value]="option.value">
+                      <span>{{ option.name }}</span>
+                    </option>
+                  </ng-container>
+                </select>
+              </ng-container>
             </div>
             <div class="text-center justify-center flex">
               <span class="text-red-500"># รหัสผ่านเริ่มต้น 123456789</span>

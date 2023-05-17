@@ -71,7 +71,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
       !is_approved_company &&
       !is_approved_success
     ) {
-      return 'รอการตอบรับจากสถานประกอบการ';
+      return 'รอการจัดทำหนังสืออนุเคราะห์';
     }
     if (
       is_approved_report &&

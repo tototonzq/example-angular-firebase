@@ -66,7 +66,7 @@ export class ManagerPetitionListComponent implements OnInit {
       !is_approved_company &&
       !is_approved_success
     ) {
-      return 'รอการตอบรับจากสถานประกอบการ';
+      return 'รอการจัดทำหนังสืออนุเคราะห์';
     }
     if (
       is_approved_report &&

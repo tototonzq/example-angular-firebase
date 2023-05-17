@@ -11,7 +11,7 @@ import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Find } from '../store/actions/find-manager.action';
 import { ManagerSelector } from '../store/selectors/manager.selectors';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataModelResponse } from 'src/app/modules/auth/sign-in/store/models/sign-in.interface.model';
 import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
@@ -51,6 +51,13 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.form.valueChanges.subscribe(() => {
       // console.log(this.form.value);
+    });
+
+    this.form.get('role')?.valueChanges.subscribe((value) => {
+      // Perform actions or validations based on the value of the "role" FormControl
+      console.log(typeof value);
+      this.roleSub$.next(value);
+      // Additional logic here
     });
 
     //* Get users
@@ -108,13 +115,13 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   // TODO : Form Group
   form: FormGroup = new FormGroup({
-    user: new FormControl('', [Validators.required]),
-    role: new FormControl('', [Validators.required]),
-    username: new FormControl('', [Validators.required]),
-    major: new FormControl('', [Validators.required]),
+    user: new FormControl(''),
+    role: new FormControl(''),
+    username: new FormControl(''),
+    major: new FormControl(''),
     password: new FormControl(''),
-    code: new FormControl('', [Validators.required]),
-    group: new FormControl('', [Validators.required]),
+    code: new FormControl(''),
+    group: new FormControl(''),
   });
 
   // TODO : Validate
@@ -134,6 +141,8 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   public isCheckedStatusEditLoading: boolean = false;
 
   public params: string | null = null;
+
+  roleSub$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   /* -------------------------------------------------------------------------- */
   /*                                    logic                                   */
   /* -------------------------------------------------------------------------- */
