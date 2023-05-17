@@ -19,9 +19,9 @@
           <span class="cursor-pointer hover:text-red-500 hover:text-[18px]" style="transition: 0.5s;"
             routerLink="/sign-up">สมัครสมาชิก ?
           </span>
-          <span (click)="forgetPassword()" class="cursor-pointer hover:text-red-500 hover:text-[18px]"
+          <!-- <span (click)="forgetPassword()" class="cursor-pointer hover:text-red-500 hover:text-[18px]"
             style="transition: 0.5s;">ลืมรหัสผ่าน
-            ?</span>
+            ?</span> -->
         </div>
         <button
           class="h-[50px] w-[250px] text-[1rem] outline-none text-center rounded-md cursor-pointer text-slate-500 bg-slate-200 hover:bg-slate-100"
@@ -31,10 +31,10 @@
             <app-loaders></app-loaders>
           </div> -->
         </button>
-        <span>{{ layout$ | async }}</span>
+        <!-- <span>{{ layout$ | async }}</span> -->
       </div>
     </div>
-    <div class="grid gap-5">
+    <!-- <div class="grid gap-5">
       <div class="gap-5 grid">
         <div>
           <button
@@ -58,14 +58,14 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
   </body>
   <footer>
   </footer>
   <app-loaders-screen
     *ngIf="((( getLoading$ | async) === true)||(( getCountUserAll$ | async) === null))"></app-loaders-screen>
-  <div>
+  <!-- <div>
     <div>สถานะล็อคอิน : {{ getLoginStatus$ | async |json }}</div>
     <div>จำนวนไอดี : {{ getCountUserAll$ | async | json }} </div>
-  </div>
+  </div> -->
 </main>
