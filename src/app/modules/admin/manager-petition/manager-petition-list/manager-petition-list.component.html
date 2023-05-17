@@ -1,42 +1,3 @@
-<!-- <main>
-  <header>
-    <div class="w-full flex justify-start items-start bg-slate-100 p-5">
-      <div class="flex gap-5">
-        <p class="text-[26px]">ตรวจสอบคำร้องขอฝึกงานของนิสิต</p>
-        <span class="mt-[11px] text-slate-400">ตรวจสอบคำร้องขอฝึกงานของนิสิต</span>
-      </div>
-    </div>
-    <div>
-      <div class="w-full h-[15rem] flex justify-center items-center bg-slate-100">
-        <div class="grid gap-5 justify-center items-center text-center">
-          <div class="flex justify-center items-center gap-5">
-            <input type="text"
-              class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
-              placeholder="เลขที่คำร้อง" />
-            <div class="cursor-pointer border-[1px] p-2 rounded-md shadow-md bg-slate-400"
-              (click)="goToSettingPetition()">
-              <i class="fa-solid fa-gear fa-shake fa-xl" style="color: #fff;"></i>
-            </div>
-          </div>
-          <div class="flex justify-center items-center">
-            <div class="flex gap-5 justify-center items-center">
-              <button
-                class="h-10 shadow-md rounded-md w-[20rem] text-slate-100 ml-5 hover:bg-blue-500 bg-blue-300 hover:text-slate-100 hover:w-[21rem]"
-                style="transition: 0.5s">
-                + ค้นหา
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <body>
-  </body>
-  <footer></footer>
-</main> -->
-
 <main>
   <header>
     <div class="w-full flex justify-start items-start bg-slate-100 p-5">
@@ -136,10 +97,21 @@
                     <p class="text-slate-100">รีเซ็ต</p>
                   </div>
                 </button>
+                <button (click)="DoDeletePetition(item)"
+                  class="shadow-md rounded-md h-[40px] px-1 bg-red-500 hover:bg-red-600 cursor-pointer"
+                  style="transition: 0.5s">
+                  <div class="flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-trash-can fa-bounce fa-xl" style="color: #fff;"></i>
+                    <p class="text-slate-100">ลบ</p>
+                  </div>
+                </button>
               </div>
             </td>
           </tr>
         </tbody>
+        <ng-container *ngIf="data$ | async as data">
+          <td *ngIf="data.length == 0" colspan="8">ไม่พบข้อมูล</td>
+        </ng-container>
       </table>
     </ng-container>
   </body>

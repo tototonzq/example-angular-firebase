@@ -114,4 +114,8 @@ export class ManagerPetitionListComponent implements OnInit {
   DoResetToFalse(item: TypePayload): void {
     this._petitionService.DoResetToFalse(item);
   }
+
+  DoDeletePetition(item: TypePayload): void {
+    this._petitionService.DoDeletePetition(item);
+  }
 }

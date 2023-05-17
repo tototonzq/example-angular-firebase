@@ -134,6 +134,11 @@ export class PetitionService {
       .subscribe();
   }
 
+  DoDeletePetition(payload: TypePayload): void {
+    console.log(payload);
+    this._firestore.collection('Petition').doc(payload.id).delete();
+  }
+
   DoUploadFileCourtesy(event: any, payload: TypePayload): void {
     // console.log(event);
     // console.log(payload);
