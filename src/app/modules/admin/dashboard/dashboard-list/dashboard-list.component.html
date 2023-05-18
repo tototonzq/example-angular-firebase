@@ -108,7 +108,7 @@
                       <p class="text-slate-100">ปฎิเสธ</p>
                     </div>
                   </button> -->
-                  {{ item.url_courtesy.length }}
+                  <!-- {{ item.url_courtesy.length }} -->
                   <button *ngIf="item.url_courtesy.length > 5" (click)="DoApproveReportPetition(item)"
                     class="shadow-md rounded-md h-[40px] px-1 bg-green-500 hover:bg-green-600 cursor-pointer"
                     style="transition: 0.5s">
@@ -117,7 +117,15 @@
                       <p class="text-slate-100">อนุมัติ</p>
                     </div>
                   </button>
-                  <button (click)="DoUploadFilePetition(item)"
+                  <!-- <button (click)="DoUploadFilePetition(item)"
+                    class="shadow-md rounded-md h-[40px] px-1 bg-red-500 hover:bg-red-600 cursor-pointer"
+                    style="transition: 0.5s">
+                    <div class="flex justify-center items-center gap-2">
+                      <i style="color: #fff;"
+                        [ngClass]="item.url_courtesy.length ? 'fa-solid fa-file-pdf fa-xl' : 'fa-solid fa-file-pdf fa-bounce fa-xl'"></i>
+                    </div>
+                  </button> -->
+                  <button (click)="DoExportPDF()"
                     class="shadow-md rounded-md h-[40px] px-1 bg-red-500 hover:bg-red-600 cursor-pointer"
                     style="transition: 0.5s">
                     <div class="flex justify-center items-center gap-2">
