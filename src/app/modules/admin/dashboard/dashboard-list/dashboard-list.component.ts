@@ -10,6 +10,7 @@ import { PetitionService } from 'src/app/shared/services/petition.service';
 import Swal from 'sweetalert2';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { GeneratePdfService } from 'src/app/shared/services/generate-pdf.service';
 
 @Component({
   selector: 'app-dashboard-list',
@@ -46,7 +47,8 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   constructor(
     private _authUserService: AuthUserService,
-    private _petitionService: PetitionService
+    private _petitionService: PetitionService,
+    private _generatePdfService: GeneratePdfService
   ) {}
 
   /* -------------------------------------------------------------------------- */
@@ -55,6 +57,8 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   public is_approved_report$ = new BehaviorSubject<TypePayload[]>([]);
   public isLoadingUpload$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
+
+  private text$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   /* -------------------------------------------------------------------------- */
   //*                                 Life Circle                                */
@@ -73,6 +77,9 @@ export class DashboardListComponent implements OnInit, OnDestroy {
         )
       );
       console.log(this.is_approved_report$.value);
+      console.log(response[0].surname);
+      this.text$.next(response[0].surname);
+      console.log(this.text$.value);
     });
     // this.getCountUserAll$.pipe().subscribe((response) => {
     //   if (response === null) return;
@@ -205,38 +212,46 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   //*                                  Make PDF                                  */
   /* -------------------------------------------------------------------------- */
   // * Create PDF maker
-  DoExportPDF() {
-    alert('สร้าง PDF สําเร็จ');
-    (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
-    (window as any).pdfMake.fonts = {
-      THSarabunNew: {
-        normal: 'THSarabunNew.ttf',
-        bold: 'THSarabunNew Bold.ttf',
-        italics: 'THSarabunNew Italic.ttf',
-        bolditalics: 'THSarabunNew BoldItalic.ttf',
-      },
-      Roboto: {
-        normal: 'Roboto-Regular.ttf',
-        bold: 'Roboto-Medium.ttf',
-        italics: 'Roboto-Italic.ttf',
-        bolditalics: 'Roboto-MediumItalic.ttf',
-      },
-    };
-    const content: any = {
-      header: {},
-      content: [
-        { text: 'ทดสอบการสร้าง pdf ', fontSize: 18, alignment: 'center' },
-      ],
-      defaultStyle: {
-        font: 'THSarabunNew',
-      },
-      watermark: {
-        text: 'ลายน้ำแบบคาด',
-        color: 'blue',
-        opacity: 0.1,
-        bold: true,
-      },
-    };
-    pdfMake.createPdf(content).open();
+  DoExportPDF(item: TypePayload) {
+    console.log(item);
+    this._generatePdfService.DoExportPDF(item)
   }
+  // DoExportPDF() {
+  //   alert('สร้าง PDF สําเร็จ');
+  //   (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
+  //   (window as any).pdfMake.fonts = {
+  //     THSarabunNew: {
+  //       normal: 'THSarabunNew.ttf',
+  //       bold: 'THSarabunNew Bold.ttf',
+  //       italics: 'THSarabunNew Italic.ttf',
+  //       bolditalics: 'THSarabunNew BoldItalic.ttf',
+  //     },
+  //     Roboto: {
+  //       normal: 'Roboto-Regular.ttf',
+  //       bold: 'Roboto-Medium.ttf',
+  //       italics: 'Roboto-Italic.ttf',
+  //       bolditalics: 'Roboto-MediumItalic.ttf',
+  //     },
+  //   };
+  //   const content: any = {
+  //     header: {},
+  //     content: [
+  //       {
+  //         text: 'ทดสอบการสร้าง pdf ' + this.text$.value,
+  //         fontSize: 18,
+  //         alignment: 'center',
+  //       },
+  //     ],
+  //     defaultStyle: {
+  //       font: 'THSarabunNew',
+  //     },
+  //     watermark: {
+  //       text: 'ลายน้ำแบบคาด',
+  //       color: 'blue',
+  //       opacity: 0.1,
+  //       bold: true,
+  //     },
+  //   };
+  //   pdfMake.createPdf(content).open();
+  // }
 }
