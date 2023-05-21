@@ -22,7 +22,7 @@
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@ngxs/store": "^3.7.5",
     "firebase": "^9.9.1",
-    "pdfmake": "^0.2.7",
+    "pdfmake": "^0.1.64",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.7.3",
     "tslib": "^2.3.0",
