@@ -1,90 +1,105 @@
-<main class="flex">
-  <header class="bg-slate-300 h-[100vh] w-[50vh]"></header>
+<main>
+  <div class="left-half">
+    <img src="../../../../../assets/img/bg-sign-up.jpg" alt="รูปภาพ">
+  </div>
+  <div class="right-half">
+    <!-- เนื้อหาของคุณที่ต้องการใส่ในส่วนด้านขวา -->
+    <main class="flex pl-[50vh] pt-[10vh]">
+      <header class="w-[50vh]"></header>
 
-  <body class="grid justify-center items-center ml-[35vh]">
-    <p class="text-[40px]">เข้าสู่ระบบ</p>
-    <div class="overflow-auto h-[70vh] p-5">
-      <form [formGroup]="form" (ngSubmit)="Add(form.value.code)">
-        <div class="flex gap-5">
-          <div class="grid gap-5">
-            <span>คำนำหน้า</span>
-            <select
-              class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              formControlName="prefix">
-              <option value="" selected disabled>คำนำหน้า</option>
-              <ng-container *ngFor="let option of dropdownPrefix">
-                <option [value]="option.value">
-                  <span>{{ option.name }}</span>
-                </option>
-              </ng-container>
-            </select>
-            <span>ชื่อ - นามสกุล</span>
-            <input type="text"
-              class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล" id="code" formControlName="nameAndSurname" />
-            <span>รหัสผ่าน</span>
-            <input type="text"
-              class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล" id="code" formControlName="password" />
-            <!-- <span>ชื่อผู้ใช้งาน</span>
-            <input type="text"
-              class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล" id="name" formControlName="user" /> -->
-            <span>ชั้นปี</span>
-            <input type="text"
-              class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล" id="name" formControlName="year" />
-            <span>อีเมล์</span>
-            <input type="text"
-              class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล" id="name" formControlName="email" />
-            <span>รหัสนิสิต</span>
-            <input type="text"
-              class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล" id="code" formControlName="code" />
-            <span>ที่อยู่ (บ้านเลขที่ , หมู่บ้าน , ตำบล/แขวง , อําเภอ/เขต , จังหวัด , รหัสไปรษณีย์ )</span>
-            <textarea formControlName="address"
-              placeholder="ข้อมูลสภานที่ฝึกงานโดยละเอียด เช่น บ้านเลขที่ , หมู่บ้าน , ตำบล/แขวง , อำเภอ/เขต , จังหวัด , รหัสไปรษณีย์ และอื่นๆ"
-              class="max-h-28 min-h-[140px] border-[1px] p-2 rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-black-500 text-ellipsis"></textarea>
-            <span>เบอร์โทร</span>
-            <input type="text"
-              class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-              placeholder="กรุณากรอกข้อมูล" id="name" formControlName="phone" />
-            <span>คณะ</span>
-            <select
-              class="border-[1px] rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
-              formControlName="group">
-              <option value="" selected disabled>คณะ</option>
-              <ng-container *ngFor="let option of dropdownGroup">
-                <option [value]="option.value">
-                  <span>{{ option.name }}</span>
-                </option>
-              </ng-container>
-            </select>
-            <span>สาขา</span>
-            <select
-              class="border-[1px] rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
-              formControlName="major">
-              <option value="" selected disabled>สาขา</option>
-              <ng-container *ngFor="let option of dropdownMajor">
-                <option [value]="option.value">
-                  <span>{{ option.name }}</span>
-                </option>
-              </ng-container>
-            </select>
+      <body class="grid justify-center items-center ml-[35vh]">
+        <div class="flex justify-between">
+          <p class="text-[40px]">สมัครสมาชิก</p>
+          <div class="cursor-pointer" routerLink="/sign-in">
+            <i class="fa-solid fa-arrow-left fa-bounce fa-xl pr-[5vh] pt-[4vh]">
+              <p class="pl-[5vh]">ย้อนกลับ</p>
+            </i>
           </div>
         </div>
-        <button
-          class="h-[50px] w-[250px] text-[1rem] mt-5 outline-none text-center rounded-md cursor-pointer text-slate-50 bg-blue-500 hover:bg-blue-400"
-          style="transition: 0.5s;">
-          <p>สมัครสมาชิก</p>
-          <div class="w-7 items-center justify-center m-auto">
+        <div class=" overflow-auto h-[70vh] p-5">
+              <form [formGroup]="form" (ngSubmit)="Add(form.value.code)">
+                <div class="flex gap-5">
+                  <div class="grid gap-5">
+                    <span>คำนำหน้า</span>
+                    <select
+                      class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+                      formControlName="prefix">
+                      <option value="" selected disabled>คำนำหน้า</option>
+                      <ng-container *ngFor="let option of dropdownPrefix">
+                        <option [value]="option.value">
+                          <span>{{ option.name }}</span>
+                        </option>
+                      </ng-container>
+                    </select>
+                    <span>ชื่อ - นามสกุล</span>
+                    <input type="text"
+                      class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+                      placeholder="กรุณากรอกข้อมูล" id="code" formControlName="nameAndSurname" />
+                    <span>รหัสผ่าน</span>
+                    <input type="text"
+                      class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+                      placeholder="กรุณากรอกข้อมูล" id="code" formControlName="password" />
+                    <!-- <span>ชื่อผู้ใช้งาน</span>
+                <input type="text"
+                  class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+                  placeholder="กรุณากรอกข้อมูล" id="name" formControlName="user" /> -->
+                    <span>ชั้นปี</span>
+                    <input type="text"
+                      class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+                      placeholder="กรุณากรอกข้อมูล" id="name" formControlName="year" />
+                    <span>อีเมล์</span>
+                    <input type="text"
+                      class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+                      placeholder="กรุณากรอกข้อมูล" id="name" formControlName="email" />
+                    <span>รหัสนิสิต</span>
+                    <input type="text"
+                      class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+                      placeholder="กรุณากรอกข้อมูล" id="code" formControlName="code" />
+                    <span>ที่อยู่ (บ้านเลขที่ , หมู่บ้าน , ตำบล/แขวง , อําเภอ/เขต , จังหวัด , รหัสไปรษณีย์ )</span>
+                    <textarea formControlName="address"
+                      placeholder="ข้อมูลสภานที่ฝึกงานโดยละเอียด เช่น บ้านเลขที่ , หมู่บ้าน , ตำบล/แขวง , อำเภอ/เขต , จังหวัด , รหัสไปรษณีย์ และอื่นๆ"
+                      class="max-h-28 min-h-[140px] border-[1px] p-2 rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-black-500 text-ellipsis"></textarea>
+                    <span>เบอร์โทร</span>
+                    <input type="text"
+                      class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+                      placeholder="กรุณากรอกข้อมูล" id="name" formControlName="phone" />
+                    <span>คณะ</span>
+                    <select
+                      class="border-[1px] rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+                      formControlName="group">
+                      <option value="" selected disabled>คณะ</option>
+                      <ng-container *ngFor="let option of dropdownGroup">
+                        <option [value]="option.value">
+                          <span>{{ option.name }}</span>
+                        </option>
+                      </ng-container>
+                    </select>
+                    <span>สาขา</span>
+                    <select
+                      class="border-[1px] rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500"
+                      formControlName="major">
+                      <option value="" selected disabled>สาขา</option>
+                      <ng-container *ngFor="let option of dropdownMajor">
+                        <option [value]="option.value">
+                          <span>{{ option.name }}</span>
+                        </option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+                <button
+                  class="h-[50px] w-[250px] text-[1rem] mt-5 outline-none text-center rounded-md cursor-pointer text-slate-50 bg-blue-500 hover:bg-blue-400"
+                  style="transition: 0.5s;">
+                  <p>สมัครสมาชิก</p>
+                  <div class="w-7 items-center justify-center m-auto">
+                  </div>
+                </button>
+              </form>
           </div>
-        </button>
-      </form>
-    </div>
-  </body>
-  <footer>
-  </footer>
-  <app-loaders-screen *ngIf="((isLoadingAdd$ | async )=== true)"></app-loaders-screen>
+      </body>
+      <footer>
+      </footer>
+      <app-loaders-screen *ngIf="((isLoadingAdd$ | async )=== true)"></app-loaders-screen>
+    </main>
+  </div>
 </main>

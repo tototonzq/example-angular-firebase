@@ -1,8 +1,8 @@
-<main class="flex flex-row h-screen">
-  <header class="sidebar h-screen overflow-auto transition-all duration-200 ease-in-out border-r-[1px] border-[#D0D5DB]"
+<main class="flex flex-row h-screen  bg-[#F3E8FF]">
+  <header class="sidebar h-screen overflow-auto transition-all duration-200 ease-in-out border-r-[1px] border-[#D0D5DB] bg-[#F3E8FF]"
     [ngClass]="isOpen  ? 'active' : ''">
 
-    <header class="pt-10 text-center justify-center grid">
+    <header class="pt-10 text-center justify-center grid bg-[#F3E8FF] pb-10 rounded-b-2xl">
       <div class="bg-slate-300 w-[245px] h-[220px] rounded-md shadow-md p-8">
         <i class="fa-solid fa-user-graduate fa-9x" style="color: #fff;"></i>
       </div>
@@ -17,13 +17,13 @@
       </ng-container>
     </header>
 
-    <body class="flex justify-center items-center p-5 flex-col gap-5">
+    <body class="flex justify-center items-center p-5 flex-col gap-5 mt-4">
       <!-- STUDENT -->
       <ng-container *ngIf="(role$ | async) === 'student'">
         <ng-container *ngFor="let item of menuStudent">
-          <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          <div class="bg-[#E5BEEC] w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
             (click)="onClickRouter(item)">
-            <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <div class="flex items-center justify-center mt-2 text-[#fff] hover:text-[#fff] cursor-pointer">
               <span>{{ item.name }}</span>
             </div>
           </div>
@@ -36,9 +36,9 @@
       <!-- ADMIN MENU -->
       <ng-container *ngIf="(role$ | async) === 'admin'">
         <ng-container *ngFor="let item of menuAdmin">
-          <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          <div class="bg-[#E5BEEC] w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
             (click)="onClickRouter(item)">
-            <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <div class="flex items-center justify-center mt-2 text-[#fff] hover:text-[#fff] cursor-pointer">
               <span>{{ item.name }}</span>
             </div>
           </div>
@@ -51,9 +51,9 @@
       <!-- TEACHER -->
       <ng-container *ngIf="(role$ | async) === 'teacher'">
         <ng-container *ngFor="let item of menuTeacher">
-          <div class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
+          <div class="bg-[#E5BEEC] w-full h-[40px] rounded-md shadow-md hover:bg-slate-300" style="transition: 0.5s"
             (click)="onClickRouter(item)">
-            <div class="flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+            <div class="flex items-center justify-center mt-2 text-[#fff] hover:text-[#fff] cursor-pointer">
               <span>{{ item.name }}</span>
             </div>
           </div>
@@ -64,21 +64,16 @@
       </ng-container>
     </body>
 
-    <div>
-      <hr class="mx-5">
-    </div>
 
-    <footer class="flex justify-center items-center p-5 flex-col gap-5">
-      <div (click)="exit()" class="bg-slate-100 w-full h-[40px] rounded-md shadow-md hover:bg-slate-300"
+    <footer class="flex justify-center items-center p-5 flex-col gap-5 ">
+      <div (click)="exit()" class="bg-[#E5BEEC] w-full h-[40px] rounded-md shadow-md hover:bg-slate-300"
         style="transition: 0.5s">
-        <div class=" flex items-center justify-center mt-2 text-slate-400 hover:text-slate-100 cursor-pointer">
+        <div class=" flex items-center justify-center mt-2 text-[#fff] hover:text-slate-100 cursor-pointer">
           <span>ออกจากระบบ</span>
         </div>
       </div>
-      <p class="text-slate-300">Dev. for learning</p>
     </footer>
   </header>
-
   <ng-container>
     <app-loaders-screen *ngIf="isCheckedStatusSignOut === true"></app-loaders-screen>
   </ng-container>

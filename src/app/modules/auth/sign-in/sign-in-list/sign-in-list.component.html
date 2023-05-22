@@ -1,71 +1,43 @@
-<main class="flex">
-  <header class="bg-slate-300 h-[100vh] w-[50vh]"></header>
+<main>
+  <div class="left-half">
+    <img src="../../../../../assets/img/bglogin.jpg" alt="รูปภาพ">
+  </div>
+  <div class="right-half">
+    <!-- เนื้อหาของคุณที่ต้องการใส่ในส่วนด้านขวา -->
 
-  <body class="grid justify-center items-center ml-[50vh]">
-    <div>
-      <div class=" grid gap-4">
-        <p class="text-[40px]">เข้าสู่ระบบ</p>
-        <span>อีเมล์</span>
-        <input type="text"
-          class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-          placeholder="กรุณากรอกข้อมูล" id="username" [formControl]="username"
-          (keyup.enter)="signIn(username.value, password.value)" />
-        <span>รหัสผ่าน</span>
-        <input type="password"
-          class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
-          placeholder="กรุณากรอกข้อมูล" id="password" [formControl]="password"
-          (keyup.enter)="signIn(username.value, password.value)" />
-        <div class="flex justify-between h-5">
-          <span class="cursor-pointer hover:text-red-500 hover:text-[18px]" style="transition: 0.5s;"
-            routerLink="/sign-up">สมัครสมาชิก ?
-          </span>
-          <!-- <span (click)="forgetPassword()" class="cursor-pointer hover:text-red-500 hover:text-[18px]"
-            style="transition: 0.5s;">ลืมรหัสผ่าน
-            ?</span> -->
-        </div>
-        <button
-          class="h-[50px] w-[250px] text-[1rem] outline-none text-center rounded-md cursor-pointer text-slate-500 bg-slate-200 hover:bg-slate-100"
-          (click)="signIn(username.value, password.value)" style="transition: 0.5s;">
-          <p>เข้าสู่ระบบ</p>
-          <!-- <div class="w-7 items-center justify-center m-auto">
-            <app-loaders></app-loaders>
-          </div> -->
-        </button>
-        <!-- <span>{{ layout$ | async }}</span> -->
-      </div>
-    </div>
-    <!-- <div class="grid gap-5">
-      <div class="gap-5 grid">
-        <div>
+    <body class="grid justify-center items-center ml-[50vh]">
+      <div class="pt-[90vh] pl-[145vh] fixed">
+        <div class=" grid gap-4">
+          <p class="text-[40px]">เข้าสู่ระบบ</p>
+          <span>อีเมล์</span>
+          <input type="text"
+            class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+            placeholder="กรุณากรอกข้อมูล" id="username" [formControl]="username"
+            (keyup.enter)="signIn(username.value, password.value)" />
+          <span>รหัสผ่าน</span>
+          <input type="password"
+            class="rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 border-[1px]"
+            placeholder="กรุณากรอกข้อมูล" id="password" [formControl]="password"
+            (keyup.enter)="signIn(username.value, password.value)" />
+          <div class="flex justify-between h-5">
+            <span class="cursor-pointer hover:text-red-500 hover:text-[18px]" style="transition: 0.5s;"
+              routerLink="/sign-up">สมัครสมาชิก ?
+            </span>
+            <!-- <span (click)="forgetPassword()" class="cursor-pointer hover:text-red-500 hover:text-[18px]"
+              style="transition: 0.5s;">ลืมรหัสผ่าน
+              ?</span> -->
+          </div>
           <button
-            class="h-[40px] w-full text-[1rem] outline-none text-center rounded-md cursor-pointer text-slate-500 bg-slate-200 hover:bg-slate-100"
-            routerLink="/admin-dashboard" style="transition: 0.5s;">
-            <p>แอดมิน</p>
+            class="h-[50px] w-[250px] text-[1rem] outline-none text-center rounded-md cursor-pointer text-[#fff] bg-[#E5BEEC] hover:bg-slate-100"
+            (click)="signIn(username.value, password.value)" style="transition: 0.5s;">
+            <p>เข้าสู่ระบบ</p>
           </button>
-        </div>
-        <div>
-          <button
-            class="h-[40px] w-full text-[1rem] outline-none text-center rounded-md cursor-pointer text-slate-500 bg-slate-200 hover:bg-slate-100"
-            routerLink="/teacher-dashboard" style="transition: 0.5s;">
-            <p>อาจารย์</p>
-          </button>
-        </div>
-        <div>
-          <button
-            class="h-[40px] w-full text-[1rem] outline-none text-center rounded-md cursor-pointer text-slate-500 bg-slate-200 hover:bg-slate-100"
-            routerLink="/student-dashboard" style="transition: 0.5s;">
-            <p>นิสิต</p>
-          </button>
+          <span>{{ layout$ | async }}</span>
         </div>
       </div>
-    </div> -->
-  </body>
-  <footer>
-  </footer>
-  <app-loaders-screen
-    *ngIf="((( getLoading$ | async) === true)||(( getCountUserAll$ | async) === null))"></app-loaders-screen>
-  <!-- <div>
-    <div>สถานะล็อคอิน : {{ getLoginStatus$ | async |json }}</div>
-    <div>จำนวนไอดี : {{ getCountUserAll$ | async | json }} </div>
-  </div> -->
+    </body>
+  </div>
 </main>
+
+<app-loaders-screen
+  *ngIf="((( getLoading$ | async) === true)||(( getCountUserAll$ | async) === null))"></app-loaders-screen>

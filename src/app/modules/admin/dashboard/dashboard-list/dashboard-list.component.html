@@ -1,4 +1,4 @@
-<main>
+<main class="bg-[#F3E8FF]">
   <header class="p-5 bg-slate-100">
     <div class="flex gap-5 items-center">
       <p class="text-[26px]">แผงควบคุม</p>
@@ -62,18 +62,17 @@
       </div>
     </div>
   </header>
-  <div class="flex gap-5 items-center px-5 py-2 bg-slate-100">
+  <div class="flex gap-5 items-center px-5 py-2 bg-slate-100 ">
     <p class="text-[18px]">การเเจ้งเตือน</p>
     <i class="fa-solid fa-bell fa-shake fa-xl"></i>
   </div>
 
   <body class="grid gap-5">
-
     <body>
       <ng-container *ngIf="is_approved_report$ | async as data">
         <table class="table">
           <thead>
-            <tr class="bg-slate-100">
+            <tr class=" bg-[#F3E8FF]">
               <th class="w-[5%]"> ลำดับ </th>
               <th class="w-[10%]"> รหัสนิสิต </th>
               <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
@@ -145,7 +144,7 @@
               </td>
             </tr>
           </tbody>
-          {{ data | json}}
+          <!-- {{ data | json}} -->
           <ng-container *ngIf="is_approved_report$ | async as data">
             <td *ngIf="data.length == 0" colspan="8">ไม่พบข้อมูล</td>
           </ng-container>
