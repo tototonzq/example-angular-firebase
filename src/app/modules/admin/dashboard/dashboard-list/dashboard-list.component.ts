@@ -214,7 +214,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   // * Create PDF maker
   DoExportPDF(item: TypePayload) {
     console.log(item);
-    this._generatePdfService.DoExportPDF(item)
+    this._generatePdfService.DoExportPDF(item);
   }
   // DoExportPDF() {
   //   alert('สร้าง PDF สําเร็จ');

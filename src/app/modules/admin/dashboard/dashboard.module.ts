@@ -9,7 +9,7 @@ import { LoadersScreenModule } from 'src/app/shared/components/loaders-screen/lo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [DashboardComponent, DashboardListComponent],
+  declarations: [DashboardComponent, DashboardListComponent,  ],
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),

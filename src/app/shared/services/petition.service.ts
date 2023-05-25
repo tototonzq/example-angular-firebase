@@ -44,10 +44,19 @@ export class PetitionService {
       .ref.where('is_approved_report', '==', payload);
   }
 
-  DoApproveReportPetition(payload: TypePayload) {
+  DoApproveReportPetition(
+    payload: TypePayload,
+    data: TypePayload,
+    time: TypePayload,
+    date: TypePayload
+  ) {
     // console.log(payload);
+    // console.log(data[0].user);
     return this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_report: true,
+      is_teacher_approve: data[0].user,
+      is_time_approve: time,
+      is_date_approve: date,
     });
   }
 
