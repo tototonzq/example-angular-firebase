@@ -45,6 +45,7 @@ export class SignUpComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
     code: new FormControl('', [Validators.required]),
     group: new FormControl('', [Validators.required]),
+    confirmPassword: new FormControl('', Validators.required),
     address: new FormControl('', [Validators.required]),
   });
 
@@ -56,8 +57,32 @@ export class SignUpComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   //*                                  functions                                 */
   /* -------------------------------------------------------------------------- */
+  passwordControl = this.form.get('password');
+  confirmPasswordControl = this.form.get('confirmPassword');
+  passwordMatch = true;
 
   Add(item?: any): void {
+    if (
+      this.passwordControl !== null &&
+      this.confirmPasswordControl !== null &&
+      this.passwordControl.value !== this.confirmPasswordControl.value
+    ) {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: `รหัสผ่านไม่ตรงกัน`,
+        showConfirmButton: false,
+        timer: 1200,
+      });
+      this.passwordMatch = false;
+      return;
+    }
+    // if (
+    //   this.form.get('password').value !== this.form.get('confirmPassword').value
+    // ) {
+    //   this.passwordMatch = false;
+    //   return;
+    // }
     this.isLoadingAdd$.next(true);
     // TODO : Set Value
     const data: any = {
@@ -71,9 +96,9 @@ export class SignUpComponent implements OnInit {
       name: this.form.value.nameAndSurname,
       prefix: this.form.value.prefix,
       email: this.form.value.email,
-      nameAndSurname : this.form.value.nameAndSurname,
-      year : this.form.value.year,
-      phone : this.form.value.phone,
+      nameAndSurname: this.form.value.nameAndSurname,
+      year: this.form.value.year,
+      phone: this.form.value.phone,
       address: this.form.value.address,
     };
     console.log(this.form.value);

@@ -8,8 +8,6 @@ import { PetitionService } from 'src/app/shared/services/petition.service';
 
 // TODO :  Library Import
 import Swal from 'sweetalert2';
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { GeneratePdfService } from 'src/app/shared/services/generate-pdf.service';
 
 @Component({
@@ -214,7 +212,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
   // * Create PDF maker
   DoExportPDF(item: TypePayload) {
     console.log(item);
-    this._generatePdfService.DoExportPDF(item);
+    this._generatePdfService.DoExportPDF2(item);
   }
   // DoExportPDF() {
   //   alert('สร้าง PDF สําเร็จ');

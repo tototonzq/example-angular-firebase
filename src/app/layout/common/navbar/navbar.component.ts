@@ -40,9 +40,8 @@ export class NavbarComponent implements OnInit {
     this.getDataUserLogin$.subscribe((response) => {
       if (response === null) return;
       //* Save the updated data to localStorage
-      this.data.push(...response);
+      this.data = response; // Set the data to the response directly
       localStorage.setItem('userData', JSON.stringify(this.data));
-      console.log(this.data);
     });
   }
   ngOnDestroy(): void {

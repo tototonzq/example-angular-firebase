@@ -54,7 +54,7 @@ export class ManagerDetailComponent implements OnInit {
       this.form.get('company_details')?.disable();
       this.form.get('position_company')?.disable();
       this.form.get('phone_company')?.disable();
-      this.form.get('fax_company')?.disable();
+      this.form.get('email')?.disable();
       this.form.get('work_details')?.disable();
       this.form.get('register_next_semester')?.disable();
       this.form.get('delivery_of_documents')?.disable();
@@ -86,7 +86,7 @@ export class ManagerDetailComponent implements OnInit {
     company_details: new FormControl('', [Validators.required]),
     position_company: new FormControl('', [Validators.required]),
     phone_company: new FormControl('', [Validators.required]),
-    fax_company: new FormControl('', [Validators.required]),
+    // email: new FormControl('', [Validators.required]),
     work_details: new FormControl('', [Validators.required]),
     register_next_semester: new FormControl('', [Validators.required]),
     delivery_of_documents: new FormControl('', [Validators.required]),

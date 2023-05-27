@@ -51,7 +51,9 @@ export class DashboardListComponent implements OnInit, OnDestroy {
       this.data_approved_status_false$.next(
         response.filter(
           (x) =>
-            x.is_approved_report === false && x.is_approved_cancel === false
+            x.is_approved_report === false &&
+            x.is_approved_cancel === false &&
+            x.major === this.data[0].major
         )
       );
       this.data_approved_status_true$.next(
@@ -63,13 +65,13 @@ export class DashboardListComponent implements OnInit, OnDestroy {
         response.filter((x) => x.is_approved_cancel === true)
       );
     });
-    console.log(this.data);
+    console.log(this.data[0].major);
 
     //* Data user local storage
     this.getDataUserLogin$.subscribe((response) => {
       if (response === null) return;
       //* Save the updated data to localStorage
-      this.data.push(...response);
+      this.data = response; // Set the data to the response directly
       localStorage.setItem('userData', JSON.stringify(this.data));
     });
   }
@@ -78,6 +80,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
     this._destroy$.next();
     this._destroy$.complete();
     this._destroy$.unsubscribe();
+    localStorage.removeItem('userData');
   }
 
   /* -------------------------------------------------------------------------- */

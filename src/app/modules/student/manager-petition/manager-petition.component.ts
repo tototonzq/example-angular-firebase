@@ -33,6 +33,7 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   public round_petition$ = new BehaviorSubject<any[]>([]);
   public data_petition$ = new BehaviorSubject<any[]>([]);
+  private major: string = '';
 
   /* -------------------------------------------------------------------------- */
   //*                                 Life Circle                                */
@@ -76,13 +77,14 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
       localStorage.getItem('userData') || '[]'
     )[0];
     console.log(localStorageHeader);
-    const split = localStorageHeader.user.split(' ');
-    // console.log(split[0]);
-    this.form.controls['name'].setValue(split[0]);
-    this.form.controls['surname'].setValue(split[1]);
-    this.form.controls['student_code'].setValue(localStorageHeader.code);
-    // this.form.controls['year'].setValue(localStorageHeader.group);
-    this.form.controls['major'].setValue(localStorageHeader.major);
+
+    console.log(localStorageHeader.name);
+
+
+    this.form.get('major')?.setValue(localStorageHeader.major);
+    this.form.get('student_code')?.setValue(localStorageHeader.code);
+    this.form.get('name')?.setValue(localStorageHeader.name);
+    this.form.get('phone_number')?.setValue(localStorageHeader.phone);
   }
 
   ngOnDestroy(): void {
@@ -96,26 +98,26 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   // TODO : Form Group
   form = new FormGroup({
-    prefix: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required]),
-    surname: new FormControl('', [Validators.required]),
-    student_code: new FormControl('', [Validators.required]),
-    year: new FormControl('', [Validators.required]),
-    major: new FormControl('', [Validators.required]),
-    phone_number: new FormControl('', [Validators.required]),
-    address: new FormControl('', [Validators.required]),
-    address_details: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required]),
+    // prefix: new FormControl(''),
+    name: new FormControl(''),
+    // surname: new FormControl(''),
+    student_code: new FormControl(''),
+    // year: new FormControl(''),
+    major: new FormControl(''),
+    phone_number: new FormControl(''),
+    // address: new FormControl(''),
+    // address_details: new FormControl(''),
+    // email: new FormControl(''),
     company: new FormControl('', [Validators.required]),
     company_details: new FormControl('', [Validators.required]),
     position_company: new FormControl('', [Validators.required]),
     phone_company: new FormControl('', [Validators.required]),
-    fax_company: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
     work_details: new FormControl('', [Validators.required]),
     register_next_semester: new FormControl('', [Validators.required]),
     delivery_of_documents: new FormControl('', [Validators.required]),
     // TODO : IsActive Petition
-    round_petition: new FormControl('', [Validators.required]),
+    round_petition: new FormControl(''),
     is_approved_report: new FormControl(false),
     is_approved_company: new FormControl(false),
     is_approved_cancel: new FormControl(false),

@@ -50,7 +50,7 @@
                 </select>
               </ng-container>
               <ng-container *ngIf="roleSub$ | async as data">
-                <select *ngIf="data === 'student'"
+                <select *ngIf="data === 'student' || data === 'teacher'"
                   [ngClass]="isMajorValidate ? 'border-[#e20000] border-[1px] rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500' : 'rounded-md w-[25rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500'"
                   formControlName="major">
                   <option value="" selected disabled>สาขา</option>
