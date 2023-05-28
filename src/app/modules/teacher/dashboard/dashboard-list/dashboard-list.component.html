@@ -10,7 +10,7 @@
         <p class="ml-3">คำร้องขอ</p>
       </div>
       <div class="flex justify-center items-center gap-5">
-        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
+        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff] border-[1px] border-[#650DAD]">
           <div>
             <p>รอการอนุมัติ & ตรวจสอบเอกสาร</p>
             <ng-container *ngIf="data_approved_status_false$ | async as data">
@@ -22,7 +22,7 @@
             </ng-container>
           </div>
         </div>
-        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
+        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff] border-[1px] border-[#650DAD]">
           <div>
             <p>รอการอนุมัติ & สถานประกอบการ & นิสิต</p>
             <ng-container *ngIf="data_approved_status_true$ | async as data">
@@ -34,7 +34,7 @@
             </ng-container>
           </div>
         </div>
-        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
+        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff] border-[1px] border-[#650DAD]">
           <div>
             <p>ปฏิเสธคำร้อง & ยกเลิกคำร้อง</p>
             <ng-container *ngIf="data_is_cancel_status_true$ | async as data">
@@ -46,7 +46,7 @@
             </ng-container>
           </div>
         </div>
-        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
+        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff] border-[1px] border-[#650DAD]">
           <ng-container *ngIf="data_approved_status_false$ | async as data">
             <div>
               <p>ทั้งหมด</p>

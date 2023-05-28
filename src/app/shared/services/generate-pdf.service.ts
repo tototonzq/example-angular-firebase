@@ -101,10 +101,63 @@ export class GeneratePdfService implements OnInit {
     }
   }
 
+  DoCoverDateToThai(date: string): string {
+    // Define Thai numerals
+    const thaiNumerals: string[] = [
+      '๐',
+      '๑',
+      '๒',
+      '๓',
+      '๔',
+      '๕',
+      '๖',
+      '๗',
+      '๘',
+      '๙',
+    ];
+
+    // Define Thai months
+    const thaiMonths: { [key: number]: string } = {
+      1: 'มกราคม',
+      2: 'กุมภาพันธ์',
+      3: 'มีนาคม',
+      4: 'เมษายน',
+      5: 'พฤษภาคม',
+      6: 'มิถุนายน',
+      7: 'กรกฎาคม',
+      8: 'สิงหาคม',
+      9: 'กันยายน',
+      10: 'ตุลาคม',
+      11: 'พฤศจิกายน',
+      12: 'ธันวาคม',
+    };
+
+    // Extract the day, month, and year
+    const [year, month, day] = date.split('-');
+
+    // Convert day, month, and year to Thai numerals
+    const thaiDay = [...day]
+      .map((digit) => thaiNumerals[Number(digit)])
+      .join('');
+    const thaiYear = [...year]
+      .map((digit) => thaiNumerals[Number(digit)])
+      .join('');
+
+    // Get the Thai month
+    const thaiMonth = thaiMonths[Number(month)];
+
+    // Combine the Thai components into the desired format
+    const thaiDate = `${thaiDay} ${thaiMonth} ${thaiYear}`;
+
+    return thaiDate;
+  }
+
   /* -------------------------------------------------------------------------- */
   //*                                   method                                   */
   /* -------------------------------------------------------------------------- */
   DoExportPDF(item: TypePayload) {
+    const startDate = this.DoCoverDateToThai(item.startDate);
+    const endDate = this.DoCoverDateToThai(item.endDate);
     const prefix = this.DoCoverPrefixToThai(item);
     const deliveryOfDocuments =
       this.DoConvertCodeToTextDeliveryOfDocuments(item);
@@ -172,7 +225,7 @@ export class GeneratePdfService implements OnInit {
           relativePosition: { x: 0, y: 0 },
         },
         {
-          text: day + ' ' + month + ' ' + '๒๕๖๕',
+          text: day + ' ' + month + ' ' + '๒๕๖๖',
           fontSize: 16,
           alignment: 'center',
           margin: [0, 60, 0, 0], // Add top margin of 0 units
@@ -229,7 +282,7 @@ export class GeneratePdfService implements OnInit {
           text: [
             'ในการนี้ คณะเทคโนโลยีสารสนเทศและการสื่อสาร มหาวิทยาลัยพะเยา  ',
             'จึงขอนำนิสิตเข้าฝึกงาน ',
-            { text: 'ระหว่างวันที่ ๑', fontSize: 15, bold: true },
+            { text: 'ระหว่างวันที่', fontSize: 15, bold: true },
           ],
           width: '110%',
           margin: [50, 0, 0, 0],
@@ -239,7 +292,7 @@ export class GeneratePdfService implements OnInit {
         {
           text: [
             {
-              text: 'พฤศจิกายน ๒๕๖๕ ถึงวันที่ ๑๗ กุมภาพันธ์ ๒๕๖๖ ',
+              text: startDate + ' ถึง ' + endDate + ' ',
               fontSize: 15,
               bold: true,
             },
@@ -554,6 +607,8 @@ export class GeneratePdfService implements OnInit {
   }
 
   DoExportPDF2(item: TypePayload) {
+    const startDate = this.DoCoverDateToThai(item.startDate);
+    const endDate = this.DoCoverDateToThai(item.endDate);
     const prefix = this.DoCoverPrefixToThai(item);
     const deliveryOfDocuments =
       this.DoConvertCodeToTextDeliveryOfDocuments(item);
@@ -621,7 +676,7 @@ export class GeneratePdfService implements OnInit {
           relativePosition: { x: 0, y: 0 },
         },
         {
-          text: day + ' ' + month + ' ' + '๒๕๖๕',
+          text: day + ' ' + month + ' ' + '๒๕๖๖',
           fontSize: 16,
           alignment: 'center',
           margin: [0, 60, 0, 0], // Add top margin of 0 units
@@ -711,7 +766,13 @@ export class GeneratePdfService implements OnInit {
               text: [
                 'ยิ่งในการถ่ายทอดความรู้ด้านทฤษฎีและการปฏิบัติให้กับนิสิตได้เป็นอย่างดี จึงใคร่ขอความอนุเคราะห์ท่านรับนิสิตฝึกงาน\n',
                 {
-                  text: 'ในระหว่างวันที่ ๑ พศจิกานยน ๒๕๖๕ ถึง 2 พศจิกานยน ๒๕๖๕',
+                  text:
+                    'ในระหว่างวันที่ ' +
+                    startDate +
+                    ' ' +
+                    'ถึง' +
+                    ' ' +
+                    endDate,
                   fontSize: 15,
                   bold: true,
                 },

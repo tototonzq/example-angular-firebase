@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Select } from '@ngxs/store';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { UserDataModelResponse } from 'src/app/modules/auth/sign-in/store/models/sign-in.interface.model';
+import { SignInSelectors } from 'src/app/modules/auth/sign-in/store/selectors/sign-in.selectors';
 import { TypePayload } from 'src/app/shared/payload/payload.model';
 import { GeneratePdfService } from 'src/app/shared/services/generate-pdf.service';
 import { PetitionService } from 'src/app/shared/services/petition.service';
@@ -31,8 +34,17 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   //*                                  variables                                 */
   /* -------------------------------------------------------------------------- */
   public data$ = new BehaviorSubject<any[]>([]);
-
+  public data_approved_status_false$ = new BehaviorSubject<any[]>([]);
+  public data_approved_status_true$ = new BehaviorSubject<any[]>([]);
+  public data_is_cancel_status_true$ = new BehaviorSubject<any[]>([]);
+  // TODO : Local storage
+  public data: TypePayload = JSON.parse(
+    localStorage.getItem('userData') || '[]'
+  );
   public searchFilter: string = '';
+  @Select(SignInSelectors.getDataUserLogin) getDataUserLogin$!: Observable<
+    UserDataModelResponse | TypePayload
+  >;
 
   /* -------------------------------------------------------------------------- */
   //*                                 life circle                                */
@@ -40,6 +52,20 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
       this.data$.next(response);
+      this.data_approved_status_false$.next(
+        response.filter(
+          (x) =>
+            x.is_approved_report === false &&
+            x.is_approved_cancel === false &&
+            x.major === this.data[0].major
+        )
+      );
+      this.getDataUserLogin$.subscribe((response) => {
+        if (response === null) return;
+        //* Save the updated data to localStorage
+        this.data = response; // Set the data to the response directly
+        localStorage.setItem('userData', JSON.stringify(this.data));
+      });
     });
   }
 

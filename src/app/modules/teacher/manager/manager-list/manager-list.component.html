@@ -52,17 +52,18 @@
   </header>
 
   <body>
-    <ng-container *ngIf=" data$ | async as data">
+    <ng-container *ngIf=" data_approved_status_false$ | async as data">
       <table class="table">
         <thead>
           <tr class="bg-slate-100">
-            <th class="w-[5%]"> ลำดับ </th>
+            <!-- <th class="w-[5%]"> ลำดับ </th> -->
             <th class="w-[15%]"> เลขเอกสาร </th>
             <th class="w-[10%]"> รหัสนิสิต </th>
             <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
             <th class="w-[10%]"> สถานประกอบการ </th>
-            <th class="w-[15%]"> รอบที่ลง </th>
+            <th class="w-[10%]"> รอบที่ลง </th>
             <th class="w-[10%]"> สถานะ </th>
+            <th class="w-[10%]"> รายละเอียดการอนุมัติ </th>
             <th class="w-[30%]"> จัดการ </th>
           </tr>
         </thead>
@@ -71,7 +72,7 @@
           <tr
             [ngClass]="item.is_approved_success ? 'bg-green-100' : (item.is_approved_cancel ? 'bg-red-100' : (item.is_approved_report || !item.is_approved_report ? 'bg-yellow-100' : ''))">
 
-            <td> {{ i + 1 }} </td>
+            <!-- <td> {{ i + 1 }} </td> -->
             <td> {{ item.id }} </td>
             <td> {{ item.student_code }} </td>
             <td> {{ item.name }} </td>
@@ -79,6 +80,9 @@
             <td> {{ item.company }} </td>
             <td> {{ getPetitionRound(item.round_petition) }} </td>
             <td> {{ DoGetStatusApprove(item) }} </td>
+            <td> {{ item.is_teacher_approve }} |
+              {{ item.is_date_approve }} |
+              {{ item.is_time_approve }}</td>
             <td class="text-center" [colSpan]="1">
               <div class="flex gap-5 justify-center items-center col-span-2">
                 <button *ngIf="item.is_approved_admin_report === true" (click)="DoViewPDF(item)"
@@ -117,6 +121,9 @@
             </td>
           </tr>
         </tbody>
+        <ng-container *ngIf="data_approved_status_false$ | async as data">
+          <td *ngIf="data.length == 0" colspan="10">ไม่พบข้อมูล</td>
+        </ng-container>
       </table>
     </ng-container>
   </body>

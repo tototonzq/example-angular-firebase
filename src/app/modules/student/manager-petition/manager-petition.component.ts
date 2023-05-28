@@ -104,6 +104,8 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
     year: new FormControl(''),
     major: new FormControl(''),
     phone_number: new FormControl(''),
+    startDate: new FormControl(''),
+    endDate: new FormControl(''),
     // address: new FormControl(''),
     // address_details: new FormControl(''),
     // email: new FormControl(''),
