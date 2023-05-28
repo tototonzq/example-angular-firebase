@@ -1,0 +1,24 @@
+.tooltip {
+  position: relative;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.tooltip:hover::before {
+  opacity: 1;
+  visibility: visible;
+}

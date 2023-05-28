@@ -138,25 +138,33 @@ export class DashboardListComponent implements OnInit, OnDestroy {
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'ใช่, อนุมัติ!',
     }).then((result) => {
-      if (item.url_courtesy.length < 5) {
-        Swal.fire({
-          position: 'center',
-          icon: 'warning',
-          title: `กรุณาอัปโหลดข้อมูล !`,
-          showConfirmButton: false,
-          timer: 1200,
-        });
-        return;
-      } else if (result.value) {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: `อนุมัติสำเร็จ`,
-          showConfirmButton: false,
-          timer: 1200,
-        });
-        this._petitionService.DoApproveReportAdminPetition(item);
-      }
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: `อนุมัติสำเร็จ`,
+        showConfirmButton: false,
+        timer: 1200,
+      });
+      this._petitionService.DoApproveReportAdminPetition(item);
+      // if () {
+      //   Swal.fire({
+      //     position: 'center',
+      //     icon: 'warning',
+      //     title: `กรุณาอัปโหลดข้อมูล !`,
+      //     showConfirmButton: false,
+      //     timer: 1200,
+      //   });
+      //   return;
+      // } else if (result.value) {
+      //   Swal.fire({
+      //     position: 'center',
+      //     icon: 'success',
+      //     title: `อนุมัติสำเร็จ`,
+      //     showConfirmButton: false,
+      //     timer: 1200,
+      //   });
+      //   this._petitionService.DoApproveReportAdminPetition(item);
+      // }
     });
   }
 

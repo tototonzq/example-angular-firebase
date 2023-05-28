@@ -22,3 +22,8 @@ body {
   height: fit-content;
   /* margin-left: 70%; */
 }
+
+img {
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}

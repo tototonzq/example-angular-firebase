@@ -10,7 +10,7 @@
         <p class="ml-3">สถานะทั้งหมด</p>
       </div>
       <div class="flex justify-center items-center gap-5">
-        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
+        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#FBEC88]">
           <div>
             <p>รอการตรวจสอบ</p>
             <ng-container *ngIf="data_user_approved_status_false$ | async as data">
@@ -22,7 +22,7 @@
             </ng-container>
           </div>
         </div>
-        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
+        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#FBEC88]">
           <div>
             <p>ผ่านการตรวจสอบ</p>
             <ng-container *ngIf="data_user_approved_status_true$ | async as data">
@@ -34,7 +34,7 @@
             </ng-container>
           </div>
         </div>
-        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
+        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#FBEC88]">
           <div>
             <p>สถานประกอบการอนุมัติ</p>
             <ng-container *ngIf="data_user_company_success$ | async as data">
@@ -46,7 +46,7 @@
             </ng-container>
           </div>
         </div>
-        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#fff]">
+        <div class="grid gap-4 mt-2  p-5 rounded-md shadow-md w-full bg-[#FBEC88]">
           <div>
             <p>ดำเนินการเสร็จสิ้น</p>
             <ng-container *ngIf="data_user_is_success$ | async as data">
@@ -79,41 +79,42 @@
         <table class="table">
           <thead>
             <tr class="bg-slate-100">
-              <th class="w-[5%]"> ลำดับ </th>
-              <th class="w-[10%]"> รหัสนิสิต </th>
-              <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
-              <th class="w-[15%]"> สถานประกอบการ </th>
-              <th class="w-[20%]" colspan="2"> ช่องทางการติดต่อ </th>
+              <!-- <th class="w-[5%]"> ลำดับ </th> -->
+              <!-- <th class="w-[10%]"> รหัสนิสิต </th> -->
+              <!-- <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th> -->
+              <th class="w-[60%]"> สถานประกอบการ </th>
+              <!-- <th class="w-[20%]" colspan="2"> ช่องทางการติดต่อ </th> -->
               <th class="w-[20%]"> จัดการ </th>
             </tr>
           </thead>
           <tbody *ngFor="let item of data; let i = index">
             <tr>
-              <td> {{ i + 1 }} </td>
-              <td> {{ item.student_code }} </td>
-              <td> {{ item.name }} </td>
-              <td> {{ item.surname }} </td>
+              <!-- <td> {{ i + 1 }} </td> -->
+              <!-- <td> {{ item.student_code }} </td> -->
+              <!-- <td> {{ item.name }} </td> -->
+              <!-- <td> {{ item.surname }} </td> -->
               <td> {{ item.company }} </td>
-              <td> {{ item.phone_number }} </td>
-              <td> {{ item.email }} </td>
+              <!-- <td> {{ item.phone_number }} </td>
+              <td> {{ item.email }} </td> -->
               <td class="text-center" [colSpan]="1">
                 <div class="flex gap-5 justify-center items-center col-span-2">
-                  <!-- <button class="shadow-md rounded-md h-[40px] px-1 bg-blue-400 hover:bg-blue-500 cursor-pointer"
-                    style="transition: 0.5s">
+                  <button (click)="DoViewDetailsResponse(item)"
+                    class="shadow-md rounded-md h-[40px] px-1 bg-red-500 hover:bg-red-600 cursor-pointer"
+                    style="transition: 0.5s" title="แบบตอบรับ/ปฏิเสธการฝึกงาน">
                     <div class="flex justify-center items-center gap-2">
-                      <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #fff;"></i>
-                      <p class="text-slate-100">รายละเอียด</p>
+                      <i class="fa-solid fa-file-pdf fa-bounce fa-xl" style="color: #fff;"></i>
                     </div>
-                  </button> -->
+                  </button>
+                  <!-- [ngClass]="item.url_response.length ? 'fa-solid fa-file-pdf fa-xl' : 'fa-solid fa-file-pdf fa-bounce fa-xl'"></i> -->
                   <button (click)="DoCancelPetition(item)"
-                    class="shadow-md rounded-md h-[40px] px-1 bg-red-400 hover:bg-red-500 cursor-pointer"
+                    class="shadow-md rounded-md h-[40px] px-1 bg-red-500 hover:bg-red-600 cursor-pointer"
                     style="transition: 0.5s">
                     <div class="flex justify-center items-center gap-2">
                       <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i>
                       <p class="text-slate-100">ปฎิเสธ</p>
                     </div>
                   </button>
-                  <button *ngIf="item.url_courtesy.length > 5" (click)="DoConfirmPetition(item)"
+                  <button (click)="DoConfirmPetition(item)"
                     class="shadow-md rounded-md h-[40px] px-1 bg-green-500 hover:bg-green-600 cursor-pointer"
                     style="transition: 0.5s">
                     <div class="flex justify-center items-center gap-2">
@@ -125,7 +126,7 @@
                     class="shadow-md rounded-md h-[40px] px-1 bg-red-500 hover:bg-red-600 cursor-pointer"
                     style="transition: 0.5s">
                     <div class="flex justify-center items-center gap-2">
-                      <i style="color: #fff;"
+                      <i style="color: #FBEC88;"
                         [ngClass]="item.url_courtesy.length ? 'fa-solid fa-file-pdf fa-xl' : 'fa-solid fa-file-pdf fa-bounce fa-xl'"></i>
                     </div>
                   </button> -->
@@ -133,7 +134,7 @@
                     class="shadow-md rounded-md h-[40px] px-1 bg-yellow-500 hover:bg-yellow-600 cursor-pointer"
                     style="transition: 0.5s">
                     <div class="flex justify-center items-center gap-2">
-                      <i class="fa-solid fa-recycle fa-spin fa-xl" style="color: #fff;"></i>
+                      <i class="fa-solid fa-recycle fa-spin fa-xl" style="color: #FBEC88;"></i>
                       <p class="text-slate-100">รีเซ็ต</p>
                     </div>
                   </button> -->

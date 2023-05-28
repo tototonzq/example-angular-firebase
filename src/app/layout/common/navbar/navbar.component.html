@@ -2,17 +2,17 @@
   <header></header>
 
   <body>
-    <header class="header bg-white py-4 px-8 shadow-md mb-[2px]  bg-[#F3E8FF]">
+    <header class="header py-4 px-8 shadow-md mb-[2px]  bg-sidebar bg-[#832ebf]">
       <div class="text-start flex">
         <div class=" rounded-md w-20 h-5 cursor-pointer" (click)="onToggleSidebar()">
           <div class="grid gap-1">
-            <div class="bg-slate-300 w-7 h-1"></div>
-            <div class="bg-slate-300 w-7 h-1"></div>
-            <div class="bg-slate-300 w-7 h-1"></div>
+            <div class="bg-slate-300 w-7 h-1 rounded-md"></div>
+            <div class="bg-slate-300 w-7 h-1 rounded-md"></div>
+            <div class="bg-slate-300 w-7 h-1 rounded-md"></div>
           </div>
         </div>
         <!-- <div class="text-end flex-grow text-slate-500">{{ today }}</div> -->
-        <div class="flex-grow flex justify-end gap-5">
+        <div class="flex-grow flex justify-end gap-5 text-[#fff]">
           <div>ผู้ใช้งาน : {{ data[0].user }}</div>
           <div>สาขา : {{ data[0].major }}</div>
           <div>คณะ : {{ data[0].group }}</div>

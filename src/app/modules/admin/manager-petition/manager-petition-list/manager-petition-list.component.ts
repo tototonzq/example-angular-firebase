@@ -51,6 +51,9 @@ export class ManagerPetitionListComponent implements OnInit {
       is_approved_cancel,
       is_approved_report,
       is_approved_company,
+      is_approved_admin_report,
+      is_approved_student_success,
+      is_complete
     } = item;
     if (
       !is_approved_success &&
@@ -64,9 +67,19 @@ export class ManagerPetitionListComponent implements OnInit {
       !is_approved_cancel &&
       is_approved_report &&
       !is_approved_company &&
-      !is_approved_success
+      !is_approved_success &&
+      !is_approved_admin_report
     ) {
-      return 'รอการจัดทำหนังสืออนุเคราะห์';
+      return 'รอจัดทำหนังสือขอความอนุเคราะห์';
+    }
+    if (
+      !is_approved_cancel &&
+      is_approved_report &&
+      !is_approved_company &&
+      !is_approved_success &&
+      is_approved_admin_report
+    ) {
+      return 'รอการตอบรับจากสถานประกอบการ';
     }
     if (
       is_approved_report &&
@@ -80,9 +93,21 @@ export class ManagerPetitionListComponent implements OnInit {
       is_approved_success &&
       !is_approved_cancel &&
       is_approved_report &&
-      is_approved_company
+      is_approved_company &&
+      is_approved_student_success &&
+      is_complete
     ) {
       return 'ดำเนินการสําเร็จ';
+    }
+    if (
+      is_approved_success &&
+      !is_approved_cancel &&
+      is_approved_report &&
+      is_approved_company &&
+      is_approved_student_success &&
+      !is_complete
+    ) {
+      return 'รอการจัดทำหนังสือส่งตัว';
     }
     if (
       (!is_approved_success &&

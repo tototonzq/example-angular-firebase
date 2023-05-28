@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TypePayload } from 'src/app/shared/payload/payload.model';
+import { GeneratePdfService } from 'src/app/shared/services/generate-pdf.service';
 import { PetitionService } from 'src/app/shared/services/petition.service';
 import Swal from 'sweetalert2';
 
@@ -13,7 +14,10 @@ export class ResponseFormComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   //*                                 constructor                                */
   /* -------------------------------------------------------------------------- */
-  constructor(private _petitionService: PetitionService) {}
+  constructor(
+    private _petitionService: PetitionService,
+    private _generatePdfService: GeneratePdfService
+  ) {}
 
   /* -------------------------------------------------------------------------- */
   //*                                  variables                                 */
@@ -135,5 +139,10 @@ export class ResponseFormComponent implements OnInit {
       }, 1000);
     });
     fileInput.click();
+  }
+
+  DoExportPDF(item: TypePayload) {
+    console.log(item);
+    this._generatePdfService.DoExportPDF(item);
   }
 }

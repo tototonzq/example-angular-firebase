@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { TypePayload } from 'src/app/shared/payload/payload.model';
+import { GeneratePdfService } from 'src/app/shared/services/generate-pdf.service';
 import { PetitionService } from 'src/app/shared/services/petition.service';
 import Swal from 'sweetalert2';
 
@@ -22,7 +23,8 @@ export class PetitionTableListComponent implements OnInit, OnDestroy {
   constructor(
     private _petitionService: PetitionService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _generatePdfService: GeneratePdfService
   ) {}
 
   /* -------------------------------------------------------------------------- */
@@ -63,6 +65,9 @@ export class PetitionTableListComponent implements OnInit, OnDestroy {
       is_approved_cancel,
       is_approved_report,
       is_approved_company,
+      is_approved_admin_report,
+      is_approved_student_success,
+      is_complete
     } = item;
     if (
       !is_approved_success &&
@@ -76,9 +81,19 @@ export class PetitionTableListComponent implements OnInit, OnDestroy {
       !is_approved_cancel &&
       is_approved_report &&
       !is_approved_company &&
-      !is_approved_success
+      !is_approved_success &&
+      !is_approved_admin_report
     ) {
-      return 'รอการจัดทำหนังสืออนุเคราะห์';
+      return 'รอจัดทำหนังสือขอความอนุเคราะห์';
+    }
+    if (
+      !is_approved_cancel &&
+      is_approved_report &&
+      !is_approved_company &&
+      !is_approved_success &&
+      is_approved_admin_report
+    ) {
+      return 'รอการตอบรับจากสถานประกอบการ';
     }
     if (
       is_approved_report &&
@@ -92,9 +107,21 @@ export class PetitionTableListComponent implements OnInit, OnDestroy {
       is_approved_success &&
       !is_approved_cancel &&
       is_approved_report &&
-      is_approved_company
+      is_approved_company &&
+      is_approved_student_success &&
+      is_complete
     ) {
       return 'ดำเนินการสําเร็จ';
+    }
+    if (
+      is_approved_success &&
+      !is_approved_cancel &&
+      is_approved_report &&
+      is_approved_company &&
+      is_approved_student_success &&
+      !is_complete
+    ) {
+      return 'รอการจัดทำหนังสือส่งตัว';
     }
     if (
       (!is_approved_success &&
@@ -182,5 +209,14 @@ export class PetitionTableListComponent implements OnInit, OnDestroy {
       queryParams: { id: item.id },
     });
     // this._cdr.detectChanges();
+  }
+
+  DoViewPDF(item: TypePayload) {
+    this._generatePdfService.DoExportPDF2(item);
+  }
+
+  DoViewPDF2(item: TypePayload) {
+    console.log(item);
+    this._generatePdfService.DoExportPDF(item);
   }
 }

@@ -80,7 +80,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
     this._destroy$.next();
     this._destroy$.complete();
     this._destroy$.unsubscribe();
-    localStorage.removeItem('userData');
+    // localStorage.removeItem('userData');
   }
 
   /* -------------------------------------------------------------------------- */

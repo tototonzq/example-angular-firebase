@@ -77,14 +77,13 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
       localStorage.getItem('userData') || '[]'
     )[0];
     console.log(localStorageHeader);
-
-    console.log(localStorageHeader.name);
-
-
     this.form.get('major')?.setValue(localStorageHeader.major);
     this.form.get('student_code')?.setValue(localStorageHeader.code);
     this.form.get('name')?.setValue(localStorageHeader.name);
+    this.form.get('surname')?.setValue(localStorageHeader.surname);
     this.form.get('phone_number')?.setValue(localStorageHeader.phone);
+    this.form.get('year')?.setValue(localStorageHeader.year);
+    this.form.get('prefix')?.setValue(localStorageHeader.prefix);
   }
 
   ngOnDestroy(): void {
@@ -98,11 +97,11 @@ export class ManagerPetitionComponent implements OnInit, OnDestroy {
   /* -------------------------------------------------------------------------- */
   // TODO : Form Group
   form = new FormGroup({
-    // prefix: new FormControl(''),
+    prefix: new FormControl(''),
     name: new FormControl(''),
-    // surname: new FormControl(''),
+    surname: new FormControl(''),
     student_code: new FormControl(''),
-    // year: new FormControl(''),
+    year: new FormControl(''),
     major: new FormControl(''),
     phone_number: new FormControl(''),
     // address: new FormControl(''),

@@ -78,7 +78,7 @@
               <th class="w-[10%]"> รหัสนิสิต </th>
               <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
               <th class="w-[15%]"> สถานประกอบการ </th>
-              <th class="w-[20%]" colspan="2"> รายละเอียด </th>
+              <!-- <th class="w-[20%]" colspan="2"> รายละเอียด </th> -->
               <th class="w-[20%]"> ผู้อนุมัติ </th>
               <th class="w-[20%]"> จัดการ </th>
             </tr>
@@ -90,8 +90,8 @@
               <td> {{ item.name }} </td>
               <td> {{ item.surname }} </td>
               <td> {{ item.company }} </td>
-              <td> {{ item.is_time_approve }} </td>
-              <td> {{ item.is_date_approve }} </td>
+              <!-- <td> {{ item.is_time_approve }} </td>
+              <td> {{ item.is_date_approve }} </td> -->
               <td> {{ item.is_teacher_approve }} </td>
               <td class="text-center" [colSpan]="1">
                 <div class="flex gap-5 justify-center items-center col-span-2">
@@ -111,7 +111,7 @@
                     </div>
                   </button> -->
                   <!-- {{ item.url_courtesy.length }} -->
-                  <button *ngIf="item.url_courtesy.length > 5" (click)="DoApproveReportPetition(item)"
+                  <button (click)="DoApproveReportPetition(item)"
                     class="shadow-md rounded-md h-[40px] px-1 bg-green-500 hover:bg-green-600 cursor-pointer"
                     style="transition: 0.5s">
                     <div class="flex justify-center items-center gap-2">

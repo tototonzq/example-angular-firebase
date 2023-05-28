@@ -69,10 +69,47 @@ export class GeneratePdfService implements OnInit {
     }
   }
 
+  DoConvertCodeToTextDeliveryOfDocuments(item: TypePayload) {
+    if (item.delivery_of_documents === '00') {
+      return 'นิสิตส่งหนังสือเองให้กับทางสถานประกอบการ';
+    } else if (item.delivery_of_documents === '01') {
+      return 'คณะจัดส่งให้ทาง ไปรษณีย์ EMS';
+    } else if (item.delivery_of_documents === '02') {
+      return 'จัดส่งทาง อีเมล์';
+    } else {
+      return 'ไม่พบข้อมูล';
+    }
+  }
+
+  DoConvertCodeToTextRegisterNextSemester(item: TypePayload) {
+    if (item.register_next_semester === '00') {
+      return 'ลงทะเบียนวิชาฝึกงานวิชาเดียว';
+    } else if (item.register_next_semester === '01') {
+      return 'ลงทะเบียนวิชาฝึกงานร่วมกับวิชาอื่น';
+    } else {
+      return 'ไม่พบข้อมูล';
+    }
+  }
+
+  DoCoverPrefixToThai(item: TypePayload) {
+    if (item.prefix === 'mr') {
+      return 'นาย';
+    } else if (item.prefix === 'ms') {
+      return 'นาง';
+    } else {
+      return 'ไม่พบข้อมูล';
+    }
+  }
+
   /* -------------------------------------------------------------------------- */
   //*                                   method                                   */
   /* -------------------------------------------------------------------------- */
   DoExportPDF(item: TypePayload) {
+    const prefix = this.DoCoverPrefixToThai(item);
+    const deliveryOfDocuments =
+      this.DoConvertCodeToTextDeliveryOfDocuments(item);
+    const registerNextSemester =
+      this.DoConvertCodeToTextRegisterNextSemester(item);
     const day = this.DoConvertToThaiScript(this.day.toString());
     const month = this.DoConvertToThaiMonth(this.month);
     (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -424,7 +461,7 @@ export class GeneratePdfService implements OnInit {
     for (var i = 0; i < ToObject.length; i++) {
       var section = {
         table: {
-          widths: ['*', '*', '*', '*', '*', '*'], // Specify the widths of the columns
+          widths: ['10%', '10%', '20%', '10%', '10%', '*'], // Specify the widths of the columns
           body: [
             [
               {
@@ -482,7 +519,7 @@ export class GeneratePdfService implements OnInit {
                 // color: 'gray',
               },
               {
-                text: item.name + ' ' + item.surname,
+                text: prefix + item.name + ' ' + item.surname,
                 // italics: true,
                 // color: 'gray',
               },
@@ -497,7 +534,8 @@ export class GeneratePdfService implements OnInit {
                 // color: 'gray',
               },
               {
-                text: '-',
+                text: deliveryOfDocuments + '\n' + registerNextSemester,
+                // alignment: 'left',
                 // italics: true,
                 // color: 'gray',
               },
@@ -516,6 +554,11 @@ export class GeneratePdfService implements OnInit {
   }
 
   DoExportPDF2(item: TypePayload) {
+    const prefix = this.DoCoverPrefixToThai(item);
+    const deliveryOfDocuments =
+      this.DoConvertCodeToTextDeliveryOfDocuments(item);
+    const registerNextSemester =
+      this.DoConvertCodeToTextRegisterNextSemester(item);
     const day = this.DoConvertToThaiScript(this.day.toString());
     const month = this.DoConvertToThaiMonth(this.month);
     (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -887,7 +930,7 @@ export class GeneratePdfService implements OnInit {
     for (var i = 0; i < ToObject.length; i++) {
       var section = {
         table: {
-          widths: ['*', '*', '*', '*', '*', '*'], // Specify the widths of the columns
+          widths: ['10%', '10%', '20%', '10%', '10%', '*'], // Specify the widths of the columns
           body: [
             [
               {
@@ -945,7 +988,7 @@ export class GeneratePdfService implements OnInit {
                 // color: 'gray',
               },
               {
-                text: item.name + ' ' + item.surname,
+                text: prefix + item.name + ' ' + item.surname,
                 // italics: true,
                 // color: 'gray',
               },
@@ -960,7 +1003,8 @@ export class GeneratePdfService implements OnInit {
                 // color: 'gray',
               },
               {
-                text: '-',
+                text: deliveryOfDocuments + '\n' + registerNextSemester,
+                // alignment: 'left',
                 // italics: true,
                 // color: 'gray',
               },
