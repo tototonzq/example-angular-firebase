@@ -105,6 +105,14 @@
                     <p class="text-slate-100">ลบ</p>
                   </div>
                 </button>
+                <button (click)="DoViewDetails(item)"
+                  class="shadow-md rounded-md h-[40px] px-1 bg-blue-500 hover:bg-blue-600 cursor-pointer"
+                  style="transition: 0.5s" title="ดูรายละเอียด">
+                  <div class="flex justify-center items-center gap-2">
+                    <i style="color: #fff;"
+                      [ngClass]="item.url_response.length ? 'fa-solid fa-magnifying-glass fa-xl fa-xl' : 'fa-solid fa-magnifying-glass fa-xl fa-bounce fa-xl'"></i>
+                  </div>
+                </button>
               </div>
             </td>
           </tr>

@@ -122,18 +122,28 @@ export class ManagerPetitionListComponent implements OnInit {
     }
   }
 
+  // DoViewDetails(item: TypePayload): void {
+  //   // console.log(item);
+  //   if (!item.url_petition) {
+  //     Swal.fire({
+  //       position: 'center',
+  //       icon: 'warning',
+  //       title: `ไม่พบข้อมูล`,
+  //       showConfirmButton: false,
+  //       timer: 1200,
+  //     });
+  //   } else window.open(item.url_petition, '_blank');
+  //   return;
+  // }
+
   DoViewDetails(item: TypePayload): void {
-    // console.log(item);
-    if (!item.url_petition) {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: `ไม่พบข้อมูล`,
-        showConfirmButton: false,
-        timer: 1200,
-      });
-    } else window.open(item.url_petition, '_blank');
-    return;
+    // alert('ดูรายละเอียด');
+    this._router.navigate(['./detail'], {
+      relativeTo: this._route,
+      replaceUrl: true,
+      queryParams: { id: item.id },
+    });
+    // this._cdr.detectChanges();
   }
 
   DoResetToFalse(item: TypePayload): void {
