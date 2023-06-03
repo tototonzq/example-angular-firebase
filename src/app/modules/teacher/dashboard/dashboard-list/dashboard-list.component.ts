@@ -117,14 +117,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
           timer: 1200,
         });
         console.log(this.currentTime);
-        console.log(this.TIME);
-        console.log(this.DMY);
-        this._petitionService.DoApproveReportPetition(
-          item,
-          this.data,
-          this.TIME,
-          this.DMY
-        );
+        this._petitionService.DoApproveReportPetition(item, this.data);
       }
     });
   }

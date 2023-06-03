@@ -44,41 +44,61 @@ export class PetitionService {
       .ref.where('is_approved_report', '==', payload);
   }
 
-  DoApproveReportPetition(
-    payload: TypePayload,
-    data: TypePayload,
-    time: TypePayload,
-    date: TypePayload
-  ) {
+  DoApproveReportPetition(payload: TypePayload, data: TypePayload) {
+    const date = new Date();
+    const timeNow = date.getHours() + ':' + date.getMinutes();
+    const date_time =
+      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     // console.log(payload);
     // console.log(data[0].user);
     return this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_report: true,
       is_teacher_approve: data[0].user,
-      is_time_approve: time,
-      is_date_approve: date,
+      is_time_approve: timeNow,
+      is_date_approve: date_time,
     });
   }
 
   DoApproveReportAdminPetition(payload: TypePayload) {
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes();
+    const date_time =
+      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+
+    // console.log(date_time);
+    // console.log(time);
     // console.log(payload);
     return this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_admin_report: true,
+      is_admin_date_approve: date_time,
+      is_admin_time_approve: time,
     });
   }
 
   DoApproveCompanyPetition(payload: TypePayload) {
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes();
+    const date_time =
+      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     console.log(payload);
     return this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_company: true,
+      is_company_date_approve: date_time,
+      is_company_time_approve: time,
     });
   }
 
   DoApproveSuccessPetition(payload: TypePayload) {
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes();
+    const date_time =
+      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     console.log(payload);
     return this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_success: true,
       is_complete: true,
+      is_petition_student_date_approve: date_time,
+      is_petition_student_time_approve: time,
     });
   }
 
@@ -90,9 +110,15 @@ export class PetitionService {
   }
 
   DoConfirmApprovePetition(payload: TypePayload) {
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes();
+    const date_time =
+      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_success: true,
       is_approved_student_success: true,
+      is_student_date_approve: date_time,
+      is_student_time_approve: time,
     });
     // console.log(payload);
   }
