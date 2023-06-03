@@ -49,7 +49,7 @@
             <th class="w-[20%]"> สถานประกอบการ </th>
             <th class="w-[15%]"> รอบที่ลง </th>
             <th class="w-[20%]"> สถานะ </th>
-            <th class="w-[20%]"> รายละเอียดการอนุมัติ </th>
+            <!-- <th class="w-[20%]"> รายละเอียดการอนุมัติ </th> -->
             <th class="w-[20%]"> จัดการ </th>
           </tr>
         </thead>
@@ -66,9 +66,9 @@
             <td> {{ item.company }} </td>
             <td> {{ getPetitionRound(item.round_petition) }} </td>
             <td> {{ DoGetStatusApprove(item) }} </td>
-            <td> {{ item.is_teacher_approve }} |
+            <!-- <td> {{ item.is_teacher_approve }} |
                  {{ item.is_date_approve }} |
-                 {{ item.is_time_approve }}</td>
+                 {{ item.is_time_approve }}</td> -->
             <td class="text-center" [colSpan]="1">
               <div class="flex gap-5 justify-center items-center col-span-2">
                 <button *ngIf="item.is_approved_admin_report === true" (click)="DoViewPDF(item)"

@@ -391,7 +391,7 @@ export class GeneratePdfService implements OnInit {
           margin: [0, 0, 0, 0],
         },
         {
-          text: 'สถานที่ฝึกงาน  บริษัท มัลเบอร์รี่ ซอฟต์ จำกัด',
+          text: item.company,
           fontSize: 26,
           bold: true,
           alignment: 'center',
@@ -868,7 +868,7 @@ export class GeneratePdfService implements OnInit {
           margin: [0, 0, 0, 0],
         },
         {
-          text: 'สถานที่ฝึกงาน  บริษัท มัลเบอร์รี่ ซอฟต์ จำกัด',
+          text: item.company,
           fontSize: 26,
           bold: true,
           alignment: 'center',

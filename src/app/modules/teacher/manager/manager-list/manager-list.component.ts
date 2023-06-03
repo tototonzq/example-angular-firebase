@@ -52,14 +52,13 @@ export class ManagerListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
       this.data$.next(response);
+      console.log(response);
+
       this.data_approved_status_false$.next(
-        response.filter(
-          (x) =>
-            x.is_approved_report === false &&
-            x.is_approved_cancel === false &&
-            x.major === this.data[0].major
-        )
+        response.filter((x) => x.major === this.data[0].major)
       );
+      console.log(this.data[0].major);
+
       this.getDataUserLogin$.subscribe((response) => {
         if (response === null) return;
         //* Save the updated data to localStorage

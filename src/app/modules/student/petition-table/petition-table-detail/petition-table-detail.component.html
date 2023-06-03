@@ -169,14 +169,18 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let item of status ; let i = index">
+                    <!-- {{ item.status}} -->
                     <!-- {{ item.accept | json }} -->
                     <!-- <tr [ngClass]="item.is_approved_success ? 'bg-green-100' : ''"> -->
-                    <tr>
+                    <tr *ngIf="(item.status | json) === 'true'">
                       <td> {{ item.label }} </td>
                       <td *ngIf="(item.accept | json) === undefined"> - </td>
                       <td *ngIf="(item.accept | json) !== undefined"> {{ item.accept }} </td>
                       <td>
-                        {{ item.status }}
+                        <ng-container *ngIf="(item.status | json) === 'true'; else False">
+                          <i class="fa-regular fa-circle-check fa-bounce fa-xl"></i>
+                        </ng-container>
+                        <ng-template #False>-</ng-template>
                       </td>
                       <!-- <i *ngIf=" item.status==='true'" class=" fa-regular fa-circle-check fa-bounce fa-xl"></i>
                           <i *ngIf="item.status === 'false'" class="fa-regular fa-circle-xmark fa-bounce fa-xl"></i> -->
@@ -197,9 +201,9 @@
                     </tr>
 
                   </tbody>
-                  <!-- <tr>
-                    <td colspan="10">กำลังดำเนินการ</td>
-                  </tr> -->
+                  <tr *ngIf="data">
+                    <td *ngIf="data[0].is_completed !== true" colspan="10">กำลังดำเนินการ</td>
+                  </tr>
                 </table>
               </ng-container>
             </div>

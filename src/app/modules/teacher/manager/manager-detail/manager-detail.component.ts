@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { DropdownRole } from 'src/app/modules/admin/manager/store/models/manager.model';
 import { MENU_DROPDOWN_PREFIX_STUDENT } from 'src/app/modules/student/manager-petition/manager-petition.data';
+import { TypePayload } from 'src/app/shared/payload/payload.model';
 import { PetitionService } from 'src/app/shared/services/petition.service';
 import Swal from 'sweetalert2';
 
@@ -25,18 +26,111 @@ export class ManagerDetailComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   public round_petition$ = new BehaviorSubject<any[]>([]);
   public data_petition$ = new BehaviorSubject<any[]>([]);
+  public data$ = new BehaviorSubject<any[]>([]);
+  public searchFilter: string = '';
+  public teacherApprove: boolean = false;
+
+  m1: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public status = [
+    {
+      label: 'ความเห็นของอาจารย์ที่ปรึกษา',
+      accept: '',
+      status: '',
+      date: '',
+      detail: '',
+      accept2: '',
+    },
+    {
+      label: 'จัดทำหนังสืออนุเคราะห์ เเละส่งเอกสาร',
+      accept: 'งานทะเบียนนิสิต',
+      status: '',
+      date: '',
+      detail: '',
+      accept2: 'ผู้ดูเเละระบบ',
+    },
+    {
+      label: 'ความเห็นของสถานประกอบการ',
+      accept: '',
+      status: '',
+      date: '',
+      detail: '',
+      accept2: '',
+    },
+    {
+      label: 'ความเห็นของนิสิต',
+      accept: '',
+      status: '',
+      date: '',
+      detail: '',
+      accept2: '',
+    },
+    {
+      label: 'จัดทำหนังสือส่งตัว',
+      accept: 'งานทะเบียนนิสิต',
+      status: '',
+      date: '',
+      detail: '',
+      accept2: 'ผู้ดูเเละระบบ',
+    },
+    {
+      label: 'ดำเนินการเสร็จสิ้น',
+      accept: 'งานทะเบียนนิสิต',
+      status: '',
+      date: '',
+      detail: '',
+      accept2: 'ผู้ดูเเละระบบ',
+    },
+  ];
 
   /* -------------------------------------------------------------------------- */
   //*                                 Life Circle                                */
   /* -------------------------------------------------------------------------- */
   ngOnInit(): void {
+    // status[2].status = 'completed';
+    // this.status[2].status = 'completed';
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     // console.log(id);
     this._petitionService.DoGetAllPetitionWithID().subscribe((res) => {
-      // console.log(res);
+      console.log(res);
+      this.teacherApprove = res[0].is_teacher_approve;
+      //* Set Value
+      this.status[0].accept = res[0].is_teacher_approve;
+      this.status[3].accept = res[0].name;
+      this.status[2].accept = res[0].position_company;
+      this.status[0].status = res[0].is_approved_report;
+      this.status[1].status = res[0].is_approved_admin_report;
+      this.status[2].status = res[0].is_approved_company;
+      this.status[3].status = res[0].is_approved_student_success;
+      this.status[4].status = res[0].is_complete;
+      this.status[5].status = res[0].is_complete;
+      this.status[0].date =
+        res[0].is_date_approve + ' ' + res[0].is_time_approve;
+      this.status[0].accept2 = res[0].is_teacher_approve;
+      this.status[3].accept2 = res[0].name + ' ' + res[0].surname;
+      this.status[2].accept2 = res[0].position_company;
+      this.status[1].date =
+        res[0].is_admin_date_approve + ' ' + res[0].is_admin_time_approve;
+      this.status[2].date =
+        res[0].is_company_date_approve + ' ' + res[0].is_company_time_approve;
+      this.status[3].date =
+        res[0].is_student_date_approve + ' ' + res[0].is_student_time_approve;
+      this.status[4].date =
+        res[0].is_petition_student_date_approve +
+        ' ' +
+        res[0].is_petition_student_time_approve;
+      this.status[5].date =
+        res[0].is_petition_student_date_approve +
+        ' ' +
+        res[0].is_petition_student_time_approve;
+
       const data: any = res.filter((item) => item.id == id);
-      console.log(...data);
+      // this.status.map((item) => {
+      //   item.accept = data[0].is_teacher_approve;
+      // });
+
+      this.m1.next(data[0].is_teacher_approve);
+      console.log(data[0].is_teacher_approve);
       this.form.patchValue({
         ...data[0],
       });
@@ -59,6 +153,42 @@ export class ManagerDetailComponent implements OnInit {
       this.form.get('register_next_semester')?.disable();
       this.form.get('delivery_of_documents')?.disable();
     });
+
+    this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
+      this.status.map((item) => {
+        // item.accept = response
+      });
+      this.data$.next(response);
+      this.data_petition$.next(
+        response.filter(
+          (x: any) =>
+            x.authorization ===
+            JSON.parse(localStorage.getItem('userData') || '[]')[0].username
+        )
+      );
+    });
+  }
+
+  DoConvertCodeToTextDeliveryOfDocuments(item: TypePayload) {
+    if (item.delivery_of_documents === '00') {
+      return 'นิสิตส่งหนังสือเองให้กับทางสถานประกอบการ';
+    } else if (item.delivery_of_documents === '01') {
+      return 'คณะจัดส่งให้ทาง ไปรษณีย์ EMS';
+    } else if (item.delivery_of_documents === '02') {
+      return 'จัดส่งทาง อีเมล์';
+    } else {
+      return 'ไม่พบข้อมูล';
+    }
+  }
+
+  DoConvertCodeToTextRegisterNextSemester(item: TypePayload) {
+    if (item.register_next_semester === '00') {
+      return 'ลงทะเบียนวิชาฝึกงานวิชาเดียว';
+    } else if (item.register_next_semester === '01') {
+      return 'ลงทะเบียนวิชาฝึกงานร่วมกับวิชาอื่น';
+    } else {
+      return 'ไม่พบข้อมูล';
+    }
   }
 
   ngOnDestroy(): void {
@@ -90,6 +220,7 @@ export class ManagerDetailComponent implements OnInit {
     work_details: new FormControl('', [Validators.required]),
     register_next_semester: new FormControl('', [Validators.required]),
     delivery_of_documents: new FormControl('', [Validators.required]),
+
     // TODO : IsActive Petition
     round_petition: new FormControl('', [Validators.required]),
     is_approved_report: new FormControl(false),
