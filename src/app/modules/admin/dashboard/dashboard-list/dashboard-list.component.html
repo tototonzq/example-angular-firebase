@@ -74,24 +74,26 @@
         <table class="table">
           <thead>
             <tr class=" bg-[#F3E8FF]">
-              <th class="w-[5%]"> ลำดับ </th>
+              <!-- <th class="w-[5%]"> ลำดับ </th> -->
               <th class="w-[10%]"> รหัสนิสิต </th>
               <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
+              <th class="w-[15%]"> วันที่่ส่งเอกสาร </th>
               <th class="w-[15%]"> สถานประกอบการ </th>
-              <th class="w-[20%]" colspan="2"> รายละเอียด </th>
+              <!-- <th class="w-[20%]" colspan="2"> รายละเอียด </th> -->
               <th class="w-[20%]"> ผู้อนุมัติ </th>
               <th class="w-[20%]"> จัดการ </th>
             </tr>
           </thead>
           <tbody *ngFor="let item of data; let i = index">
             <tr>
-              <td> {{ i + 1 }} </td>
+              <!-- <td> {{ i + 1 }} </td> -->
               <td> {{ item.student_code }} </td>
               <td> {{ item.name }} </td>
               <td> {{ item.surname }} </td>
+              <td> {{ item.is_petition_date_approve }} {{item.is_petition_time_approve}} </td>
               <td> {{ item.company }} </td>
-              <td> {{ item.is_time_approve }} </td>
-              <td> {{ item.is_date_approve }} </td>
+              <!-- <td> {{ item.is_time_approve }} </td> -->
+              <!-- <td> {{ item.is_date_approve }} </td> -->
               <td> {{ item.is_teacher_approve }} </td>
               <td class="text-center" [colSpan]="1">
                 <div class="flex gap-5 justify-center items-center col-span-2">

@@ -125,6 +125,23 @@ export class ManagerDetailComponent implements OnInit {
         res[0].is_petition_student_time_approve;
 
       const data: any = res.filter((item) => item.id == id);
+
+      if (
+        JSON.parse(localStorage.getItem('userData') || '[]')[0].username ===
+          'teacher' ||
+        JSON.parse(localStorage.getItem('userData') || '[]')[0].username ===
+          'admin'
+      ) {
+        this.data_petition$.next(res);
+      } else {
+        this.data_petition$.next(
+          res.filter(
+            (x: any) =>
+              x.authorization ===
+              JSON.parse(localStorage.getItem('userData') || '[]')[0].username
+          )
+        );
+      }
       // this.status.map((item) => {
       //   item.accept = data[0].is_teacher_approve;
       // });
@@ -159,13 +176,6 @@ export class ManagerDetailComponent implements OnInit {
         // item.accept = response
       });
       this.data$.next(response);
-      this.data_petition$.next(
-        response.filter(
-          (x: any) =>
-            x.authorization ===
-            JSON.parse(localStorage.getItem('userData') || '[]')[0].username
-        )
-      );
     });
   }
 
