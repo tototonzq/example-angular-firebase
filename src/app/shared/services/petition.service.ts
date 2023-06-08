@@ -125,8 +125,18 @@ export class PetitionService {
 
   // TODO : Create Petition Form !
   createPetition(payload: TypePayload): void {
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes();
+    const date_time =
+      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+
+    const data = {
+      ...payload,
+      is_petition_date_approve: date_time,
+      is_petition_time_approve: time,
+    };
     // console.log(payload);
-    this._firestore.collection('Petition').add(payload);
+    this._firestore.collection('Petition').add(data);
   }
 
   /* -------------------------------------------------------------------------- */

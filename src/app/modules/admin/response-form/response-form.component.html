@@ -28,7 +28,7 @@
         <thead>
           <tr class="bg-slate-100">
             <th class="w-[5%]"> ลำดับ </th>
-            <th class="w-[15%]"> เลขเอกสาร </th>
+            <!-- <th class="w-[15%]"> เลขเอกสาร </th> -->
             <th class="w-[10%]"> รหัสนิสิต </th>
             <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
             <th class="w-[15%]"> สถานประกอบการ </th>
@@ -39,7 +39,7 @@
         <tbody *ngFor="let item of data | filter:searchFilter; let i = index">
           <tr>
             <td> {{ i + 1 }} </td>
-            <td> {{ item.id }} </td>
+            <!-- <td> {{ item.id }} </td> -->
             <td> {{ item.student_code }} </td>
             <td> {{ item.name }} </td>
             <td> {{ item.surname }} </td>

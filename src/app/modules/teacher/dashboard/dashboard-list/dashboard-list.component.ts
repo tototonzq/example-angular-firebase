@@ -124,25 +124,25 @@ export class DashboardListComponent implements OnInit, OnDestroy {
 
   DoCancelApprovePetition(item: TypePayload) {
     console.log(item);
-    // Swal.fire({
-    //   title: 'คุณแน่ใจหรือไม่ว่าต้องการปฏิเสธ?',
-    //   text: 'แตะที่อื่นเพื่อยกเลิกการทำงาน!',
-    //   icon: 'warning',
-    //   showCancelButton: false,
-    //   confirmButtonColor: '#3085d6',
-    //   confirmButtonText: 'ใช่, ปฏิเสธ!',
-    // }).then((result) => {
-    //   if (result.value) {
-    //     Swal.fire({
-    //       position: 'center',
-    //       icon: 'success',
-    //       title: `อนุมัติสำเร็จ`,
-    //       showConfirmButton: false,
-    //       timer: 1200,
-    //     });
-    //     this._petitionService.DoCancelApprovePetition(item);
-    //   }
-    // });
+    Swal.fire({
+      title: 'คุณแน่ใจหรือไม่ว่าต้องการปฏิเสธ?',
+      text: 'แตะที่อื่นเพื่อยกเลิกการทำงาน!',
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'ใช่, ปฏิเสธ!',
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `อนุมัติสำเร็จ`,
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        this._petitionService.DoCancelApprovePetition(item);
+      }
+    });
   }
 
   DoResetToFalse(item: TypePayload): void {

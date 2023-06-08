@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-manager-detail',
   templateUrl: './manager-detail.component.html',
-  styleUrls: ['./manager-detail.component.css']
+  styleUrls: ['./manager-detail.component.css'],
 })
 export class ManagerDetailComponent implements OnInit {
   /* -------------------------------------------------------------------------- */

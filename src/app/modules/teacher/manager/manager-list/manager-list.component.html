@@ -57,7 +57,8 @@
         <thead>
           <tr class="bg-slate-100">
             <!-- <th class="w-[5%]"> ลำดับ </th> -->
-            <th class="w-[15%]"> เลขเอกสาร </th>
+            <!-- <th class="w-[15%]"> เลขเอกสาร </th> -->
+            <th class="w-[15%]"> วันที่่ส่งเอกสาร </th>
             <th class="w-[10%]"> รหัสนิสิต </th>
             <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
             <th class="w-[10%]"> สถานประกอบการ </th>
@@ -73,7 +74,8 @@
             [ngClass]="item.is_approved_success ? 'bg-green-100' : (item.is_approved_cancel ? 'bg-red-100' : (item.is_approved_report || !item.is_approved_report ? 'bg-yellow-100' : ''))">
 
             <!-- <td> {{ i + 1 }} </td> -->
-            <td> {{ item.id }} </td>
+            <!-- <td> {{ item.id }} </td> -->
+            <td> {{ item.is_petition_date_approve }} {{item.is_petition_time_approve}} </td>
             <td> {{ item.student_code }} </td>
             <td> {{ item.name }} </td>
             <td> {{ item.surname }} </td>

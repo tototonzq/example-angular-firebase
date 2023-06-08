@@ -90,16 +90,7 @@ export class CompanyManagerComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'ใช่, ปฏิเสธ!',
     }).then((result) => {
-      if (item.url_response.length < 5) {
-        Swal.fire({
-          position: 'center',
-          icon: 'warning',
-          title: `กรุณาอัปโหลดข้อมูล !`,
-          showConfirmButton: false,
-          timer: 1200,
-        });
-        return;
-      } else if (result.value) {
+      if (result.value) {
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -110,6 +101,34 @@ export class CompanyManagerComponent implements OnInit {
         this._petitionService.DoCancelApprovePetition(item);
       }
     });
+    // Swal.fire({
+    //   title: 'คุณแน่ใจหรือไม่ว่าต้องการปฏิเสธ?',
+    //   text: 'แตะที่อื่นเพื่อยกเลิกการทำงาน!',
+    //   icon: 'warning',
+    //   showCancelButton: false,
+    //   confirmButtonColor: '#3085d6',
+    //   confirmButtonText: 'ใช่, ปฏิเสธ!',
+    // }).then((result) => {
+    //   if (item.url_response.length < 5) {
+    //     Swal.fire({
+    //       position: 'center',
+    //       icon: 'warning',
+    //       title: `กรุณาอัปโหลดข้อมูล !`,
+    //       showConfirmButton: false,
+    //       timer: 1200,
+    //     });
+    //     return;
+    //   } else if (result.value) {
+    //     Swal.fire({
+    //       position: 'center',
+    //       icon: 'success',
+    //       title: `อนุมัติสำเร็จ`,
+    //       showConfirmButton: false,
+    //       timer: 1200,
+    //     });
+    //     this._petitionService.DoCancelApprovePetition(item);
+    //   }
+    // });
   }
 
   DoUploadFilePetitionResponse(item: TypePayload): void {
