@@ -172,21 +172,24 @@
                     <!-- {{ item.status}} -->
                     <!-- {{ item.accept | json }} -->
                     <!-- <tr [ngClass]="item.is_approved_success ? 'bg-green-100' : ''"> -->
-                    <tr *ngIf="(item.status | json) === 'true'">
-                      <td> {{ item.label }} </td>
-                      <td *ngIf="(item.accept | json) === undefined"> - </td>
-                      <td *ngIf="(item.accept | json) !== undefined"> {{ item.accept }} </td>
-                      <td>
-                        <ng-container *ngIf="(item.status | json) === 'true'; else False">
+                    <tr *ngIf="(item.status | json) === 'true' || (data[0].is_approved_cancel === true)">
+                      <td *ngIf="data[0].is_approved_cancel !== true"> {{ item.label }} </td>
+                      <td *ngIf="(item.accept | json) === undefined && data[0].is_approved_cancel !== true"> - </td>
+                      <td *ngIf="(item.accept | json) !== undefined && data[0].is_approved_cancel !== true"> {{
+                        item.accept }} </td>
+                      <td *ngIf="data[0].is_approved_cancel !== true">
+                        <ng-container
+                          *ngIf="(item.status | json) === 'true' && data[0].is_approved_cancel !== true; else False">
                           <i class="fa-regular fa-circle-check fa-bounce fa-xl"></i>
                         </ng-container>
                         <ng-template #False>-</ng-template>
                       </td>
                       <!-- <i *ngIf=" item.status==='true'" class=" fa-regular fa-circle-check fa-bounce fa-xl"></i>
                           <i *ngIf="item.status === 'false'" class="fa-regular fa-circle-xmark fa-bounce fa-xl"></i> -->
-                      <td> {{ item.date }} </td>
-                      <td> {{ item.accept2 }} </td>
-                      <td> - </td>
+                      <td *ngIf="data[0].is_approved_cancel !== true"> {{ item.date }} </td>
+                      <td *ngIf="data[0].is_approved_cancel !== true"> {{ item.accept2 }} </td>
+                      <td *ngIf="data[0].is_approved_cancel !== true"> - </td>
+                      <td *ngIf="data[0].is_approved_cancel !== true">sd</td>
                       <!-- <td>ความเห็นของอาจารย์ที่ปรึกษา</td>
                       <td>จัดทำหนังสืออนุเคราะห์ เเละส่งเอกสาร</td>
                       <td>ความเห็นของสถานประกอบการ</td>
@@ -199,14 +202,15 @@
                       <!-- <td> {{ item.name }} </td> -->
                       <!-- <td> {{ item.surname }} </td> -->
                     </tr>
-
                   </tbody>
                   <!-- {{ data | json }} -->
                   <tr *ngIf="data">
-                    <td *ngIf="data[0].is_completed !== true" colspan="10">กำลังดำเนินการ</td>
+                    <td *ngIf="data[0].is_completed !== true && data[0].is_approved_cancel !== true" colspan="10">กำลังดำเนินการ</td>
+                    <td *ngIf="data[0].is_completed !== true && data[0].is_approved_cancel === true" colspan="10">เอกสารถูกปฎิเสธ</td>
                   </tr>
                 </table>
-                <p class="p-5">วันที่ส่งคำร้อง : {{data[0]?.is_petition_date_approve}} {{ data[0]?.is_petition_time_approve}}</p>
+                <p class="p-5">วันที่ส่งคำร้อง : {{data[0]?.is_petition_date_approve}} {{
+                  data[0]?.is_petition_time_approve}}</p>
               </ng-container>
             </div>
           </div>

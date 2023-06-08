@@ -42,11 +42,11 @@ export class ManagerDetailComponent implements OnInit {
     },
     {
       label: 'จัดทำหนังสืออนุเคราะห์ เเละส่งเอกสาร',
-      accept: 'งานทะเบียนนิสิต',
+      accept: 'นายกิตติคุณ นุผัด',
       status: '',
       date: '',
       detail: '',
-      accept2: 'ผู้ดูเเละระบบ',
+      accept2: 'นายกิตติคุณ นุผัด',
     },
     {
       label: 'ความเห็นของสถานประกอบการ',
@@ -66,7 +66,7 @@ export class ManagerDetailComponent implements OnInit {
     },
     {
       label: 'จัดทำหนังสือส่งตัว',
-      accept: 'งานทะเบียนนิสิต',
+      accept: 'นายกิตติคุณ นุผัด',
       status: '',
       date: '',
       detail: '',
@@ -74,7 +74,7 @@ export class ManagerDetailComponent implements OnInit {
     },
     {
       label: 'ดำเนินการเสร็จสิ้น',
-      accept: 'งานทะเบียนนิสิต',
+      accept: 'นายกิตติคุณ นุผัด',
       status: '',
       date: '',
       detail: '',
@@ -97,7 +97,7 @@ export class ManagerDetailComponent implements OnInit {
       //* Set Value
       this.status[0].accept = res[0].is_teacher_approve;
       this.status[3].accept = res[0].name;
-      this.status[2].accept = res[0].position_company;
+      this.status[2].accept = 'นายกิตติคุณ นุผัด'
       this.status[0].status = res[0].is_approved_report;
       this.status[1].status = res[0].is_approved_admin_report;
       this.status[2].status = res[0].is_approved_company;
@@ -108,7 +108,7 @@ export class ManagerDetailComponent implements OnInit {
         res[0].is_date_approve + ' ' + res[0].is_time_approve;
       this.status[0].accept2 = res[0].is_teacher_approve;
       this.status[3].accept2 = res[0].name + ' ' + res[0].surname;
-      this.status[2].accept2 = res[0].position_company;
+      this.status[2].accept2 = 'นายกิตติคุณ นุผัด'
       this.status[1].date =
         res[0].is_admin_date_approve + ' ' + res[0].is_admin_time_approve;
       this.status[2].date =
