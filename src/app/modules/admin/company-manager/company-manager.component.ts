@@ -56,6 +56,7 @@ export class CompanyManagerComponent implements OnInit {
   //*                                  functions                                 */
   /* -------------------------------------------------------------------------- */
   DoApproveCompanyPetition(item: TypePayload): void {
+    const data = JSON.parse(localStorage.getItem('userData') || '[]');
     Swal.fire({
       title: 'คุณแน่ใจหรือไม่ว่าต้องการอนุมัติ?',
       text: 'แตะที่อื่นเพื่อยกเลิกการทำงาน!',
@@ -81,8 +82,7 @@ export class CompanyManagerComponent implements OnInit {
   //   this._petitionService.DoCancelApprovePetition(item);
   // }
   DoCancelApproveCompanyPetition(item: TypePayload) {
-    // console.log(item);
-    Swal.fire({
+    const data = Swal.fire({
       title: 'คุณแน่ใจหรือไม่ว่าต้องการปฏิเสธ?',
       text: 'แตะที่อื่นเพื่อยกเลิกการทำงาน!',
       icon: 'warning',
@@ -94,7 +94,7 @@ export class CompanyManagerComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: `อนุมัติสำเร็จ`,
+          title: `ปฏิเสธสำเร็จ`,
           showConfirmButton: false,
           timer: 1200,
         });

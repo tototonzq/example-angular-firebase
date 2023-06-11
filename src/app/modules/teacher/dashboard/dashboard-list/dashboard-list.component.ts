@@ -116,7 +116,8 @@ export class DashboardListComponent implements OnInit, OnDestroy {
           showConfirmButton: false,
           timer: 1200,
         });
-        console.log(this.currentTime);
+        // console.log(this.currentTime);
+        // console.log(this.data);
         this._petitionService.DoApproveReportPetition(item, this.data);
       }
     });
@@ -140,7 +141,7 @@ export class DashboardListComponent implements OnInit, OnDestroy {
           showConfirmButton: false,
           timer: 1200,
         });
-        this._petitionService.DoCancelApprovePetition(item);
+        this._petitionService.DoCancelApprovePetition(item, this.data);
       }
     });
   }

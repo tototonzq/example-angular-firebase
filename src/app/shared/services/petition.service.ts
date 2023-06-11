@@ -43,22 +43,6 @@ export class PetitionService {
       .collection('Petition')
       .ref.where('is_approved_report', '==', payload);
   }
-
-  DoApproveReportPetition(payload: TypePayload, data: TypePayload) {
-    const date = new Date();
-    const timeNow = date.getHours() + ':' + date.getMinutes();
-    const date_time =
-      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-    // console.log(payload);
-    // console.log(data[0].user);
-    return this._firestore.collection('Petition').doc(payload.id).update({
-      is_approved_report: true,
-      is_teacher_approve: data[0].user,
-      is_time_approve: timeNow,
-      is_date_approve: date_time,
-    });
-  }
-
   DoApproveReportAdminPetition(payload: TypePayload) {
     const date = new Date();
     const time = date.getHours() + ':' + date.getMinutes();
@@ -102,10 +86,39 @@ export class PetitionService {
     });
   }
 
-  DoCancelApprovePetition(payload: TypePayload) {
-    // console.log(payload);
+  DoCancelApprovePetition(payload: TypePayload, data?: TypePayload) {
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes();
+    const date_time =
+      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    if (data === undefined) {
+      return this._firestore.collection('Petition').doc(payload.id).update({
+        is_approved_cancel: true,
+        is_cancel_date_approve: date_time,
+        is_cancel_time_approve: time,
+        is_name_cancel: 'นาย กิตติคุณ นุผัด'
+      });
+    }
     return this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_cancel: true,
+      is_cancel_date_approve: date_time,
+      is_cancel_time_approve: time,
+      is_name_cancel: data[0].user,
+    });
+  }
+
+  DoApproveReportPetition(payload: TypePayload, data: TypePayload) {
+    const date = new Date();
+    const timeNow = date.getHours() + ':' + date.getMinutes();
+    const date_time =
+      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    // console.log(payload);
+    // console.log(data[0].user);
+    return this._firestore.collection('Petition').doc(payload.id).update({
+      is_approved_report: true,
+      is_teacher_approve: data[0].user,
+      is_time_approve: timeNow,
+      is_date_approve: date_time,
     });
   }
 
