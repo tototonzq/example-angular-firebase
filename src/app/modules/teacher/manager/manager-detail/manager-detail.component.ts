@@ -30,12 +30,14 @@ export class ManagerDetailComponent implements OnInit {
   public searchFilter: string = '';
   public teacherApprove: boolean = false;
 
+  public statusNoT$ = new BehaviorSubject<any[]>([]);
+
   m1: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public status = [
     {
       label: 'ความเห็นของอาจารย์ที่ปรึกษา',
       accept: '',
-      status: '',
+      status: 'pending',
       date: '',
       detail: '',
       accept2: '',
@@ -43,7 +45,7 @@ export class ManagerDetailComponent implements OnInit {
     {
       label: 'จัดทำหนังสืออนุเคราะห์ เเละส่งเอกสาร',
       accept: 'นายกิตติคุณ นุผัด',
-      status: '',
+      status: 'pending',
       date: '',
       detail: '',
       accept2: 'นายกิตติคุณ นุผัด',
@@ -51,7 +53,7 @@ export class ManagerDetailComponent implements OnInit {
     {
       label: 'ความเห็นของสถานประกอบการ',
       accept: '',
-      status: '',
+      status: 'pending',
       date: '',
       detail: '',
       accept2: '',
@@ -59,7 +61,7 @@ export class ManagerDetailComponent implements OnInit {
     {
       label: 'ความเห็นของนิสิต',
       accept: '',
-      status: '',
+      status: 'pending',
       date: '',
       detail: '',
       accept2: '',
@@ -67,7 +69,7 @@ export class ManagerDetailComponent implements OnInit {
     {
       label: 'จัดทำหนังสือส่งตัว',
       accept: 'นายกิตติคุณ นุผัด',
-      status: '',
+      status: 'pending',
       date: '',
       detail: '',
       accept2: 'ผู้ดูเเละระบบ',
@@ -75,7 +77,7 @@ export class ManagerDetailComponent implements OnInit {
     {
       label: 'ดำเนินการเสร็จสิ้น',
       accept: 'นายกิตติคุณ นุผัด',
-      status: '',
+      status: 'pending',
       date: '',
       detail: '',
       accept2: 'ผู้ดูเเละระบบ',
@@ -93,11 +95,12 @@ export class ManagerDetailComponent implements OnInit {
     // console.log(id);
     this._petitionService.DoGetAllPetitionWithID().subscribe((res) => {
       console.log(res);
+
       this.teacherApprove = res[0].is_teacher_approve;
       //* Set Value
       this.status[0].accept = res[0].is_teacher_approve;
       this.status[3].accept = res[0].name;
-      this.status[2].accept = 'นายกิตติคุณ นุผัด'
+      this.status[2].accept = 'นายกิตติคุณ นุผัด';
       this.status[0].status = res[0].is_approved_report;
       this.status[1].status = res[0].is_approved_admin_report;
       this.status[2].status = res[0].is_approved_company;
@@ -108,7 +111,7 @@ export class ManagerDetailComponent implements OnInit {
         res[0].is_date_approve + ' ' + res[0].is_time_approve;
       this.status[0].accept2 = res[0].is_teacher_approve;
       this.status[3].accept2 = res[0].name + ' ' + res[0].surname;
-      this.status[2].accept2 = 'นายกิตติคุณ นุผัด'
+      this.status[2].accept2 = 'นายกิตติคุณ นุผัด';
       this.status[1].date =
         res[0].is_admin_date_approve + ' ' + res[0].is_admin_time_approve;
       this.status[2].date =
@@ -169,6 +172,48 @@ export class ManagerDetailComponent implements OnInit {
       this.form.get('work_details')?.disable();
       this.form.get('register_next_semester')?.disable();
       this.form.get('delivery_of_documents')?.disable();
+
+      if (res[0].is_name_cancel.length > 0) {
+        this.status[0].accept = res[0].is_name_cancel;
+        this.status[0].status = 'false';
+        this.status[0].date =
+          res[0].is_cancel_date_approve + ' ' + res[0].is_cancel_time_approve;
+        this.status[0].accept2 = res[0].is_name_cancel;
+        this.status[0].detail =
+          'ยกเลิกคำร้อง ' + ' โดย  ' + res[0].is_name_cancel;
+
+        this.status[1].accept = '-';
+        this.status[1].status = 'pending';
+        this.status[1].date = '-';
+        this.status[1].accept2 = '-';
+        this.status[1].detail = '-';
+
+        this.status[2].accept = '-';
+        this.status[2].status = 'pending';
+        this.status[2].date = '-';
+        this.status[2].accept2 = '-';
+        this.status[2].detail = '-';
+
+        this.status[3].accept = '-';
+        this.status[3].status = 'pending';
+        this.status[3].date = '-';
+        this.status[3].accept2 = '-';
+        this.status[3].detail = '-';
+
+        this.status[4].accept = '-';
+        this.status[4].status = 'pending';
+        this.status[4].date = '-';
+        this.status[4].accept2 = '-';
+        this.status[4].detail = '-';
+
+        this.status[5].accept = '-';
+        this.status[5].status = 'pending';
+        this.status[5].date = '-';
+        this.status[5].accept2 = '-';
+        this.status[5].detail = '-';
+
+        return;
+      }
     });
 
     this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
