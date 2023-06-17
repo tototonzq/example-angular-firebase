@@ -127,6 +127,101 @@
             <p>รายละเอียดการดำเนินงาน</p>
             <div>
               <ng-container *ngIf="dataId$ | async as data">
+                <!-- {{ data | json }} -->
+                <!-- {{ data[0].type }} -->
+                <table class="table" *ngIf="data[0].type.length < 0">
+                  <thead>
+                    <tr class="bg-slate-100">
+                      <th class="w-[20%]">ชื่อเส้นทางใบคำร้อง</th>
+                      <th class="w-[15%]">ผู้รับเรื่อง</th>
+                      <th class="w-[10%]">สถานะ</th>
+                      <th class="w-[20%]">วันที่อนุมัติ</th>
+                      <th class="w-[20%]">ผู้ดำเนินการคำร้อง</th>
+                      <th class="w-[30%]">รายละเอียด</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let item of status; let i = index">
+                    <tr>
+                      <td
+                        [ngClass]="{
+                          'bg-green-400': item.status === 'true',
+                          'text-white': item.status === 'true'
+                        }"
+                      >
+                        {{ item.label || "กำลังดำเนินการ" }}
+                      </td>
+
+                      <td
+                        [ngClass]="{
+                          'bg-green-400': item.status === 'true',
+                          'text-white': item.status === 'true'
+                        }"
+                        *ngIf="item.accept === undefined"
+                      >
+                        -
+                      </td>
+                      <td
+                        [ngClass]="{
+                          'bg-green-400': item.status === 'true',
+                          'text-white': item.status === 'true'
+                        }"
+                        *ngIf="item.accept !== undefined"
+                      >
+                        {{ item.accept || "กำลังดำเนินการ" }}
+                      </td>
+                      <td
+                        [ngClass]="{
+                          'bg-green-400': item.status === 'true',
+                          'text-white': item.status === 'true'
+                        }"
+                      >
+                        <ng-container
+                          *ngIf="item.status === 'true'; else False"
+                        >
+                          <i
+                            class="fa-regular fa-circle-check fa-bounce fa-xl"
+                          ></i>
+                        </ng-container>
+                        <ng-template #False>
+                          <ng-container *ngIf="item.status === 'true'">
+                            <i class="fa-solid fa-xmark fa-shake fa-xl"></i>
+                          </ng-container>
+                          <ng-container *ngIf="item.status === 'pending'">
+                            <i class="fa-solid fa-ban fa-shake fa-xl"></i>
+                          </ng-container>
+                        </ng-template>
+                      </td>
+                      <td
+                        [ngClass]="{
+                          'bg-green-400': item.status === 'true',
+                          'text-white': item.status === 'true'
+                        }"
+                      >
+                        {{ item.date || "กำลังดำเนินการ" }}
+                      </td>
+                      <td
+                        [ngClass]="{
+                          'bg-green-400': item.status === 'true',
+                          'text-white': item.status === 'true'
+                        }"
+                      >
+                        {{ item.accept2 || "กำลังดำเนินการ" }}
+                      </td>
+                      <td
+                        [ngClass]="{
+                          'bg-green-400': item.status === 'true',
+                          'text-white': item.status === 'true'
+                        }"
+                      >
+                        {{ item.detail || "-" }}
+                      </td>
+                    </tr>
+                  </tbody>
+                  <p class="p-5">
+                    วันที่ส่งคำร้อง : {{ data[0]?.is_petition_date_approve }}
+                    {{ data[0]?.is_petition_time_approve }}
+                  </p>
+                </table>
                 <ng-container *ngIf="data[0].type == 'teacher'">
                   <!-- {{ data[0] | json }} -->
                   <table class="table">
