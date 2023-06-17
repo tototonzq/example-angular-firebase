@@ -8,15 +8,19 @@
       </div>
     </div>
     <div>
-      <div class="w-full h-[5rem] flex justify-center items-center bg-slate-100">
+      <div
+        class="w-full h-[5rem] flex justify-center items-center bg-slate-100"
+      >
         <div class="grid gap-5">
           <div class="flex justify-center items-center gap-5">
-            <input type="text" [(ngModel)]="searchFilter"
+            <input
+              type="text"
+              [(ngModel)]="searchFilter"
               class="rounded-md w-[50rem] h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-500 text-slate-500 text-ellipsis"
-              placeholder="ค้นหาโดย รหัสนิสิต ชื่อ นามสกุล สถานประกอบการ เเละอื่นๆ" />
+              placeholder="ค้นหาโดย รหัสนิสิต ชื่อ นามสกุล สถานประกอบการ เเละอื่นๆ"
+            />
           </div>
-          <div class="flex justify-center items-center">
-          </div>
+          <div class="flex justify-center items-center"></div>
         </div>
       </div>
     </div>
@@ -27,24 +31,24 @@
       <table class="table">
         <thead>
           <tr class="bg-slate-100">
-            <th class="w-[5%]"> ลำดับ </th>
+            <th class="w-[5%]">ลำดับ</th>
             <!-- <th class="w-[15%]"> เลขเอกสาร </th> -->
-            <th class="w-[10%]"> รหัสนิสิต </th>
-            <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th>
-            <th class="w-[15%]"> สถานประกอบการ </th>
-            <th class="w-[15%]"> ข้อมูลสถานประกอบการ </th>
-            <th class="w-[20%]"> จัดการ </th>
+            <th class="w-[10%]">รหัสนิสิต</th>
+            <th class="w-[15%]" colspan="2">ชื่อ - นามสกุล</th>
+            <th class="w-[15%]">สถานประกอบการ</th>
+            <th class="w-[15%]">ข้อมูลสถานประกอบการ</th>
+            <th class="w-[20%]">จัดการ</th>
           </tr>
         </thead>
-        <tbody *ngFor="let item of data | filter:searchFilter; let i = index">
+        <tbody *ngFor="let item of data | filter : searchFilter; let i = index">
           <tr>
-            <td> {{ i + 1 }} </td>
+            <td>{{ i + 1 }}</td>
             <!-- <td> {{ item.id }} </td> -->
-            <td> {{ item.student_code }} </td>
-            <td> {{ item.name }} </td>
-            <td> {{ item.surname }} </td>
-            <td> {{ item.company }} </td>
-            <td> {{ item.company_details }} </td>
+            <td>{{ item.student_code }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.surname }}</td>
+            <td>{{ item.company }}</td>
+            <td>{{ item.company_details }}</td>
             <td class="text-center" [colSpan]="1">
               <div class="flex gap-5 justify-center items-center col-span-2">
                 <!-- <button class="shadow-md rounded-md h-[40px] px-1 bg-blue-400 hover:bg-blue-500 cursor-pointer"
@@ -54,29 +58,48 @@
                     <p class="text-slate-100">รายละเอียด</p>
                   </div>
                 </button> -->
-                <button (click)="DoCancelApproveCompanyPetition(item)"
+                <button
+                  (click)="DoCancelApproveCompanyPetition(item)"
                   class="shadow-md rounded-md h-[40px] px-1 bg-red-400 hover:bg-red-500 cursor-pointer"
-                  style="transition: 0.5s">
+                  style="transition: 0.5s"
+                >
                   <div class="flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-circle-minus fa-xl" style="color: #fff;"></i>
+                    <i
+                      class="fa-solid fa-circle-minus fa-xl"
+                      style="color: #fff"
+                    ></i>
                     <p class="text-slate-100">ปฎิเสธ</p>
                   </div>
                 </button>
                 <!-- {{ item.url_response.length }} -->
-                <button *ngIf="item.url_response.length > 5" (click)="DoApproveCompanyPetition(item)"
+                <button
+                  *ngIf="item.url_response.length > 5"
+                  (click)="DoApproveCompanyPetition(item)"
                   class="shadow-md rounded-md h-[40px] px-1 bg-green-500 hover:bg-green-600 cursor-pointer"
-                  style="transition: 0.5s">
+                  style="transition: 0.5s"
+                >
                   <div class="flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-circle-check fa-bounce fa-xl" style="color: #fff;"></i>
+                    <i
+                      class="fa-solid fa-circle-check fa-bounce fa-xl"
+                      style="color: #fff"
+                    ></i>
                     <p class="text-slate-100">อนุมัติ</p>
                   </div>
                 </button>
-                <button (click)="DoUploadFilePetitionResponse(item)"
+                <button
+                  (click)="DoUploadFilePetitionResponse(item)"
                   class="shadow-md rounded-md h-[40px] px-1 bg-red-500 hover:bg-red-600 cursor-pointer"
-                  style="transition: 0.5s">
+                  style="transition: 0.5s"
+                >
                   <div class="flex justify-center items-center gap-2">
-                    <i style="color: #fff;"
-                      [ngClass]="item.url_response.length ? 'fa-solid fa-file-pdf fa-xl' : 'fa-solid fa-file-pdf fa-bounce fa-xl'"></i>
+                    <i
+                      style="color: #fff"
+                      [ngClass]="
+                        item.url_response.length
+                          ? 'fa-solid fa-file-pdf fa-xl'
+                          : 'fa-solid fa-file-pdf fa-bounce fa-xl'
+                      "
+                    ></i>
                   </div>
                 </button>
               </div>
@@ -92,6 +115,8 @@
   <footer></footer>
 
   <ng-container>
-    <app-loaders-screen *ngIf="(isLoadingUpload$ | async) === true"></app-loaders-screen>
+    <app-loaders-screen
+      *ngIf="(isLoadingUpload$ | async) === true"
+    ></app-loaders-screen>
   </ng-container>
 </main>

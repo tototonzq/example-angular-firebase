@@ -27,13 +27,25 @@ export class ManagerDetailComponent implements OnInit {
   public round_petition$ = new BehaviorSubject<any[]>([]);
   public data_petition$ = new BehaviorSubject<any[]>([]);
   public data$ = new BehaviorSubject<any[]>([]);
+  public dataId$ = new BehaviorSubject<any[]>([]);
   public searchFilter: string = '';
   public teacherApprove: boolean = false;
 
   public statusNoT$ = new BehaviorSubject<any[]>([]);
 
   m1: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public status = [
+  public status_teacher = [
+    {
+      label: 'ความเห็นของอาจารย์ที่ปรึกษา',
+      accept: '',
+      status: 'pending',
+      date: '',
+      detail: '',
+      accept2: '',
+    },
+  ];
+
+  public status_company = [
     {
       label: 'ความเห็นของอาจารย์ที่ปรึกษา',
       accept: '',
@@ -58,30 +70,6 @@ export class ManagerDetailComponent implements OnInit {
       detail: '',
       accept2: '',
     },
-    {
-      label: 'ความเห็นของนิสิต',
-      accept: '',
-      status: 'pending',
-      date: '',
-      detail: '',
-      accept2: '',
-    },
-    {
-      label: 'จัดทำหนังสือส่งตัว',
-      accept: 'นายกิตติคุณ นุผัด',
-      status: 'pending',
-      date: '',
-      detail: '',
-      accept2: 'ผู้ดูเเละระบบ',
-    },
-    {
-      label: 'ดำเนินการเสร็จสิ้น',
-      accept: 'นายกิตติคุณ นุผัด',
-      status: 'pending',
-      date: '',
-      detail: '',
-      accept2: 'ผู้ดูเเละระบบ',
-    },
   ];
 
   /* -------------------------------------------------------------------------- */
@@ -92,42 +80,39 @@ export class ManagerDetailComponent implements OnInit {
     // this.status[2].status = 'completed';
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
-    // console.log(id);
+    console.log(id);
     this._petitionService.DoGetAllPetitionWithID().subscribe((res) => {
-      console.log(res);
-
-      this.teacherApprove = res[0].is_teacher_approve;
-      //* Set Value
-      this.status[0].accept = res[0].is_teacher_approve;
-      this.status[3].accept = res[0].name;
-      this.status[2].accept = 'นายกิตติคุณ นุผัด';
-      this.status[0].status = res[0].is_approved_report;
-      this.status[1].status = res[0].is_approved_admin_report;
-      this.status[2].status = res[0].is_approved_company;
-      this.status[3].status = res[0].is_approved_student_success;
-      this.status[4].status = res[0].is_complete;
-      this.status[5].status = res[0].is_complete;
-      this.status[0].date =
-        res[0].is_date_approve + ' ' + res[0].is_time_approve;
-      this.status[0].accept2 = res[0].is_teacher_approve;
-      this.status[3].accept2 = res[0].name + ' ' + res[0].surname;
-      this.status[2].accept2 = 'นายกิตติคุณ นุผัด';
-      this.status[1].date =
-        res[0].is_admin_date_approve + ' ' + res[0].is_admin_time_approve;
-      this.status[2].date =
-        res[0].is_company_date_approve + ' ' + res[0].is_company_time_approve;
-      this.status[3].date =
-        res[0].is_student_date_approve + ' ' + res[0].is_student_time_approve;
-      this.status[4].date =
-        res[0].is_petition_student_date_approve +
-        ' ' +
-        res[0].is_petition_student_time_approve;
-      this.status[5].date =
-        res[0].is_petition_student_date_approve +
-        ' ' +
-        res[0].is_petition_student_time_approve;
-
       const data: any = res.filter((item) => item.id == id);
+      this.dataId$.next(data);
+
+      // Company
+      this.status_company[0].accept = data[0].is_teacher_approve;
+      this.status_company[0].status = 'true';
+      this.status_company[0].date =
+        data[0].is_cancel_date_approve + ' ' + data[0].is_cancel_time_approve;
+      this.status_company[0].accept2 = data[0].is_teacher_approve;
+      this.status_company[0].detail = 'ผ่านการอนุมัติ';
+
+      this.status_company[1].status = 'true';
+      this.status_company[1].date =
+        data[0].is_admin_date_approve + ' ' + data[0].is_admin_time_approve;
+      this.status_company[1].accept2 = 'นายกิตติคุณ นุผัด';
+      this.status_company[1].detail = 'ผ่านการอนุมัติ';
+
+      this.status_company[2].status = 'false';
+      this.status_company[2].date =
+        data[0].is_cancel_date_approve + ' ' + data[0].is_cancel_time_approve;
+      this.status_company[2].accept2 = 'นายกิตติคุณ นุผัด';
+      this.status_company[2].accept = 'นายกิตติคุณ นุผัด';
+      this.status_company[2].detail = 'ไม่ผ่านการอนุมัติ';
+
+      // Teacher
+      this.status_teacher[0].accept = data[0].is_name_cancel;
+      this.status_teacher[0].status = 'false';
+      this.status_teacher[0].date =
+        data[0].is_cancel_date_approve + ' ' + data[0].is_cancel_time_approve;
+      this.status_teacher[0].detail = 'ไม่ผ่านการอนุมัติ';
+      this.status_teacher[0].accept2 = data[0].is_name_cancel;
 
       if (
         JSON.parse(localStorage.getItem('userData') || '[]')[0].username ===
@@ -145,9 +130,6 @@ export class ManagerDetailComponent implements OnInit {
           )
         );
       }
-      // this.status.map((item) => {
-      //   item.accept = data[0].is_teacher_approve;
-      // });
 
       this.m1.next(data[0].is_teacher_approve);
       console.log(data[0].is_teacher_approve);
@@ -172,55 +154,6 @@ export class ManagerDetailComponent implements OnInit {
       this.form.get('work_details')?.disable();
       this.form.get('register_next_semester')?.disable();
       this.form.get('delivery_of_documents')?.disable();
-
-      if (res[0].is_name_cancel.length > 0) {
-        this.status[0].accept = res[0].is_name_cancel;
-        this.status[0].status = 'false';
-        this.status[0].date =
-          res[0].is_cancel_date_approve + ' ' + res[0].is_cancel_time_approve;
-        this.status[0].accept2 = res[0].is_name_cancel;
-        this.status[0].detail =
-          'ยกเลิกคำร้อง ' + ' โดย  ' + res[0].is_name_cancel;
-
-        this.status[1].accept = '-';
-        this.status[1].status = 'pending';
-        this.status[1].date = '-';
-        this.status[1].accept2 = '-';
-        this.status[1].detail = '-';
-
-        this.status[2].accept = '-';
-        this.status[2].status = 'pending';
-        this.status[2].date = '-';
-        this.status[2].accept2 = '-';
-        this.status[2].detail = '-';
-
-        this.status[3].accept = '-';
-        this.status[3].status = 'pending';
-        this.status[3].date = '-';
-        this.status[3].accept2 = '-';
-        this.status[3].detail = '-';
-
-        this.status[4].accept = '-';
-        this.status[4].status = 'pending';
-        this.status[4].date = '-';
-        this.status[4].accept2 = '-';
-        this.status[4].detail = '-';
-
-        this.status[5].accept = '-';
-        this.status[5].status = 'pending';
-        this.status[5].date = '-';
-        this.status[5].accept2 = '-';
-        this.status[5].detail = '-';
-
-        return;
-      }
-    });
-
-    this._petitionService.DoGetAllPetitionWithID().subscribe((response) => {
-      this.status.map((item) => {
-        // item.accept = response
-      });
-      this.data$.next(response);
     });
   }
 
@@ -233,6 +166,25 @@ export class ManagerDetailComponent implements OnInit {
       return 'จัดส่งทาง อีเมล์';
     } else {
       return 'ไม่พบข้อมูล';
+    }
+  }
+
+  DoCoverText(item: TypePayload) {
+    if (item === 'false') {
+      return 'คำร้องถูกยกเลิก';
+    } else if (item === 'true') {
+      return 'สำเร็จ';
+    } else {
+      return item;
+    }
+  }
+
+  DoCoverTextDate(item: TypePayload) {
+    console.log(item);
+    if (item === 'undefined undefined') {
+      return 'ไม่พบข้อมูล';
+    } else {
+      return item;
     }
   }
 

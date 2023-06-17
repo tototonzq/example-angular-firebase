@@ -81,7 +81,7 @@ export class CompanyManagerComponent implements OnInit {
   // DoCancelApproveCompanyPetition(item: TypePayload): void {
   //   this._petitionService.DoCancelApprovePetition(item);
   // }
-  DoCancelApproveCompanyPetition(item: TypePayload) {
+  DoCancelApproveCompanyPetition(item: TypePayload): void {
     const data = Swal.fire({
       title: 'คุณแน่ใจหรือไม่ว่าต้องการปฏิเสธ?',
       text: 'แตะที่อื่นเพื่อยกเลิกการทำงาน!',
@@ -98,7 +98,7 @@ export class CompanyManagerComponent implements OnInit {
           showConfirmButton: false,
           timer: 1200,
         });
-        this._petitionService.DoCancelApprovePetition(item);
+        this._petitionService.DoCancelApproveCompanyPetition(item);
       }
     });
     // Swal.fire({

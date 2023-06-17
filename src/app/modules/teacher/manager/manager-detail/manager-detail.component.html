@@ -29,49 +29,6 @@
                   class="grid gap-5"
                   (ngSubmit)="onCreatePetition()"
                 >
-                  <!-- <div class="flex gap-5">
-                    <select style="background-color: #F1F5F9; color: #000;"  formControlName="prefix" class="shadow-md rounded-md w-[30rem] h-10 pl-2">
-                      <option value='' selected disabled>คำนำหน้า</option>
-                      <ng-container *ngFor="let option of dropdown">
-                        <option [value]="option.value">
-                          {{ option.name }}
-                        </option>
-                      </ng-container>
-                    </select>
-                    <input style="background-color: #F1F5F9; color: #000;" type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="ชื่อ" formControlName="name" />
-                    <input style="background-color: #F1F5F9; color: #000;" type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="นามสกุล " formControlName="surname" />
-                    <input style="background-color: #F1F5F9; color: #000;" type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="รหัสนิสิต " formControlName="student_code" />
-                  </div> -->
-                  <!-- <div class="flex gap-5">
-                    <input style="background-color: #F1F5F9; color: #000;" type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="ชั้นปีที่ " formControlName="year" />
-                    <input style="background-color: #F1F5F9; color: #000;" type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="สาขาวิชา " formControlName="major" />
-                    <input style="background-color: #F1F5F9; color: #000;" type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="หมายเลขโทรศัพท์ " formControlName="phone_number" />
-                    <input style="background-color: #F1F5F9; color: #000;" type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="อีเมล์ " formControlName="email" />
-                  </div> -->
-                  <!-- <div class="flex gap-5">
-                    <input style="background-color: #F1F5F9; color: #000;" type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="ที่อยู่อาศัย " formControlName="address" />
-                  </div>
-                  <div>
-                    <textarea style="background-color: #F1F5F9; color: #000;" formControlName="address_details"
-                      placeholder="ที่อยู่โดยละเอียด เช่น บ้านเลขที่ , หมู่บ้าน , ตำบล/แขวง , อำเภอ/เขต , จังหวัด , รหัสไปรษณีย์ และอื่นๆ "
-                      class="max-h-28 min-h-[112px] p-2 rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"></textarea>
-                  </div> -->
                   <div class="flex gap-5">
                     <input
                       style="background-color: #f1f5f9; color: #000"
@@ -118,18 +75,7 @@
                       placeholder="หมายเลขโทรสารของสถานที่ฝึกงาน"
                       formControlName="email"
                     />
-                    <!-- <input type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="หมายเลขโทรสารของสถานที่ฝึกงาน" formControlName="delivery_of_documents" /> -->
                   </div>
-                  <!-- <div class="flex gap-5">
-                    <input type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="การส่งเอกสารให้แหล่งฝึกงาน " formControlName="company" />
-                    <input type="text"
-                      class="rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"
-                      placeholder="หมายเลขโทรสารของสถานที่ฝึกงาน" formControlName="company" />
-                  </div> -->
                   <div class="grid gap-5 justify-start items-center">
                     <div class="flex justify-center items-center gap-5">
                       <span>การลงทะเบียนเรียนในภาคเรียนหน้า</span>
@@ -167,27 +113,12 @@
                       <span>คณะจัดส่งให้ทาง ไปรษณีย์ EMS</span>
                     </div>
                   </div>
-
-                  <!-- <div>
-                    <textarea formControlName="company_details"
-                      placeholder="ข้อมูลสภานที่ฝึกงานโดยละเอียด เช่น บ้านเลขที่ , หมู่บ้าน , ตำบล/แขวง , อำเภอ/เขต , จังหวัด , รหัสไปรษณีย์ และอื่นๆ "
-                      class="max-h-28 min-h-[112px] p-2 rounded-md w-full h-10 shadow-md focus:outline-none pl-5 placeholder:text-slate-300 text-black-500 text-ellipsis"></textarea>
-                  </div> -->
                   <span class="text-red-500"
                     >หมายเหตุ: นิสิตจะต้องตรวจสอบสอบข้อมูลให้ถูกต้องก่อนส่ง
                     และต้องยื่นภายในเวลาที่กำหนดตามปฏิทินการฝึกงานของคณะด้วยนะคะ</span
                   >
                   <span class="text-red-500"> * จำเป็นต้องกรอกข้อมูล</span>
-                  <div class="justify-end flex">
-                    <!-- <button
-                      class="h-10 shadow-md rounded-md w-[20rem] text-slate-100 ml-5 hover:bg-blue-500 bg-blue-300 hover:text-slate-100 hover:w-[21rem]"
-                      style="transition: 0.5s" type="submit">
-                      <div class="flex items-center gap-2 justify-center">
-                        <i class="fa-solid fa-box-archive fa-shake" style="color: #fff;"></i>
-                        <p class="text-[#fff]">ส่งแบบฟอร์ม</p>
-                      </div>
-                    </button> -->
-                  </div>
+                  <div class="justify-end flex"></div>
                 </form>
               </ng-container>
             </div>
@@ -195,248 +126,252 @@
           <div class="grid gap-4 border-[1px] mt-2 p-5 rounded-md bg-slate-100">
             <p>รายละเอียดการดำเนินงาน</p>
             <div>
-              <ng-container *ngIf="data_petition$ | async as data">
-                <table
-                  *ngIf="data[0].is_name_cancel === undefined"
-                  class="table"
-                >
-                  <thead>
-                    <tr class="bg-slate-100">
-                      <!-- <th class="w-[5%]"> ลำดับ </th> -->
-                      <!-- <th class="w-[15%]"> เลขเอกสาร </th> -->
-                      <!-- <th class="w-[10%]"> รหัสนิสิต </th> -->
-                      <!-- <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th> -->
-                      <th class="w-[20%]">ชื่อเส้นทางใบคำร้อง</th>
-                      <th class="w-[15%]">ผู้รับเรื่อง</th>
-                      <th class="w-[10%]">สถานะ</th>
-                      <th class="w-[20%]">วันที่อนุมัติ</th>
-                      <th class="w-[20%]">ผู้อนุมัติ</th>
-                      <th class="w-[30%]">รายละเอียด</th>
-                    </tr>
-                  </thead>
-                  <tbody *ngFor="let item of status; let i = index">
-                    <!-- {{ item.status}} -->
-                    <!-- {{ item.accept | json }} -->
-                    <!-- <tr [ngClass]="item.is_approved_success ? 'bg-green-100' : ''"> -->
-                    <tr
-                      *ngIf="
-                        (item.status | json) === 'true' ||
-                        data[0].is_approved_cancel === true
-                      "
-                    >
-                      <td *ngIf="data[0].is_approved_cancel !== true">
-                        {{ item.label }}
-                      </td>
-                      <td
-                        *ngIf="
-                          (item.accept | json) === undefined &&
-                          data[0].is_approved_cancel !== true
-                        "
-                      >
-                        -
-                      </td>
-                      <td
-                        *ngIf="
-                          (item.accept | json) !== undefined &&
-                          data[0].is_approved_cancel !== true
-                        "
-                      >
-                        {{ item.accept }}
-                      </td>
-                      <td *ngIf="data[0].is_approved_cancel !== true">
-                        <ng-container
-                          *ngIf="
-                            (item.status | json) === 'true' &&
-                              data[0].is_approved_cancel !== true;
-                            else False
-                          "
+              <ng-container *ngIf="dataId$ | async as data">
+                <ng-container *ngIf="data[0].type == 'teacher'">
+                  <!-- {{ data[0] | json }} -->
+                  <table class="table">
+                    <thead>
+                      <tr class="bg-slate-100">
+                        <th class="w-[20%]">ชื่อเส้นทางใบคำร้อง</th>
+                        <th class="w-[15%]">ผู้รับเรื่อง</th>
+                        <th class="w-[10%]">สถานะ</th>
+                        <th class="w-[20%]">วันที่อนุมัติ</th>
+                        <th class="w-[20%]">ผู้ดำเนินการคำร้อง</th>
+                        <th class="w-[30%]">รายละเอียด</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let item of status_teacher; let i = index">
+                      <tr>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
                         >
-                          <i
-                            class="fa-regular fa-circle-check fa-bounce fa-xl"
-                          ></i>
-                        </ng-container>
-                        <ng-template #False>-</ng-template>
-                      </td>
-                      <!-- <i *ngIf=" item.status==='true'" class=" fa-regular fa-circle-check fa-bounce fa-xl"></i>
-                          <i *ngIf="item.status === 'false'" class="fa-regular fa-circle-xmark fa-bounce fa-xl"></i> -->
-                      <td *ngIf="data[0].is_approved_cancel !== true">
-                        {{ item.date }}
-                      </td>
-                      <td *ngIf="data[0].is_approved_cancel !== true">
-                        {{ item.accept2 }}
-                      </td>
-                      <td *ngIf="data[0].is_approved_cancel !== true">
-                        {{ item.detail || '-' }}
-                      </td>
-                      <!-- <td>ความเห็นของอาจารย์ที่ปรึกษา</td>
-                      <td>จัดทำหนังสืออนุเคราะห์ เเละส่งเอกสาร</td>
-                      <td>ความเห็นของสถานประกอบการ</td>
-                      <td>ความเห็นของนิสิต</td>
-                      <td>จัดทำหนังสือส่งตัว</td>
-                      <td>ดำเนินการเสร็จสิ้น</td> -->
-                      <!-- <td> {{ i + 1 }} </td> -->
-                      <!-- <td> {{ item.id }} </td> -->
-                      <!-- <td> {{ item.student_code }} </td> -->
-                      <!-- <td> {{ item.name }} </td> -->
-                      <!-- <td> {{ item.surname }} </td> -->
-                    </tr>
-                  </tbody>
-                  <!-- {{ data | json }} -->
-                  <tr *ngIf="data">
-                    <td
-                      *ngIf="
-                        data[0].is_completed !== true &&
-                        data[0].is_approved_cancel !== true &&
-                        data[0].is_complete !== true
-                      "
-                      colspan="10"
-                    >
-                      กำลังดำเนินการ
-                    </td>
-                    <td
-                      *ngIf="
-                        data[0].is_completed !== true &&
-                        data[0].is_approved_cancel === true
-                      "
-                      colspan="10"
-                    >
-                      เอกสารถูกปฎิเสธ โดย
-                      <p class="text-[#ff2525]">
-                        นาย {{ data[0]?.is_name_cancel }}
-                        {{ data[0]?.is_cancel_date_approve }}
-                        {{ data[0]?.is_cancel_time_approve }}
-                      </p>
-                    </td>
-                  </tr>
-                </table>
-                <table
-                  *ngIf="data[0].is_name_cancel !== undefined"
-                  class="table"
-                >
-                  <thead>
-                    <tr class="bg-slate-100">
-                      <!-- <th class="w-[5%]"> ลำดับ </th> -->
-                      <!-- <th class="w-[15%]"> เลขเอกสาร </th> -->
-                      <!-- <th class="w-[10%]"> รหัสนิสิต </th> -->
-                      <!-- <th class="w-[15%]" colspan="2"> ชื่อ - นามสกุล </th> -->
-                      <th class="w-[20%]">ชื่อเส้นทางใบคำร้อง</th>
-                      <th class="w-[15%]">ผู้รับเรื่อง</th>
-                      <th class="w-[10%]">สถานะ</th>
-                      <th class="w-[20%]">วันที่อนุมัติ</th>
-                      <th class="w-[20%]">ผู้ดำเนินการคำร้อง</th>
-                      <th class="w-[30%]">รายละเอียด</th>
-                    </tr>
-                  </thead>
-                  <tbody *ngFor="let item of status; let i = index">
-                    <tr>
-                      <td
-                        [ngClass]="{
-                          'bg-red-400': item.status === 'false',
-                          'text-white': item.status === 'false'
-                        }"
-                      >
-                        {{ item.label }}
-                      </td>
+                          {{ item.label }}
+                        </td>
 
-                      <td
-                        [ngClass]="{
-                          'bg-red-400': item.status === 'false',
-                          'text-white': item.status === 'false'
-                        }"
-                        *ngIf="item.accept === undefined"
-                      >
-                        -
-                      </td>
-                      <td
-                        [ngClass]="{
-                          'bg-red-400': item.status === 'false',
-                          'text-white': item.status === 'false'
-                        }"
-                        *ngIf="item.accept !== undefined"
-                      >
-                        {{ item.accept }}
-                      </td>
-                      <td
-                        [ngClass]="{
-                          'bg-red-400': item.status === 'false',
-                          'text-white': item.status === 'false'
-                        }"
-                      >
-                        <ng-container
-                          *ngIf="item.status === 'true'; else False"
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                          *ngIf="item.accept === undefined"
                         >
-                          <i
-                            class="fa-regular fa-circle-check fa-bounce fa-xl"
-                          ></i>
-                        </ng-container>
-                        <ng-template #False>
-                          <ng-container *ngIf="item.status === 'false'">
-                            <i class="fa-solid fa-xmark fa-shake fa-xl"></i>
+                          -
+                        </td>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                          *ngIf="item.accept !== undefined"
+                        >
+                          {{ item.accept }}
+                        </td>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                        >
+                          <ng-container
+                            *ngIf="item.status === 'true'; else False"
+                          >
+                            <i
+                              class="fa-regular fa-circle-check fa-bounce fa-xl"
+                            ></i>
                           </ng-container>
-                          <ng-container *ngIf="item.status === 'pending'">
-                            <i class="fa-solid fa-ban fa-shake fa-xl"></i>
-                          </ng-container>
-                        </ng-template>
+                          <ng-template #False>
+                            <ng-container *ngIf="item.status === 'false'">
+                              <i class="fa-solid fa-xmark fa-shake fa-xl"></i>
+                            </ng-container>
+                            <ng-container *ngIf="item.status === 'pending'">
+                              <i class="fa-solid fa-ban fa-shake fa-xl"></i>
+                            </ng-container>
+                          </ng-template>
+                        </td>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                        >
+                          {{ item.date }}
+                        </td>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                        >
+                          {{ item.accept2 }}
+                        </td>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                        >
+                          {{ item.detail || "-" }}
+                        </td>
+                      </tr>
+                    </tbody>
+                    <!-- {{ data }} -->
+                    <tr *ngIf="data">
+                      <td
+                        *ngIf="
+                          data[0].is_completed !== true &&
+                          data[0].is_approved_cancel !== true &&
+                          data[0].is_complete !== true
+                        "
+                        colspan="10"
+                      >
+                        กำลังดำเนินการ
                       </td>
                       <td
-                        [ngClass]="{
-                          'bg-red-400': item.status === 'false',
-                          'text-white': item.status === 'false'
-                        }"
+                        class="bg-red-400 text-white"
+                        *ngIf="
+                          data[0].is_completed !== true &&
+                          data[0].is_approved_cancel === true &&
+                          data[0].is_company_cancel === undefined
+                        "
+                        colspan="10"
                       >
-                        {{ item.date }}
-                      </td>
-                      <td
-                        [ngClass]="{
-                          'bg-red-400': item.status === 'false',
-                          'text-white': item.status === 'false'
-                        }"
-                      >
-                        {{ item.accept2 }}
-                      </td>
-                      <td
-                        [ngClass]="{
-                          'bg-red-400': item.status === 'false',
-                          'text-white': item.status === 'false'
-                        }"
-                      >
-                        {{ item.detail || "-" }}
+                        เอกสารถูกปฎิเสธ โดย
+                        <p class="text-yellow-100">
+                          นาย {{ data[0]?.is_name_cancel }}
+                          {{ data[0]?.is_cancel_date_approve }}
+                          {{ data[0]?.is_cancel_time_approve }}
+                        </p>
                       </td>
                     </tr>
-                  </tbody>
-                  <!-- {{ data }} -->
-                  <tr *ngIf="data">
-                    <td
-                      *ngIf="
-                        data[0].is_completed !== true &&
-                        data[0].is_approved_cancel !== true &&
-                        data[0].is_complete !== true
-                      "
-                      colspan="10"
-                    >
-                      กำลังดำเนินการ
-                    </td>
-                    <td
-                      class="bg-red-400 text-white"
-                      *ngIf="
-                        data[0].is_completed !== true &&
-                        data[0].is_approved_cancel === true
-                      "
-                      colspan="10"
-                    >
-                      เอกสารถูกปฎิเสธ โดย
-                      <p class="text-yellow-100">
-                        นาย {{ data[0]?.is_name_cancel }}
-                        {{ data[0]?.is_cancel_date_approve }}
-                        {{ data[0]?.is_cancel_time_approve }}
-                      </p>
-                    </td>
-                  </tr>
-                </table>
-                <p class="p-5">
-                  วันที่ส่งคำร้อง : {{ data[0]?.is_petition_date_approve }}
-                  {{ data[0]?.is_petition_time_approve }}
-                </p>
+                  </table>
+                  <p class="p-5">
+                    วันที่ส่งคำร้อง : {{ data[0]?.is_petition_date_approve }}
+                    {{ data[0]?.is_petition_time_approve }}
+                  </p>
+                </ng-container>
+                <ng-container *ngIf="data[0].type == 'company'">
+                  <table class="table">
+                    <thead>
+                      <tr class="bg-slate-100">
+                        <th class="w-[20%]">ชื่อเส้นทางใบคำร้อง</th>
+                        <th class="w-[15%]">ผู้รับเรื่อง</th>
+                        <th class="w-[10%]">สถานะ</th>
+                        <th class="w-[20%]">วันที่อนุมัติ</th>
+                        <th class="w-[20%]">ผู้ดำเนินการคำร้อง</th>
+                        <th class="w-[30%]">รายละเอียด</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let item of status_company; let i = index">
+                      <tr>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                        >
+                          {{ item.label }}
+                        </td>
+
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                          *ngIf="item.accept === undefined"
+                        >
+                          -
+                        </td>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                          *ngIf="item.accept !== undefined"
+                        >
+                          {{ item.accept }}
+                        </td>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                        >
+                          <ng-container
+                            *ngIf="item.status === 'true'; else False"
+                          >
+                            <i
+                              class="fa-regular fa-circle-check fa-bounce fa-xl"
+                            ></i>
+                          </ng-container>
+                          <ng-template #False>
+                            <ng-container *ngIf="item.status === 'false'">
+                              <i class="fa-solid fa-xmark fa-shake fa-xl"></i>
+                            </ng-container>
+                            <ng-container *ngIf="item.status === 'pending'">
+                              <i class="fa-solid fa-ban fa-shake fa-xl"></i>
+                            </ng-container>
+                          </ng-template>
+                        </td>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                        >
+                          {{ item.date }}
+                        </td>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                        >
+                          {{ item.accept2 }}
+                        </td>
+                        <td
+                          [ngClass]="{
+                            'bg-red-400': item.status === 'false',
+                            'text-white': item.status === 'false'
+                          }"
+                        >
+                          {{ item.detail || "-" }}
+                        </td>
+                      </tr>
+                    </tbody>
+                    <!-- {{ data }} -->
+                    <tr *ngIf="data">
+                      <td
+                        *ngIf="
+                          data[0].is_completed !== true &&
+                          data[0].is_approved_cancel !== true &&
+                          data[0].is_complete !== true
+                        "
+                        colspan="10"
+                      >
+                        กำลังดำเนินการ
+                      </td>
+                      <td
+                        class="bg-red-400 text-white"
+                        *ngIf="
+                          data[0].is_completed !== true &&
+                          data[0].is_approved_cancel === true &&
+                          data[0].is_company_cancel === undefined
+                        "
+                        colspan="10"
+                      >
+                        เอกสารถูกปฎิเสธ โดย
+                        <p class="text-yellow-100">
+                          นาย {{ data[0]?.is_name_cancel }}
+                          {{ data[0]?.is_cancel_date_approve }}
+                          {{ data[0]?.is_cancel_time_approve }}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </ng-container>
               </ng-container>
             </div>
           </div>

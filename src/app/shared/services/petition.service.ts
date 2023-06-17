@@ -91,20 +91,36 @@ export class PetitionService {
     const time = date.getHours() + ':' + date.getMinutes();
     const date_time =
       date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-    if (data === undefined) {
-      return this._firestore.collection('Petition').doc(payload.id).update({
-        is_approved_cancel: true,
-        is_cancel_date_approve: date_time,
-        is_cancel_time_approve: time,
-        is_name_cancel: 'นาย กิตติคุณ นุผัด'
-      });
-    }
-    return this._firestore.collection('Petition').doc(payload.id).update({
+
+    console.log(data[0].user);
+    this._firestore.collection('Petition').doc(payload.id).update({
       is_approved_cancel: true,
       is_cancel_date_approve: date_time,
       is_cancel_time_approve: time,
       is_name_cancel: data[0].user,
+      type: 'teacher',
     });
+  }
+
+  DoCancelApproveCompanyPetition(payload: TypePayload, data?: TypePayload) {
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes();
+    const date_time =
+      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    this._firestore.collection('Petition').doc(payload.id).update({
+      is_approved_cancel: true,
+      is_cancel_date_approve: date_time,
+      is_cancel_time_approve: time,
+      is_name_cancel: 'นาย กิตติคุณ นุผัด',
+      type: 'company',
+    });
+    // this._firestore.collection('Petition').doc(payload.id).update({
+    //   is_approved_cancel: true,
+    //   is_cancel_date_approve: date_time,
+    //   is_cancel_time_approve: time,
+    //   is_name_cancel: 'นาย กิตติคุณ นุผัด',
+    //   type: 'company',
+    // });
   }
 
   DoApproveReportPetition(payload: TypePayload, data: TypePayload) {
