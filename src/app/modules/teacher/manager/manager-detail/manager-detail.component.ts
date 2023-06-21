@@ -132,6 +132,7 @@ export class ManagerDetailComponent implements OnInit {
     this._petitionService.DoGetAllPetitionWithID().subscribe((res) => {
       const data: any = res.filter((item) => item.id == id);
       this.dataId$.next(data);
+      console.log(data);
 
       // Company
       this.status_company[0].accept = data[0].is_teacher_approve;
@@ -164,58 +165,64 @@ export class ManagerDetailComponent implements OnInit {
 
       // REPORT NEXT STEP
       if (data[0].is_approved_report === true) {
-        this.status[0].accept = res[0].is_teacher_approve;
+        this.status[0].accept = data[0].is_teacher_approve;
+        console.log(data);
+
         this.status[0].status = 'true';
         this.status[0].date =
-          res[0].is_date_approve + ' ' + res[0].is_time_approve;
+          data[0].is_date_approve + ' ' + data[0].is_time_approve;
         this.status[0].detail = 'ผ่านการอนุมัติ';
-        this.status[0].accept2 = res[0].is_teacher_approve;
+        this.status[0].accept2 = data[0].is_teacher_approve;
       }
 
       // ADMIN
       if (data[0].is_approved_admin_report === true) {
         this.status[1].status = 'true';
         this.status[1].date =
-          res[0].is_admin_date_approve + ' ' + res[0].is_admin_time_approve;
+          data[0].is_admin_date_approve + ' ' + data[0].is_admin_time_approve;
         this.status[1].detail = 'ผ่านการอนุมัติ';
-        this.status[1].accept2 = res[0].is_teacher_approve;
+        this.status[1].accept2 = data[0].is_teacher_approve;
       }
 
       // COMPANY
       if (data[0].is_approved_company === true) {
         this.status[2].status = 'true';
         this.status[2].date =
-          res[0].is_company_date_approve + ' ' + res[0].is_company_time_approve;
+          data[0].is_company_date_approve +
+          ' ' +
+          data[0].is_company_time_approve;
         this.status[2].detail = 'ผ่านการอนุมัติ';
-        this.status[2].accept2 = res[0].is_teacher_approve;
+        this.status[2].accept2 = data[0].is_teacher_approve;
       }
 
       // STUDENTS
       if (data[0].is_approved_student_success === true) {
         this.status[3].status = 'true';
         this.status[3].date =
-          res[0].is_student_date_approve + ' ' + res[0].is_student_time_approve;
+          data[0].is_student_date_approve +
+          ' ' +
+          data[0].is_student_time_approve;
         this.status[3].detail = 'ผ่านการอนุมัติ';
-        this.status[3].accept2 = res[0].is_teacher_approve;
+        this.status[3].accept2 = data[0].is_teacher_approve;
       }
 
       // IS COMPLETE
       if (data[0].is_complete === true) {
         this.status[4].status = 'true';
         this.status[4].date =
-          res[0].is_petition_student_date_approve +
+          data[0].is_petition_student_date_approve +
           ' ' +
-          res[0].is_petition_student_time_approve;
+          data[0].is_petition_student_time_approve;
         this.status[4].detail = 'ผ่านการอนุมัติ';
-        this.status[4].accept2 = res[0].is_teacher_approve;
+        this.status[4].accept2 = data[0].is_teacher_approve;
 
         this.status[5].status = 'true';
         this.status[5].date =
-          res[0].is_petition_student_date_approve +
+          data[0].is_petition_student_date_approve +
           ' ' +
-          res[0].is_petition_student_time_approve;
+          data[0].is_petition_student_time_approve;
         this.status[5].detail = 'ผ่านการอนุมัติ';
-        this.status[5].accept2 = res[0].is_teacher_approve;
+        this.status[5].accept2 = data[0].is_teacher_approve;
       }
 
       if (
